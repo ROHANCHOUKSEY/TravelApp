@@ -27,6 +27,17 @@ export const locationFromServer = async () => {
   return allLocation.map(maplocalValueToserviseValue);
 };
 
+export const editFromServer = async (id) => {
+  const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const editLocation = await response.json();
+  return maplocalValueToserviseValue(editLocation);
+};
+
 const maplocalValueToserviseValue = (serviseItem) => {
   return {
     id: serviseItem._id,

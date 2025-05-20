@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../../CreateContext/Context';
 import { locationFromServer } from '../../service/locationService';
 import { FaStar, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
+import {NavLink} from "react-router-dom";
 
 const Host = () => {
   const { locationLists, setLocationLists } = useContext(AppContext);
@@ -60,9 +61,9 @@ const Host = () => {
                 <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
                   View Details
                 </button>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
+                <NavLink to={`/editLocation/${location.id}`} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
                   Edit
-                </button>
+                </NavLink>
               </div>
             </div>
           </div>
