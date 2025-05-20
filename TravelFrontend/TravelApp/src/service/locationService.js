@@ -38,6 +38,21 @@ export const editFromServer = async (id) => {
   return maplocalValueToserviseValue(editLocation);
 };
 
+export const postEditFromServer = async (
+  id,
+  { image, locationName, country, rating, description }
+) => {
+  const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ image, locationName, country, rating, description }),
+  });
+  const updateLocation = await response.json();
+  return maplocalValueToserviseValue(updateLocation);
+};
+
 const maplocalValueToserviseValue = (serviseItem) => {
   return {
     id: serviseItem._id,

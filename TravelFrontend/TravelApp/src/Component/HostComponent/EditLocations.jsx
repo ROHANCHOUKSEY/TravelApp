@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { editFromServer, savetodb } from "../../service/locationService";
+import {
+  editFromServer,
+  postEditFromServer,
+  savetodb,
+} from "../../service/locationService";
 import { useParams } from "react-router-dom";
 
 const EditLocations = () => {
@@ -31,9 +35,43 @@ const EditLocations = () => {
     fetchEditData();
   }, [id]);
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    console.log(editLocations);
+    setEditLocations({
+      editimage:
+        e.target.name === "image" ? e.target.value : editLocations.editimage,
+      editlocationName:
+        e.target.name === "locationName"
+          ? e.target.value
+          : editLocations.editlocationName,
+      editcountry:
+        e.target.name === "country"
+          ? e.target.value
+          : editLocations.editcountry,
+      editrating:
+        e.target.name === "rating" ? e.target.value : editLocations.editrating,
+      editdescription:
+        e.target.name === "description"
+          ? e.target.value
+          : editLocations.editdescription,
+    });
+  };
 
-  const editButton = () => {
+  const editButton = async () => {
+    const updateItem = await postEditFromServer(id, {
+      image: editLocations.editimage,
+      locationName: editLocations.editlocationName,
+      country: editLocations.editcountry,
+      rating: editLocations.editrating,
+      description: editLocations.editdescription,
+    });
+    setEditLocations({
+      image: updateItem.image,
+      locationName: updateItem.locationName,
+      country: updateItem.country,
+      rating: updateItem.rating,
+      description: updateItem.description,
+    });
     window.location.href = "/host";
   };
 
@@ -96,7 +134,7 @@ const EditLocations = () => {
               name="description"
               rows="3"
               className="w-full p-2 border rounded"
-              value={editLocations.editreditdescriptionating}
+              value={editLocations.editdescription}
               onChange={handleChange}
             ></textarea>
           </div>

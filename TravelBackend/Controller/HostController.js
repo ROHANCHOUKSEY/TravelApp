@@ -19,8 +19,22 @@ exports.getLocation = async (req, res, next) => {
   res.status(200).json(getLocations);
 };
 
-exports.editLocation = async (req, res, next) => {
-  const {id} = req.params;
+exports.getEditLocation = async (req, res, next) => {
+  const { id } = req.params;
   const editLocation = await TravelLocations.findById(id);
   res.status(200).json(editLocation);
+};
+
+exports.postEditLocation = async (req, res, next) => {
+  const { id } = req.params;
+  const { image, locationName, country, rating, description } = req.body;
+  const updateLocation = await TravelLocations.findByIdAndUpdate(id, {
+    image,
+    locationName,
+    country,
+    rating,
+    description,
+  }, {new: true});
+  await updateLocation.save();
+  res.status(200).json(updateLocation);
 };
