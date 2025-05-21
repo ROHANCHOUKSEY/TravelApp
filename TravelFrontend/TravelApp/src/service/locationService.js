@@ -1,3 +1,5 @@
+// Host Service Section -------------------------------------------------------------------------------------
+
 export const savetodb = async ({
   image,
   locationName,
@@ -50,7 +52,7 @@ export const postEditFromServer = async (
     body: JSON.stringify({ image, locationName, country, rating, description }),
   });
   const updateLocation = await response.json();
-  return maplocalValueToserviseValue(updateLocation); 
+  return maplocalValueToserviseValue(updateLocation);
 };
 
 export const deleteFromServer = async (id) => {
@@ -58,9 +60,39 @@ export const deleteFromServer = async (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-    },
+    }, 
   });
   return id;
+};
+
+// User Service Section ---------------------------------------------------------------------------------------
+
+export const userFavourite = async (Locationid) => {
+  const response = await fetch("http://localhost:3002/api/user", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ Locationid }),
+  });
+  const favouriteLocation = await response.json();
+  return maplocalValueToserviseValue(favouriteLocation);
+};
+
+export const favouriteFromServer = async () => {
+  try {
+    const response = await fetch("http://localhost:3002/api/user/favourites", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    return data.map(maplocalValueToserviseValue);
+  } catch (err) {
+    console.log("FavouriteLocation is not fetch from DB Error", err);
+    return [];
+  }
 };
 
 const maplocalValueToserviseValue = (serviseItem) => {

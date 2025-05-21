@@ -3,7 +3,7 @@ import { savetodb } from "../../service/locationService";
 import Host from "./Host";
 import { AppContext } from "../../CreateContext/Context";
 
-const AddLocation = () => {
+const AddLocation = () => { 
   const { locationLists, setLocationLists } = useContext(AppContext);
 
   const [newLocationPlace, setNewLocationPlace] = useState({

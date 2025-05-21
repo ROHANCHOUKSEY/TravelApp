@@ -27,7 +27,7 @@ const Host = () => {
     );
     setLocationLists(UpdateList);
 
-    window.location.href = "/host";
+    // window.location.href = "/host";
   };
 
   return (
