@@ -20,10 +20,10 @@ exports.getLocation = async (req, res, next) => {
 };
 
 exports.getEditLocation = async (req, res, next) => {
-  const { id } = req.params;
+  const { id } = req.params; 
   const editLocation = await TravelLocations.findById(id);
   res.status(200).json(editLocation);
-};
+}; 
 
 exports.postEditLocation = async (req, res, next) => {
   const { id } = req.params;
@@ -38,3 +38,10 @@ exports.postEditLocation = async (req, res, next) => {
   await updateLocation.save();
   res.status(200).json(updateLocation);
 };
+
+
+exports.deleteLocation = async (req, res, next) => {
+  const {id} = req.params;
+  await TravelLocations.findByIdAndDelete(id);
+  res.status(200).json({_id: id});
+}

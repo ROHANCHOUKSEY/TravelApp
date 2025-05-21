@@ -50,7 +50,17 @@ export const postEditFromServer = async (
     body: JSON.stringify({ image, locationName, country, rating, description }),
   });
   const updateLocation = await response.json();
-  return maplocalValueToserviseValue(updateLocation);
+  return maplocalValueToserviseValue(updateLocation); 
+};
+
+export const deleteFromServer = async (id) => {
+  await fetch(`http://localhost:3002/api/host/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return id;
 };
 
 const maplocalValueToserviseValue = (serviseItem) => {
