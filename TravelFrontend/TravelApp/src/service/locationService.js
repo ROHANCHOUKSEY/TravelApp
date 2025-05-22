@@ -60,7 +60,7 @@ export const deleteFromServer = async (id) => {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-    }, 
+    },
   });
   return id;
 };
@@ -92,6 +92,24 @@ export const favouriteFromServer = async () => {
   } catch (err) {
     console.log("FavouriteLocation is not fetch from DB Error", err);
     return [];
+  }
+};
+
+export const deleteFromFavourite = async (id) => {
+  console.log("Delete id", id);
+  try {
+    const response = await fetch(
+      `http://localhost:3002/api/user/favourites/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return id;
+  } catch (err) {
+    console.log("Location is not delete from Favourite", err);
   }
 };
 

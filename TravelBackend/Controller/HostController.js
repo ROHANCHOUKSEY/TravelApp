@@ -39,7 +39,6 @@ exports.postEditLocation = async (req, res, next) => {
   res.status(200).json(updateLocation);
 };
 
-
 exports.deleteLocation = async (req, res, next) => {
   const {id} = req.params;
   await TravelLocations.findByIdAndDelete(id);

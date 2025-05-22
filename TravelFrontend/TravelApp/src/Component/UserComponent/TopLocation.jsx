@@ -64,7 +64,7 @@ const TopLocation = () => {
                 <div className="flex items-center bg-blue-100 px-2 py-1 rounded">
                   <FaGlobe className="text-blue-500 mr-1" />
                   <span className="text-sm text-blue-800">
-                    {location.country}
+                    {location.country} 
                   </span>
                 </div>
               </div>
