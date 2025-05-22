@@ -9,4 +9,4 @@ const FavouritesSchema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("FavouriteLocation", FavouritesSchema);  
+module.exports = mongoose.model("FavouriteLocation", FavouritesSchema);   
