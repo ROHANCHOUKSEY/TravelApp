@@ -14,18 +14,24 @@ const TopLocation = () => {
 
   useEffect(() => {
     async function fetchLocation() {
-      const data = await locationFromServer();
-      setLocationLists(data);
+      try {
+        const data = await locationFromServer();
+        setLocationLists(data);
+      } catch (error) {
+        console.log("Location is not fetch");
+      }
     }
     fetchLocation();
   }, []);
 
   const handleFavourite = async (id) => {
-    const alreadyFavourite = locationLists.find((location) => location.id === id);
+    const alreadyFavourite = locationLists.find(
+      (location) => location.id === id
+    );
     if (alreadyFavourite?.isFavourite) {
       navigate("/favourites");
     } else {
-      await userFavourite(id); 
+      await userFavourite(id);
       navigate("/favourites");
     }
   };

@@ -19,16 +19,21 @@ const EditLocations = () => {
 
   useEffect(() => {
     const fetchEditData = async () => {
-      if (id) {
-        const editItem = await editFromServer(id);
-        const { image, locationName, country, rating, description } = editItem;
-        setEditLocations({
-          editimage: image,
-          editlocationName: locationName,
-          editcountry: country,
-          editrating: rating,
-          editdescription: description,
-        });
+      try {
+        if (id) {
+          const editItem = await editFromServer(id);
+          const { image, locationName, country, rating, description } =
+            editItem;
+          setEditLocations({
+            editimage: image,
+            editlocationName: locationName,
+            editcountry: country,
+            editrating: rating,
+            editdescription: description,
+          });
+        }
+      } catch (error) {
+        console.log("Edit data is not fetch");
       }
     };
 

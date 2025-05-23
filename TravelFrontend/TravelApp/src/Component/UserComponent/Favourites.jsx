@@ -11,8 +11,12 @@ const Favourites = () => {
 
   useEffect(() => {
     const fetchfavourites = async () => {
-      const data = await favouriteFromServer();
-      setLocationLists(data);
+      try {
+        const data = await favouriteFromServer();
+        setLocationLists(data);
+      } catch (error) {
+        console.log("Favourite is not fetch");
+      }
     };
     fetchfavourites();
   }, []);
@@ -61,7 +65,10 @@ const Favourites = () => {
                 You haven't saved any locations to your favorites. Start
                 exploring and add places you love!
               </p>
-              <NavLink to="/location" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-md">
+              <NavLink
+                to="/location"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-md"
+              >
                 Discover Amazing Places
               </NavLink>
             </div>
