@@ -47,7 +47,7 @@ exports.postEditLocation = async (req, res, next) => {
         image,
         locationName,
         country,
-        rating,
+        rating, 
         description,
       },
       { new: true }

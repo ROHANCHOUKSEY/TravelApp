@@ -16,7 +16,7 @@ const AddLocation = () => {
 
   const handleChange = (e) => {
     setNewLocationPlace({
-      ...newLocationPlace,
+      ...newLocationPlace, 
       [e.target.name]: e.target.value,
     });
   };

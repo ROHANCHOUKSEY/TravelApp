@@ -113,6 +113,20 @@ export const deleteFromFavourite = async (id) => {
   }
 };
 
+// Authentication -----------------------------
+
+export const loginUser = async ({email, password}) => {
+  const response = await fetch("http://localhost:3002/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({email, password})
+  });
+  const user = await response.json();
+  return user;
+};
+
 const maplocalValueToserviseValue = (serviseItem) => {
   return {
     id: serviseItem._id,
@@ -123,3 +137,4 @@ const maplocalValueToserviseValue = (serviseItem) => {
     description: serviseItem.description,
   };
 };
+  

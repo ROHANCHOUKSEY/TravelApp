@@ -15,6 +15,9 @@ import AddLocation from "./Component/HostComponent/AddLocation.jsx";
 import Host from "./Component/HostComponent/Host.jsx";
 import {ContextProvider } from "./CreateContext/Context.jsx";
 import EditLocations from "./Component/HostComponent/EditLocations.jsx";
+import Login from "./Component/LoginSignUpComponent/Login.jsx";
+import SignUp from "./Component/LoginSignUpComponent/SignUp.jsx";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +28,8 @@ const router = createBrowserRouter(
       <Route path="host" element={<Host />} />
       <Route path="addLocation" element={<AddLocation />} />
       <Route path="editLocation/:id" element={<EditLocations/>} />
+      <Route path="login" element={<Login/>} />
+      <Route path="signUp" element={<SignUp/>} />
     </Route>
   )
 );

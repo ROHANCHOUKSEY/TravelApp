@@ -1,11 +1,21 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from "../CreateContext/Context";
 
 const Navbar = () => {
+  const navigation = useNavigate();
+
   const getNavlinkClass = ({ isActive }) => {
     return isActive
       ? "text-white bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer"
       : "text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer";
+  };
+
+  const { isLoggined, setIsLoggined } = useContext(AppContext);
+
+  const handleLogout = () => {
+    navigation("/login");
+    setIsLoggined(false);
   };
 
   return (
@@ -15,7 +25,7 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
             <div className="flex items-center">
-              <svg
+              <svg 
                 className="h-8 w-8 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
@@ -36,31 +46,46 @@ const Navbar = () => {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-2">
-            <NavLink to="/" className={getNavlinkClass}>
-              Explore
-            </NavLink>
-            <NavLink to="/location" className={getNavlinkClass}>
-              Top Location
-            </NavLink>
-            <NavLink to="/favourites" className={getNavlinkClass}>
-              Favourites
-            </NavLink>
-            <NavLink
-              to="/host"
-              className={getNavlinkClass}
-            >
-              Host
-            </NavLink>
-            <NavLink
-              to="/addLocation"
-              className={getNavlinkClass}
-            >
-              Add Location
-            </NavLink>
+            {isLoggined ? (
+              <>
+                <NavLink to="/" className={getNavlinkClass}>
+                  Explore
+                </NavLink>
+                <NavLink to="/location" className={getNavlinkClass}>
+                  Top Location
+                </NavLink>
+                <NavLink to="/favourites" className={getNavlinkClass}>
+                  Favourites
+                </NavLink>
+                <NavLink to="/host" className={getNavlinkClass}>
+                  Host
+                </NavLink>
+                <NavLink to="/addLocation" className={getNavlinkClass}>
+                  Add Location
+                </NavLink>
+                <button onClick={handleLogout} className={getNavlinkClass}>
+                  LogOut
+                </button>
+              </>
+            ) : (
+              <>
+                <NavLink to="/" className={getNavlinkClass}>
+                  Explore
+                </NavLink>
+                <div className="hidden md:flex items-center space-x-4 ml-6">
+                  <NavLink to="/login" className={getNavlinkClass}>
+                    Login
+                  </NavLink>
+                  <NavLink to="/signUp" className={getNavlinkClass}>
+                    Sign Up
+                  </NavLink>
+                </div>
+              </>
+            )}
           </div>
 
           {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4 ml-6">
+          {/* <div className="hidden md:flex items-center space-x-4 ml-6">
             <Link
               to="/login"
               className="text-white hover:bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer"
@@ -73,7 +98,7 @@ const Navbar = () => {
             >
               Sign Up
             </Link>
-          </div>
+          </div> */}
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center">

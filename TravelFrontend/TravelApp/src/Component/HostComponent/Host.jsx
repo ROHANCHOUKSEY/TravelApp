@@ -11,7 +11,7 @@ const Host = () => {
   const { locationLists, setLocationLists } = useContext(AppContext);
 
   const id= useParams();
-
+ 
   useEffect(() => {
     async function fetchLocation() {
       const response = await locationFromServer();
