@@ -17,19 +17,22 @@ import {ContextProvider } from "./CreateContext/Context.jsx";
 import EditLocations from "./Component/HostComponent/EditLocations.jsx";
 import Login from "./Component/LoginSignUpComponent/Login.jsx";
 import SignUp from "./Component/LoginSignUpComponent/SignUp.jsx";
+import PageNotFound from "./Component/PageNotFound.jsx";
+import ProtectedRoute from "./Component/ProtectedRoute.jsx";
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Explore />} />
-      <Route path="location" element={<TopLocation />} />
-      <Route path="favourites" element={<Favourites />} />
-      <Route path="host" element={<Host />} />
-      <Route path="addLocation" element={<AddLocation />} />
-      <Route path="editLocation/:id" element={<EditLocations/>} />
+      <Route path="location" element={<ProtectedRoute><TopLocation /></ProtectedRoute>} />
+      <Route path="favourites" element={<ProtectedRoute><Favourites /></ProtectedRoute>} />
+      <Route path="host" element={<ProtectedRoute><Host /></ProtectedRoute>} />
+      <Route path="addLocation" element={<ProtectedRoute><AddLocation /></ProtectedRoute>} />
+      <Route path="editLocation/:id" element={<ProtectedRoute><EditLocations/></ProtectedRoute>} />
       <Route path="login" element={<Login/>} />
       <Route path="signUp" element={<SignUp/>} />
+      <Route path="*" element={<PageNotFound/>} />
     </Route>
   )
 );

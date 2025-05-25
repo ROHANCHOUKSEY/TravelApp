@@ -8,7 +8,7 @@ export const savetodb = async ({
   description,
 }) => {
   const response = await fetch("http://localhost:3002/api/host", {
-    method: "POST",
+    method: "POST", 
     headers: {
       "Content-Type": "application/json",
     },
@@ -126,6 +126,7 @@ export const loginUser = async ({email, password}) => {
   const user = await response.json();
   return user;
 };
+
 
 const maplocalValueToserviseValue = (serviseItem) => {
   return {

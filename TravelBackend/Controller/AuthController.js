@@ -10,4 +10,4 @@ exports.postAuth = async (req, res, next) => {
     console.log("userdata is not save", error);
   }
 };
- 
+  

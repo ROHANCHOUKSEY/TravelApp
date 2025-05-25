@@ -8,6 +8,7 @@ const cors = require("cors");
 const hostRouter = require("./Router/HostRouter");
 const userRouter = require("./Router/UserRouter");
 const authRouter = require("./Router/AuthRouter");
+// const ErrorRouter = require("./Router/Error");
 
 const DB_PATH =
   "mongodb+srv://rohanchouksey02:Rohan2002@airbnb.thjlczk.mongodb.net/TravelApp?retryWrites=true&w=majority&appName=Airbnb";
@@ -15,7 +16,7 @@ const DB_PATH =
 const store = new mongodbStore({
   uri: DB_PATH,
   collection: "session",
-});
+}); 
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,7 @@ app.use(session({
 app.use("/login", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
+// app.use("/notFound", ErrorRouter);
 
 const PORT = 3002;
 
