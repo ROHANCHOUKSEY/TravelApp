@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaUser, FaLock, FaSignInAlt } from "react-icons/fa";
 import { AppContext } from "../../CreateContext/Context";
 import { loginUser } from "../../service/locationService";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
 
@@ -80,12 +80,12 @@ const Login = () => {
 
           <p className="mt-6 text-center text-sm text-gray-600">
             Don't have an account?{" "}
-            <a
-              href="#"
+            <NavLink
+              to="/signUp"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Sign up
-            </a>
+            </NavLink>
           </p>
         </div>
       </div>

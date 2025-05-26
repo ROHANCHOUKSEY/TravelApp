@@ -16,21 +16,22 @@ const DB_PATH =
 const store = new mongodbStore({
   uri: DB_PATH,
   collection: "session",
-}); 
+});
 
 app.use(express.json());
 app.use(cors());
-app.use(session({
-  secret: "rohanchouksey",
-  resave: false,
-  saveUninitialized: true,
-  store: store,
-}));
+app.use(
+  session({
+    secret: "rohanchouksey",
+    resave: false,
+    saveUninitialized: true,
+    store: store,
+  })
+);
 
-app.use("/login", authRouter);
+app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
-// app.use("/notFound", ErrorRouter);
 
 const PORT = 3002;
 
