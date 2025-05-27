@@ -32,10 +32,7 @@ const SignUp = () => {
       navigation("/login");
     } catch (error) {
       console.log("User is not signUp", error);
-      setSignUpUser((prevUser) => ({
-        ...prevUser, password: "", confirm_password: ""
-      }))  
-    
+
       if (error.errors) {
         setValidationerror(error.errors);
       } else {
@@ -51,8 +48,7 @@ const SignUp = () => {
           <div className="text-center p-5">
             <h1>Welcome Travel App</h1>
             {validationerror.length > 0 &&
-              validationerror.map((err, index) => <p key={index}>{err.msg}</p>)
-            }
+              validationerror.map((err, index) => <p key={index}>{err.msg}</p>)}
           </div>
           <form onSubmit={handleSignUp}>
             <div className="flex flex-col p-5 gap-5">

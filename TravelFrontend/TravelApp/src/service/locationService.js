@@ -158,7 +158,7 @@ export const signUp = async ({firstname, lastname, email, password, confirm_pass
   });
   const newuser = await response.json();
 
-  if (!response.ok) {
+  if (!response.ok) { 
     throw newuser;
   }
 
@@ -176,9 +176,12 @@ export const loginUser = async ({ email, password }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  });
+  }); 
   const user = await response.json();
-  return user;
+  if(!response.ok){
+    throw user;
+  }
+  return user; 
 };
 
 const maplocalValueToserviseValue = (serviseItem) => {

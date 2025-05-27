@@ -5,8 +5,7 @@ import { loginUser } from "../../service/locationService";
 import { NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
-
-  const {setIsLoggined } = useContext(AppContext);
+  const { setIsLoggined } = useContext(AppContext);
   const navigation = useNavigate();
 
   const [user, setUser] = useState({
@@ -14,18 +13,28 @@ const Login = () => {
     password: "",
   });
 
-  const handleChange = (e) =>{
+  const [loginerror, setLoginError] = useState("");
+
+  const handleChange = (e) => {
     setUser({
-      ...user, [e.target.name] : e.target.value
-    })
-  }
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSignIn = async (e) => {
     e.preventDefault();
-    const userLogin = await loginUser(user);
-    setIsLoggined(true);
-    setUser(userLogin);
-    navigation("/");
+    try {
+      const userLogin = await loginUser(user);
+      setIsLoggined(true);
+      setUser(userLogin);
+      navigation("/");
+    } catch (error) {
+      console.log(error);
+      if (error.message) {
+        setLoginError(error.message);
+      }
+    }
   };
 
   return (
@@ -36,7 +45,7 @@ const Login = () => {
           <h1 className="text-3xl font-bold text-white">Welcome Back</h1>
           <p className="text-blue-100 mt-2">Please enter your credentials</p>
         </div>
-
+        {loginerror && <p>{loginerror}</p>}
         {/* Form Section */}
         <div className="p-8">
           <form className="space-y-6" onSubmit={handleSignIn}>

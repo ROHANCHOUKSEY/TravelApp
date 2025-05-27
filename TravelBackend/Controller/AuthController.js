@@ -66,12 +66,11 @@ exports.postSignUp = [
     }
     try {
       const { firstname, lastname, email, password, usertype } = req.body;
-      
-      const existingEmail = await User.findOne({email});
 
-      if(existingEmail){
-        // email = ""
-        return res.status(400).json({message: "email is already exist"});
+      const existingEmail = await User.findOne({ email });
+
+      if (existingEmail) {
+        return res.status(400).json({ message: "email is already exist" });
       }
 
       bcrypt.hash(password, 12).then(async (hashedPassword) => {
@@ -95,10 +94,23 @@ exports.postSignUp = [
 exports.postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const newUser = await new User({ email, password });
-    await newUser.save();
-    res.status(200).json(newUser);
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      console.log("Email not found");
+      return res.status(400).json({ message: "Invalid Email" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      console.log("password not found");
+      return res.status(400).json({ message: "Password is invalid" });
+    }
+
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
-    console.log("userdata is not save", error);
+    console.log("user is not login", error);
   }
 };
