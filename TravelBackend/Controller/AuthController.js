@@ -81,8 +81,10 @@ exports.postSignUp = [
           password: hashedPassword,
           usertype,
         });
+        
         await newUser.save();
         res.status(200).json(newUser);
+
       });
     } catch (error) {
       console.log("Uers is not SignUp", error);
@@ -108,6 +110,10 @@ exports.postLogin = async (req, res, next) => {
       console.log("password not found");
       return res.status(400).json({ message: "Password is invalid" });
     }
+
+    req.session.user = user;
+    req.session.isLoggined = true;
+    await req.session.save();
 
     res.status(200).json({ message: "Login successful" });
   } catch (error) {

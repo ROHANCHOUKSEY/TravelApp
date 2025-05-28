@@ -151,6 +151,7 @@ export const signUp = async ({firstname, lastname, email, password, confirm_pass
   try{
   const response = await fetch("http://localhost:3002/auth/signup", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -172,6 +173,7 @@ export const signUp = async ({firstname, lastname, email, password, confirm_pass
 export const loginUser = async ({ email, password }) => {
   const response = await fetch("http://localhost:3002/auth/login", {
     method: "POST",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },

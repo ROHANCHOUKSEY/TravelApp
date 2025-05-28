@@ -11,11 +11,23 @@ const Navbar = () => {
       : "text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer";
   };
 
-  const { isLoggined, setIsLoggined } = useContext(AppContext);
+  const { isLoggined, setIsLoggined, loading } = useContext(AppContext);
 
-  const handleLogout = () => {
-    navigation("/login");
-    setIsLoggined(false);
+  // if (loading) {
+  //   return <div>Loading...</div>; // Or your loading spinner
+  // }
+
+  const handleLogout = async () => {
+    try {
+      await fetch("http://localhost:3002/auth/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      setIsLoggined(false);
+      navigation("/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -25,7 +37,7 @@ const Navbar = () => {
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
             <div className="flex items-center">
-              <svg 
+              <svg
                 className="h-8 w-8 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
