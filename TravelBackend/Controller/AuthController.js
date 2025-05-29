@@ -92,7 +92,6 @@ exports.postSignUp = [
     }
   },
 ];
-
 exports.postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -119,4 +118,17 @@ exports.postLogin = async (req, res, next) => {
   } catch (error) {
     console.log("user is not login", error);
   }
+};
+
+
+// Add this to your AuthController
+exports.postLogout = async (req, res, next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("Error destroying session:", err);
+      return res.status(500).json({ message: "Logout failed" });
+    }
+    res.clearCookie("connect.sid"); // Clear the session cookie
+    res.status(200).json({ message: "Logout successful" });
+  });
 };

@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../CreateContext/Context";
 
 const Navbar = () => {
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const getNavlinkClass = ({ isActive }) => {
     return isActive
@@ -11,24 +11,33 @@ const Navbar = () => {
       : "text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer";
   };
 
-  const { isLoggined, setIsLoggined, loading } = useContext(AppContext);
-
-  // if (loading) {
-  //   return <div>Loading...</div>; // Or your loading spinner
-  // }
+  const { isLoggined, setIsLoggined, loading, user, setUser, userType } =
+    useContext(AppContext);
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3002/auth/logout", {
+      const response = await fetch("http://localhost:3002/auth/logout", {
         method: "POST",
         credentials: "include",
       });
+
+      if (!response.ok) {
+        throw new Error("Logout failed");
+      }
+
       setIsLoggined(false);
-      navigation("/login");
+      setUser(null);
+      navigate("/login");
     } catch (error) {
       console.error("Logout failed:", error);
+      // Optionally show error to user
     }
   };
+
+  if (loading) {
+    return null;
+    s;
+  }
 
   return (
     <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
@@ -59,26 +68,45 @@ const Navbar = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-2">
             {isLoggined ? (
-              <>
-                <NavLink to="/" className={getNavlinkClass}>
-                  Explore
-                </NavLink>
-                <NavLink to="/location" className={getNavlinkClass}>
-                  Top Location
-                </NavLink>
-                <NavLink to="/favourites" className={getNavlinkClass}>
-                  Favourites
-                </NavLink>
-                <NavLink to="/host" className={getNavlinkClass}>
-                  Host
-                </NavLink>
-                <NavLink to="/addLocation" className={getNavlinkClass}>
-                  Add Location
-                </NavLink>
-                <button onClick={handleLogout} className={getNavlinkClass}>
-                  LogOut
-                </button>
-              </>
+              userType === "guest" ? (
+                <>
+                  <NavLink to="/" className={getNavlinkClass}>
+                    Explore
+                  </NavLink>
+                  <NavLink to="/location" className={getNavlinkClass}>
+                    Top Location
+                  </NavLink>
+                  <NavLink to="/favourites" className={getNavlinkClass}>
+                    Favourites
+                  </NavLink>
+                  <NavLink
+                    to="/login"
+                    onClick={handleLogout}
+                    className={getNavlinkClass}
+                  >
+                    LogOut
+                  </NavLink>
+                </>
+              ) : (
+                <>
+                  <NavLink to="/" className={getNavlinkClass}>
+                    Explore
+                  </NavLink>
+                  <NavLink to="/host" className={getNavlinkClass}>
+                    Host
+                  </NavLink>
+                  <NavLink to="/addLocation" className={getNavlinkClass}>
+                    Add Location
+                  </NavLink>
+                  <NavLink
+                    to="/login"
+                    onClick={handleLogout}
+                    className={getNavlinkClass}
+                  >
+                    LogOut
+                  </NavLink>
+                </>
+              )
             ) : (
               <>
                 <NavLink to="/" className={getNavlinkClass}>

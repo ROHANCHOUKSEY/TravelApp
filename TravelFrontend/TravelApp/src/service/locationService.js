@@ -147,27 +147,42 @@ export const deleteFromFavourite = async (id) => {
 
 // Authentication -----------------------------
 
-export const signUp = async ({firstname, lastname, email, password, confirm_password, usertype, terms}) => {
-  try{
-  const response = await fetch("http://localhost:3002/auth/signup", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ firstname, lastname, email, password, confirm_password, usertype, terms }),
-  });
-  const newuser = await response.json();
+export const signUp = async ({
+  firstname,
+  lastname,
+  email,
+  password,
+  confirm_password,
+  usertype,
+  terms,
+}) => {
+  try {
+    const response = await fetch("http://localhost:3002/auth/signup", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        firstname,
+        lastname,
+        email,
+        password,
+        confirm_password,
+        usertype,
+        terms,
+      }),
+    });
+    const newuser = await response.json();
 
-  if (!response.ok) { 
-    throw newuser;
-  }
+    if (!response.ok) {
+      throw newuser;
+    }
 
-  return newuser;
-  }catch(error){
+    return newuser;
+  } catch (error) {
     throw error;
   }
-
 };
 
 export const loginUser = async ({ email, password }) => {
@@ -178,13 +193,14 @@ export const loginUser = async ({ email, password }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }); 
+  });
   const user = await response.json();
-  if(!response.ok){
+  if (!response.ok) {
     throw user;
   }
-  return user; 
+  return user;
 };
+
 
 const maplocalValueToserviseValue = (serviseItem) => {
   return {
