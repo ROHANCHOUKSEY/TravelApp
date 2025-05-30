@@ -10,11 +10,12 @@ export const savetodb = async ({
   try {
     const response = await fetch("http://localhost:3002/api/host", {
       method: "POST",
+      credentials: "include",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json", 
       },
       body: JSON.stringify({
-        image,
+        image, 
         locationName,
         country,
         rating,
@@ -32,6 +33,7 @@ export const locationFromServer = async () => {
   try {
     const response = await fetch("http://localhost:3002/api/host", {
       method: "GET",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -47,6 +49,7 @@ export const editFromServer = async (id) => {
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
       method: "GET",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -65,6 +68,7 @@ export const postEditFromServer = async (
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -86,6 +90,7 @@ export const postEditFromServer = async (
 export const deleteFromServer = async (id) => {
   await fetch(`http://localhost:3002/api/host/${id}`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
@@ -99,6 +104,7 @@ export const userFavourite = async (Locationid) => {
   try {
     const response = await fetch("http://localhost:3002/api/user", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -115,9 +121,10 @@ export const favouriteFromServer = async () => {
   try {
     const response = await fetch("http://localhost:3002/api/user/favourites", {
       method: "GET",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
-      },
+      }, 
     });
     const data = await response.json();
     return data.map(maplocalValueToserviseValue);
@@ -128,12 +135,13 @@ export const favouriteFromServer = async () => {
 };
 
 export const deleteFromFavourite = async (id) => {
-  console.log("Delete id", id);
   try {
     const response = await fetch(
       `http://localhost:3002/api/user/favourites/${id}`,
       {
         method: "DELETE",
+        credentials: "include",
+
         headers: {
           "Content-Type": "application/json",
         },
@@ -200,7 +208,6 @@ export const loginUser = async ({ email, password }) => {
   }
   return user;
 };
-
 
 const maplocalValueToserviseValue = (serviseItem) => {
   return {

@@ -24,7 +24,7 @@ const TopLocation = () => {
     fetchLocation();
   }, []);
 
-  const handleFavourite = async (id) => {
+  const handleFavourite = async (id) => { 
     const alreadyFavourite = locationLists.find(
       (location) => location.id === id
     );
