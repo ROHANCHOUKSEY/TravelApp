@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  editFromServer,
+  editFromServer, 
   postEditFromServer,
   savetodb,
 } from "../../service/locationService";

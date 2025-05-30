@@ -9,7 +9,7 @@ const Explore = () => {
   useEffect(() => {
     async function fetchLocation() {
       try {
-        const response = await locationFromServer();
+        const response = await locationFromServer(); 
         setLocationLists(response);
       } catch (error) {
         console.log("All location is not fetch", error);

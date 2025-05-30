@@ -12,10 +12,10 @@ export const savetodb = async ({
       method: "POST",
       credentials: "include",
       headers: {
-        "Content-Type": "application/json", 
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        image, 
+        image,
         locationName,
         country,
         rating,
@@ -26,6 +26,22 @@ export const savetodb = async ({
     return maplocalValueToserviseValue(newLocation);
   } catch (error) {
     console.log("data is not saved in database", error);
+  }
+};
+
+export const hostlocation = async () => {
+  try {
+    const response = await fetch("http://localhost:3002/api/host/hostLocation", {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+   const data = await response.json();
+   return data.map(maplocalValueToserviseValue); 
+  } catch (error) {
+    console.log("host location is not fetch: ", error);
   }
 };
 
@@ -124,7 +140,7 @@ export const favouriteFromServer = async () => {
       credentials: "include",
       headers: {
         "Content-Type": "application/json",
-      }, 
+      },
     });
     const data = await response.json();
     return data.map(maplocalValueToserviseValue);

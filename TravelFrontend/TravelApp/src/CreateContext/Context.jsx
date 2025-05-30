@@ -8,6 +8,7 @@ export const ContextProvider = (props) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userType, setUsertype] = useState("");
+  const [userName, setUsername] = useState("");
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -25,6 +26,7 @@ export const ContextProvider = (props) => {
           setIsLoggined(true);
           setUser(data.user);
           setUsertype(data.user.usertype);
+          setUsername(data.user.firstname);
         } else {
           setIsLoggined(false);
           setUser(null)
@@ -51,7 +53,8 @@ export const ContextProvider = (props) => {
         loading,
         user, 
         setUser,
-        userType
+        userType,
+        userName
       }}
     >
       {props.children}

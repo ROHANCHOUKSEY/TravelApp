@@ -1,20 +1,43 @@
 const TravelLocations = require("../Models/TravelLocation");
+const user = require("../Models/user");
 
 exports.postLocation = async (req, res, next) => {
   console.log(req.body);
   try {
     const { image, locationName, country, rating, description } = req.body;
-    const newLocation = await new TravelLocations({
+    const newLocation = new TravelLocations({
       image,
       locationName,
       country,
       rating,
       description,
     });
+
     await newLocation.save();
+
+    const userId = req.session.user._id;
+    const User = await user.findById(userId);
+    User.hostLocation.push(newLocation._id);
+    console.log("HostLocation: ", User.hostLocation);
+    await User.save();
     res.status(200).json(newLocation);
   } catch (error) {
     console.log("Data is not assign in database", error);
+  }
+};
+
+exports.getHostLocation = async (req, res, next) => {
+  try {
+    const userId = req.session.user._id;
+
+    const User = await user.findById(userId).populate("hostLocation");
+
+    const getLocations = User.hostLocation;
+
+    res.status(200).json(getLocations);
+  } catch (error) {
+    console.log("Host Data is not fetched from database", error);
+    res.status(500).json({ message: "Failed to fetch host locations" });
   }
 };
 
@@ -47,14 +70,14 @@ exports.postEditLocation = async (req, res, next) => {
         image,
         locationName,
         country,
-        rating, 
+        rating,
         description,
       },
       { new: true }
     );
     await updateLocation.save();
     res.status(200).json(updateLocation);
-  } catch (error) { 
+  } catch (error) {
     console.log("Edit data is not post in database", error);
   }
 };

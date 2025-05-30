@@ -5,7 +5,7 @@ import { AppContext } from "../CreateContext/Context";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { isLoggined, setIsLoggined, loading, user, setUser, userType } =
+  const { isLoggined, setIsLoggined, loading, user, setUser, userType, userName } =
     useContext(AppContext);
 
   const getNavlinkClass = ({ isActive }) => {
@@ -67,6 +67,8 @@ const Navbar = () => {
               <span className="ml-2 text-white text-xl font-bold">
                 BrandName
               </span>
+              {isLoggined ?  <h1 className="text-white px-6">Welecome, {userName}</h1> : '' }
+             
             </div>
           </div>
 

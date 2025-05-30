@@ -1,20 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { AppContext } from "../../CreateContext/Context";
-import {
-  deleteFromServer,
-  locationFromServer,
-} from "../../service/locationService";
+import React, { useEffect, useState } from "react";
+import { deleteFromServer, hostlocation } from "../../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 
 const Host = () => {
-  const { locationLists, setLocationLists } = useContext(AppContext);
+  const [locationLists, setLocationLists] = useState([]);
 
-  const id= useParams();
- 
+  const id = useParams();
+
   useEffect(() => {
     async function fetchLocation() {
-      const response = await locationFromServer();
+      const response = await hostlocation();
       setLocationLists(response);
     }
     fetchLocation();
@@ -26,15 +22,17 @@ const Host = () => {
       (item) => item.id !== deleteLocation
     );
     setLocationLists(UpdateList);
-
-    // window.location.href = "/host";
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">
-        Your Hosted Locations
-      </h1>
+      {locationLists.length === 0 ? (
+        <h1 className="w-full text-center font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">There is no hosted Location</h1>
+      ) : (
+        <h1 className="text-3xl font-bold text-gray-800 mb-8">
+          Your Hosted Locations
+        </h1>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
