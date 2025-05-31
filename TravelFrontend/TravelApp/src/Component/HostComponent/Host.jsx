@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { deleteFromServer, hostlocation } from "../../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom"; 
 
 const Host = () => {
   const [locationLists, setLocationLists] = useState([]);
@@ -27,7 +27,9 @@ const Host = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {locationLists.length === 0 ? (
-        <h1 className="w-full text-center font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">There is no hosted Location</h1>
+        <h1 className="w-full text-center font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
+          There is no hosted Location
+        </h1>
       ) : (
         <h1 className="text-3xl font-bold text-gray-800 mb-8">
           Your Hosted Locations
