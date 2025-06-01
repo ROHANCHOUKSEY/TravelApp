@@ -3,8 +3,15 @@ import { FaUser, FaLock, FaSignInAlt } from "react-icons/fa";
 import { AppContext } from "../../CreateContext/Context";
 import { loginUser } from "../../service/locationService";
 import { NavLink, useNavigate } from "react-router-dom";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
+  const [password, setPassword] = useState(true);
+
+  const handlePassword = () => {
+    setPassword(!password);
+  };
+
   const { setIsLoggined } = useContext(AppContext);
   const navigation = useNavigate();
 
@@ -94,13 +101,20 @@ const Login = () => {
                 <FaLock className="text-gray-400" />
               </div>
               <input
-                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                type="password"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+                type={password ? "password" : "text"}
                 name="password"
                 onChange={handleChange}
                 placeholder="Password"
                 required
               />
+              <div className="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer">
+                {password ? (
+                  <Eye onClick={handlePassword} />
+                ) : (
+                  <EyeOff onClick={handlePassword} />
+                )}
+              </div>
             </div>
 
             <button

@@ -20,7 +20,6 @@ export const ContextProvider = (props) => {
         if (!res.ok) throw new Error("Session check failed");
 
         const data = await res.json();
-        console.log(data);
 
         if (data.isLoggined && data.user) {
           setIsLoggined(true);
@@ -41,6 +40,7 @@ export const ContextProvider = (props) => {
     };
 
     checkLoginStatus();
+    console.log(isLoggined);
   }, [isLoggined]);
 
   return (
