@@ -6,6 +6,10 @@ export const savetodb = async ({
   country,
   rating,
   description,
+  holeDescription,
+  history,
+  timing,
+  closing,
 }) => {
   try {
     const response = await fetch("http://localhost:3002/api/host", {
@@ -20,6 +24,10 @@ export const savetodb = async ({
         country,
         rating,
         description,
+        holeDescription,
+        history,
+        timing,
+        closing,
       }),
     });
     const newLocation = await response.json();
@@ -31,15 +39,18 @@ export const savetodb = async ({
 
 export const hostlocation = async () => {
   try {
-    const response = await fetch("http://localhost:3002/api/host/hostLocation", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-   const data = await response.json();
-   return data.map(maplocalValueToserviseValue); 
+    const response = await fetch(
+      "http://localhost:3002/api/host/hostLocation",
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    return data.map(maplocalValueToserviseValue);
   } catch (error) {
     console.log("host location is not fetch: ", error);
   }
@@ -115,6 +126,25 @@ export const deleteFromServer = async (id) => {
 };
 
 // User Service Section ---------------------------------------------------------------------------------------
+
+export const locationDetails = async (id) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3002/api/user/details/${id}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Details is not fetch: ", error);
+  }
+};
 
 export const userFavourite = async (Locationid) => {
   try {

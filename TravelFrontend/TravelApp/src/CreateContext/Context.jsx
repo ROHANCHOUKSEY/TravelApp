@@ -9,6 +9,7 @@ export const ContextProvider = (props) => {
   const [loading, setLoading] = useState(true);
   const [userType, setUsertype] = useState("");
   const [userName, setUsername] = useState("");
+  const [details, setDetails] = useState("");
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -18,7 +19,7 @@ export const ContextProvider = (props) => {
         });
 
         if (!res.ok) throw new Error("Session check failed");
-
+ 
         const data = await res.json();
 
         if (data.isLoggined && data.user) {
@@ -54,7 +55,9 @@ export const ContextProvider = (props) => {
         user, 
         setUser,
         userType,
-        userName
+        userName,
+        details,
+        setDetails
       }}
     >
       {props.children}

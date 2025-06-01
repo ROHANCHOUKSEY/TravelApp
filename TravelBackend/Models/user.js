@@ -9,7 +9,7 @@ const userSchema = mongoose.Schema({
     type: String, 
     required: true,
     enum: ["guest", "host"],
-    default: "guest",
+    default: "guest", 
   },
   favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
   hostLocation: [

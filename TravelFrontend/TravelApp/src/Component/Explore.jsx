@@ -2,14 +2,16 @@ import React, { useContext, useEffect } from "react";
 import { AppContext } from "../CreateContext/Context";
 import { locationFromServer } from "../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
+import { NavLink, useParams } from "react-router-dom";
 
 const Explore = () => {
-  const { locationLists, setLocationLists } = useContext(AppContext);
+  const { locationLists, setLocationLists, isLoggined} = useContext(AppContext);
+
 
   useEffect(() => {
     async function fetchLocation() {
       try {
-        const response = await locationFromServer(); 
+        const response = await locationFromServer();
         setLocationLists(response);
       } catch (error) {
         console.log("All location is not fetch", error);
@@ -73,9 +75,18 @@ const Explore = () => {
               </p>
 
               <div className="flex justify-between items-center">
-                <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition">
-                  Book
-                </button>
+                {isLoggined ? (
+                  <NavLink to={`viewDetails/${location.id}`} className="text-blue-500">
+                    View Details
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    to="login"
+                    className="w-full bg-green-500 hover:bg-green-600 px-5 py-2 rounded-sm text-center text-white text-lg font-bold"
+                  >
+                    Book
+                  </NavLink>
+                )}
               </div>
             </div>
           </div>
@@ -83,6 +94,6 @@ const Explore = () => {
       </div>
     </div>
   );
-}; 
+};
 
 export default Explore;

@@ -19,6 +19,7 @@ import Login from "./Component/LoginSignUpComponent/Login.jsx";
 import SignUp from "./Component/LoginSignUpComponent/SignUp.jsx";
 import PageNotFound from "./Component/PageNotFound.jsx";
 import ProtectedRoute from "./Component/ProtectedRoute.jsx";
+import ViewDetails from "./Component/ViewDetails.jsx";
 
 
 const router = createBrowserRouter(
@@ -29,6 +30,7 @@ const router = createBrowserRouter(
       <Route path="favourites" element={<ProtectedRoute><Favourites /></ProtectedRoute>} />
       <Route path="host" element={<ProtectedRoute><Host /></ProtectedRoute>} />
       <Route path="addLocation" element={<ProtectedRoute><AddLocation /></ProtectedRoute>} />
+      <Route path="viewDetails/:id" element={<ProtectedRoute><ViewDetails/></ProtectedRoute>} />
       <Route path="editLocation/:id" element={<ProtectedRoute><EditLocations/></ProtectedRoute>} />
       <Route path="login" element={<Login/>} />
       <Route path="signUp" element={<SignUp/>} />

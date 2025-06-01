@@ -4,7 +4,7 @@ import Host from "./Host";
 import { AppContext } from "../../CreateContext/Context";
 
 const AddLocation = () => {
-  const { locationLists, setLocationLists } = useContext(AppContext);
+  const { locationLists, setLocationLists, details, setDetails } = useContext(AppContext);
 
   const [newLocationPlace, setNewLocationPlace] = useState({
     image: "",
@@ -12,11 +12,15 @@ const AddLocation = () => {
     country: "",
     rating: "",
     description: "",
+    holeDescription: "",
+    history: "",
+    timing: "",
+    closing: "",
   });
 
   const handleChange = (e) => {
     setNewLocationPlace({
-      ...newLocationPlace, 
+      ...newLocationPlace,
       [e.target.name]: e.target.value,
     });
   };
@@ -25,6 +29,8 @@ const AddLocation = () => {
     e.preventDefault();
 
     const newLocation = await savetodb(newLocationPlace);
+
+    setDetails(newLocation);
 
     setLocationLists(...locationLists, newLocation);
 
@@ -93,6 +99,50 @@ const AddLocation = () => {
               className="w-full p-2 border rounded"
               onChange={handleChange}
             ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Complete Description</label>
+            <textarea
+              name="holeDescription"
+              rows="3"
+              placeholder="Enter complete description"
+              className="w-full p-2 border rounded"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Histoy Location</label>
+            <textarea
+              name="history"
+              rows="3"
+              placeholder="Enter history of location"
+              className="w-full p-2 border rounded"
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Opening Timing</label>
+            <input
+              type="time"
+              name="timing"
+              placeholder="Enter Opening Timing Of Location"
+              className="w-full p-2 border rounded"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Closing Timing</label>
+            <input
+              type="time"
+              name="closing"
+              placeholder="Enter Opening Timing Of Location"
+              className="w-full p-2 border rounded"
+              onChange={handleChange}
+            />
           </div>
 
           <button

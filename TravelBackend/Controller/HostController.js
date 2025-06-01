@@ -4,13 +4,17 @@ const user = require("../Models/user");
 exports.postLocation = async (req, res, next) => {
   console.log(req.body);
   try {
-    const { image, locationName, country, rating, description } = req.body;
+    const { image, locationName, country, rating, description, holeDescription, history, timing, closing } = req.body;
     const newLocation = new TravelLocations({
       image,
       locationName,
       country,
       rating,
       description,
+      holeDescription,
+      history,
+      timing,
+      closing
     });
 
     await newLocation.save();

@@ -6,6 +6,10 @@ const LocationSchema = mongoose.Schema({
     country: {type:String},
     rating: {type: Number},
     description: {type: String},
+    holeDescription: {type: String},
+    history: {type: String},
+    timing: {type: String},
+    closing: {type: String}
 });
 
 module.exports = mongoose.model("TravelLocation", LocationSchema);  
