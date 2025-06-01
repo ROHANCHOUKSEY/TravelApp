@@ -62,12 +62,12 @@ exports.getEditLocation = async (req, res, next) => {
   } catch (error) {
     console.log("Edit Location is not get", error);
   }
-};
+}; 
 
 exports.postEditLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { image, locationName, country, rating, description } = req.body;
+    const { image, locationName, country, rating, description, holeDescription, history, timing, closing} = req.body;
     const updateLocation = await TravelLocations.findByIdAndUpdate(
       id,
       {
@@ -76,6 +76,10 @@ exports.postEditLocation = async (req, res, next) => {
         country,
         rating,
         description,
+        holeDescription,
+        history,
+        timing,
+        closing
       },
       { new: true }
     );

@@ -5,7 +5,7 @@ import {
   userFavourite,
 } from "../../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const TopLocation = () => {
   const { locationLists, setLocationLists } = useContext(AppContext);
@@ -24,7 +24,7 @@ const TopLocation = () => {
     fetchLocation();
   }, []);
 
-  const handleFavourite = async (id) => { 
+  const handleFavourite = async (id) => {
     const alreadyFavourite = locationLists.find(
       (location) => location.id === id
     );
@@ -91,7 +91,7 @@ const TopLocation = () => {
 
               <div className="flex justify-between items-center">
                 <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                  View Details
+                  <NavLink to={`/viewDetails/${location.id}`}> View Details</NavLink>
                 </button>
                 <button
                   onClick={() => handleFavourite(location.id)}

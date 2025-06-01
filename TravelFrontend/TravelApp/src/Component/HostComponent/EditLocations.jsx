@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import {
-  editFromServer, 
+  editFromServer,
   postEditFromServer,
   savetodb,
 } from "../../service/locationService";
@@ -15,6 +15,10 @@ const EditLocations = () => {
     editcountry: "",
     editrating: "",
     editdescription: "",
+    editHoledescription: "",
+    editHistory: "",
+    editTiming: "",
+    editClosing: "",
   });
 
   useEffect(() => {
@@ -22,14 +26,27 @@ const EditLocations = () => {
       try {
         if (id) {
           const editItem = await editFromServer(id);
-          const { image, locationName, country, rating, description } =
-            editItem;
+          const {
+            image,
+            locationName,
+            country,
+            rating,
+            description,
+            holeDescription,
+            history,
+            timing,
+            closing,
+          } = editItem;
           setEditLocations({
             editimage: image,
             editlocationName: locationName,
             editcountry: country,
             editrating: rating,
             editdescription: description,
+            editHoledescription: holeDescription,
+            editHistory: history,
+            editTiming: timing,
+            editClosing: closing,
           });
         }
       } catch (error) {
@@ -59,6 +76,20 @@ const EditLocations = () => {
         e.target.name === "description"
           ? e.target.value
           : editLocations.editdescription,
+      editHoledescription:
+        e.target.name === "holeDescription"
+          ? e.target.value
+          : editLocations.editHoledescription,
+      editHistory:
+        e.target.name === "history"
+          ? e.target.value
+          : editLocations.editHistory,
+      editTiming:
+        e.target.name === "timing" ? e.target.value : editLocations.editTiming,
+      editClosing:
+        e.target.name === "closing"
+          ? e.target.value
+          : editLocations.editClosing,
     });
   };
 
@@ -69,6 +100,10 @@ const EditLocations = () => {
       country: editLocations.editcountry,
       rating: editLocations.editrating,
       description: editLocations.editdescription,
+      holeDescription: editLocations.editHoledescription,
+      history: editLocations.editHistory,
+      timing: editLocations.editTiming,
+      closing: editLocations.editClosing
     });
     setEditLocations({
       image: updateItem.image,
@@ -76,6 +111,10 @@ const EditLocations = () => {
       country: updateItem.country,
       rating: updateItem.rating,
       description: updateItem.description,
+      holeDescription: updateItem.holeDescription,
+      history: updateItem.history,
+      timing: updateItem.timing,
+      closing: updateItem.closing
     });
     window.location.href = "/host";
   };
@@ -142,6 +181,52 @@ const EditLocations = () => {
               value={editLocations.editdescription}
               onChange={handleChange}
             ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Complete Description</label>
+            <textarea
+              name="holeDescription"
+              rows="3"
+              className="w-full p-2 border rounded"
+              value={editLocations.editHoledescription}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Histoy Location</label>
+            <textarea
+              name="history"
+              rows="3"
+              className="w-full p-2 border rounded"
+              value={editLocations.editHistory}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Opening Timing</label>
+            <input
+              name="timing"
+              rows="3"
+              type="time"
+              className="w-full p-2 border rounded"
+              value={editLocations.editTiming}
+              onChange={handleChange}
+            ></input>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Closing Timing</label>
+            <input
+              name="closing"
+              rows="3"
+              type="time"
+              className="w-full p-2 border rounded"
+              value={editLocations.editClosing}
+              onChange={handleChange}
+            ></input>
           </div>
 
           <button

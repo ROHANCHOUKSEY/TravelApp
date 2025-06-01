@@ -4,7 +4,8 @@ import Host from "./Host";
 import { AppContext } from "../../CreateContext/Context";
 
 const AddLocation = () => {
-  const { locationLists, setLocationLists, details, setDetails } = useContext(AppContext);
+  const { locationLists, setLocationLists, setDetails } =
+    useContext(AppContext);
 
   const [newLocationPlace, setNewLocationPlace] = useState({
     image: "",
@@ -29,8 +30,6 @@ const AddLocation = () => {
     e.preventDefault();
 
     const newLocation = await savetodb(newLocationPlace);
-
-    setDetails(newLocation);
 
     setLocationLists(...locationLists, newLocation);
 

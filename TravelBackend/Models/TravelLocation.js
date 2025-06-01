@@ -12,4 +12,4 @@ const LocationSchema = mongoose.Schema({
     closing: {type: String}
 });
 
-module.exports = mongoose.model("TravelLocation", LocationSchema);  
+module.exports = mongoose.model("TravelLocation", LocationSchema);     

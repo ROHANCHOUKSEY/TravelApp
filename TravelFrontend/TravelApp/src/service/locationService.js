@@ -90,7 +90,7 @@ export const editFromServer = async (id) => {
 
 export const postEditFromServer = async (
   id,
-  { image, locationName, country, rating, description }
+  { image, locationName, country, rating, description, holeDescription, history, timing, closing}
 ) => {
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
@@ -105,6 +105,10 @@ export const postEditFromServer = async (
         country,
         rating,
         description,
+        holeDescription,
+        history, 
+        timing,
+        closing
       }),
     });
     const updateLocation = await response.json();
@@ -263,5 +267,9 @@ const maplocalValueToserviseValue = (serviseItem) => {
     country: serviseItem.country,
     rating: serviseItem.rating,
     description: serviseItem.description,
+    holeDescription: serviseItem.holeDescription,
+    history: serviseItem.history,
+    timing: serviseItem.timing,
+    closing: serviseItem.closing
   };
 };

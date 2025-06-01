@@ -37,7 +37,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<PageNotFound/>} />
     </Route>
   )
-);
+); 
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
