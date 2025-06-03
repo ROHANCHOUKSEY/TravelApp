@@ -3,11 +3,25 @@ const app = express();
 const mongoose = require("mongoose");
 const session = require("express-session");
 const mongodbStore = require("connect-mongodb-session")(session);
+const path = require("path");
+const multer = require("multer");
 
 const cors = require("cors");
 const hostRouter = require("./Router/HostRouter");
 const userRouter = require("./Router/UserRouter");
 const authRouter = require("./Router/AuthRouter");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + "_" + Math.round(Math.random() * 1e9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({ storage });
 
 const DB_PATH =
   "mongodb+srv://rohanchouksey02:Rohan2002@airbnb.thjlczk.mongodb.net/TravelApp?retryWrites=true&w=majority&appName=Airbnb";
@@ -26,6 +40,8 @@ app.use(
   })
 );
 
+app.use("/uploads", express.static("uploads"));
+
 app.use(
   session({
     secret: "rohanchouksey",
@@ -36,10 +52,9 @@ app.use(
       secure: false,
       httpOnly: true,
       sameSite: "lax",
-    } 
+    },
   })
 );
-
 
 app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
@@ -47,7 +62,15 @@ app.use("/api/user", userRouter);
 
 const PORT = 3002;
 
-mongoose
+app.post("/api/upload", upload.single("image"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+  const fileUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
+  res.status(200).json({ imageUrl: fileUrl });
+});
+
+mongoose 
   .connect(DB_PATH)
   .then(() => {
     app.listen(PORT, () => {

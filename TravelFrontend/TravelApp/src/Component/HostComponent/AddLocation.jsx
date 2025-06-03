@@ -14,7 +14,7 @@ const AddLocation = () => {
     rating: "",
     description: "",
     holeDescription: "",
-    history: "",
+    history: "", 
     timing: "",
     closing: "",
   });
@@ -26,15 +26,39 @@ const AddLocation = () => {
     });
   };
 
-  const handleButton = async (e) => {
-    e.preventDefault();
+const handleButton = async (e) => {
+  e.preventDefault();
 
-    const newLocation = await savetodb(newLocationPlace);
+  // Step 1: Upload image
+  const formData = new FormData();
+  formData.append("image", newLocationPlace.image);
 
-    setLocationLists(...locationLists, newLocation);
+  let imageUrl = "";
+  try {
+    const res = await fetch("http://localhost:3002/api/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-    window.location.href = "/host";
+    const data = await res.json();
+    imageUrl = data.imageUrl;
+  } catch (error) {
+    console.error("Image upload failed", error);
+    return;
+  }
+
+  // Step 2: Save location data
+  const locationData = {
+    ...newLocationPlace,
+    image: imageUrl, // Set uploaded image URL
   };
+
+  const newLocation = await savetodb(locationData);
+  setLocationLists((prev) => [...prev, newLocation]);
+
+  window.location.href = "/host";
+};
+
 
   return (
     <>
@@ -45,11 +69,12 @@ const AddLocation = () => {
           <div>
             <label className="block text-sm mb-1">Image URL</label>
             <input
-              type="url"
+              type="file"
               name="image"
-              placeholder="https://example.com/image.jpg"
+              accept="image/*"
+              // placeholder="https://example.com/image.jpg"
               className="w-full p-2 border rounded"
-              onChange={handleChange}
+              onChange={(e) => setNewLocationPlace({ ...newLocationPlace, image: e.target.files[0] })}
             />
           </div>
 
