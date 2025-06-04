@@ -45,7 +45,7 @@ const Host = () => {
             {/* Location Image */}
             <div className="relative h-48 overflow-hidden">
               <img
-                src={location.image}
+                src={location.image[0]}
                 alt={location.locationName}
                 className="w-full h-full object-cover"
                 onError={(e) => {

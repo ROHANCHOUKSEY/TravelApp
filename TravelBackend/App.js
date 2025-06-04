@@ -10,6 +10,7 @@ const cors = require("cors");
 const hostRouter = require("./Router/HostRouter");
 const userRouter = require("./Router/UserRouter");
 const authRouter = require("./Router/AuthRouter");
+const { error } = require("console");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -21,7 +22,7 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage }).array("images");
 
 const DB_PATH =
   "mongodb+srv://rohanchouksey02:Rohan2002@airbnb.thjlczk.mongodb.net/TravelApp?retryWrites=true&w=majority&appName=Airbnb";
@@ -62,15 +63,25 @@ app.use("/api/user", userRouter);
 
 const PORT = 3002;
 
-app.post("/api/upload", upload.single("image"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-  const fileUrl = `http://localhost:${PORT}/uploads/${req.file.filename}`;
-  res.status(200).json({ imageUrl: fileUrl });
+app.post("/api/upload", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.status(400).json({ error: err.message });
+    }
+
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ error: "No files uploaded" });
+    }
+
+    const fileUrls = req.files.map(
+      (file) => `http://localhost:${PORT}/uploads/${file.filename}`
+    ); 
+
+    res.status(200).json({ imageUrls: fileUrls });
+  });
 });
 
-mongoose 
+mongoose
   .connect(DB_PATH)
   .then(() => {
     app.listen(PORT, () => {

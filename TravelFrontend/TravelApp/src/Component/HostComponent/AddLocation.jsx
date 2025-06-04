@@ -14,7 +14,7 @@ const AddLocation = () => {
     rating: "",
     description: "",
     holeDescription: "",
-    history: "", 
+    history: "",
     timing: "",
     closing: "",
   });
@@ -26,39 +26,48 @@ const AddLocation = () => {
     });
   };
 
-const handleButton = async (e) => {
-  e.preventDefault();
+  const handleButton = async (e) => {
+    e.preventDefault();
 
-  // Step 1: Upload image
-  const formData = new FormData();
-  formData.append("image", newLocationPlace.image);
+    if (!newLocationPlace.image || newLocationPlace.image.length === 0) {
+      alert("Please select at least one image");
+      return;
+    }
 
-  let imageUrl = "";
-  try {
-    const res = await fetch("http://localhost:3002/api/upload", {
-      method: "POST",
-      body: formData,
-    });
+    // Step 1: Upload image
+    const formData = new FormData();
 
-    const data = await res.json();
-    imageUrl = data.imageUrl;
-  } catch (error) {
-    console.error("Image upload failed", error);
-    return;
-  }
+    Array.from(newLocationPlace.image).forEach((file) => {
+      formData.append("images", file);
+    })
 
-  // Step 2: Save location data
-  const locationData = {
-    ...newLocationPlace,
-    image: imageUrl, // Set uploaded image URL
+    console.log("FormData", formData);
+
+    let imageUrls = [];
+    try {
+      const res = await fetch("http://localhost:3002/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      imageUrls = data.imageUrls;
+    } catch (error) {
+      console.error("Image upload failed", error);
+      return;
+    }
+
+    // Step 2: Save location data
+    const locationData = {
+      ...newLocationPlace,
+      image: imageUrls, // Set uploaded image URL
+    };
+
+    const newLocation = await savetodb(locationData);
+    setLocationLists((prev) => [...prev, newLocation]);
+
+    window.location.href = "/host";
   };
-
-  const newLocation = await savetodb(locationData);
-  setLocationLists((prev) => [...prev, newLocation]);
-
-  window.location.href = "/host";
-};
-
 
   return (
     <>
@@ -72,9 +81,15 @@ const handleButton = async (e) => {
               type="file"
               name="image"
               accept="image/*"
+              multiple
               // placeholder="https://example.com/image.jpg"
               className="w-full p-2 border rounded"
-              onChange={(e) => setNewLocationPlace({ ...newLocationPlace, image: e.target.files[0] })}
+              onChange={(e) =>
+                setNewLocationPlace({
+                  ...newLocationPlace,
+                  image: Array.from(e.target.files),
+                })
+              }
             />
           </div>
 

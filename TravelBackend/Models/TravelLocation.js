@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const LocationSchema = mongoose.Schema({
-    image: {type:String},
+    image: [{type:String}],
     locationName: {type:String},
     country: {type:String},
     rating: {type: Number},
