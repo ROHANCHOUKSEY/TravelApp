@@ -11,6 +11,7 @@ const AddLocation = () => {
     image: "",
     locationName: "",
     country: "",
+    state: "",
     rating: "",
     description: "",
     holeDescription: "",
@@ -39,7 +40,7 @@ const AddLocation = () => {
 
     Array.from(newLocationPlace.image).forEach((file) => {
       formData.append("images", file);
-    })
+    });
 
     console.log("FormData", formData);
 
@@ -109,6 +110,17 @@ const AddLocation = () => {
             <input
               type="text"
               name="country"
+              placeholder="Enter country"
+              className="w-full p-2 border rounded"
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">State</label>
+            <input
+              type="text"
+              name="state"
               placeholder="Enter country"
               className="w-full p-2 border rounded"
               onChange={handleChange}

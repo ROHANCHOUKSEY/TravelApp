@@ -5,8 +5,8 @@ import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 
 const Explore = () => {
-  const { locationLists, setLocationLists, isLoggined} = useContext(AppContext);
-
+  const { locationLists, setLocationLists, isLoggined } =
+    useContext(AppContext);
 
   useEffect(() => {
     async function fetchLocation() {
@@ -21,7 +21,7 @@ const Explore = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className=" min-h-screen bg-gray-50 p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-8">
         Your Hosted Locations
       </h1>
@@ -33,7 +33,7 @@ const Explore = () => {
             className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
           >
             {/* Location Image */}
-            <div className="relative h-48 overflow-hidden">
+            <div className="relative h-48  overflow-hidden">
               <img
                 src={location.image[0]}
                 alt={location.locationName}
@@ -62,12 +62,14 @@ const Explore = () => {
                   <span className="text-sm text-blue-800">
                     {location.country}
                   </span>
-                </div>
+                </div> 
               </div>
 
               <div className="flex items-center text-gray-600 mb-3">
                 <FaMapMarkerAlt className="mr-2 text-red-500" />
-                <span className="text-sm">{location.country}</span>
+                <span className="text-sm">
+                  {location.country}, {location.state}
+                </span>
               </div>
 
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -76,7 +78,10 @@ const Explore = () => {
 
               <div className="flex justify-between items-center">
                 {isLoggined ? (
-                  <NavLink to={`viewDetails/${location.id}`} className="text-blue-500">
+                  <NavLink
+                    to={`viewDetails/${location.id}`}
+                    className="text-blue-500"
+                  >
                     View Details
                   </NavLink>
                 ) : (

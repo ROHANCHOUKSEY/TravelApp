@@ -4,6 +4,7 @@ export const savetodb = async ({
   image,
   locationName,
   country,
+  state, 
   rating,
   description,
   holeDescription,
@@ -22,6 +23,7 @@ export const savetodb = async ({
         image,
         locationName,
         country,
+        state,
         rating,
         description,
         holeDescription,
@@ -90,7 +92,7 @@ export const editFromServer = async (id) => {
 
 export const postEditFromServer = async (
   id,
-  { image, locationName, country, rating, description, holeDescription, history, timing, closing}
+  { image, locationName, country, state, rating, description, holeDescription, history, timing, closing}
 ) => {
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
@@ -103,6 +105,7 @@ export const postEditFromServer = async (
         image,
         locationName,
         country,
+        state,
         rating,
         description,
         holeDescription,
@@ -265,6 +268,7 @@ const maplocalValueToserviseValue = (serviseItem) => {
     image: serviseItem.image,
     locationName: serviseItem.locationName,
     country: serviseItem.country,
+    state: serviseItem.state,
     rating: serviseItem.rating,
     description: serviseItem.description,
     holeDescription: serviseItem.holeDescription,

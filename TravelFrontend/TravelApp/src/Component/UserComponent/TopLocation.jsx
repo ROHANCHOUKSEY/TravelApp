@@ -29,9 +29,11 @@ const TopLocation = () => {
       (location) => location.id === id
     );
     if (alreadyFavourite?.isFavourite) {
+      console.log("Already Favourite");
       navigate("/favourites");
     } else {
       await userFavourite(id);
+      console.log("Add favourite");
       navigate("/favourites");
     }
   };
@@ -50,7 +52,7 @@ const TopLocation = () => {
             {/* Location Image */}
             <div className="relative h-48 overflow-hidden">
               <img
-                src={location.image}
+                src={location.image[0]}
                 alt={location.locationName}
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -72,6 +74,7 @@ const TopLocation = () => {
                 <h2 className="text-xl font-bold text-gray-800">
                   {location.locationName}
                 </h2>
+
                 <div className="flex items-center bg-blue-100 px-2 py-1 rounded">
                   <FaGlobe className="text-blue-500 mr-1" />
                   <span className="text-sm text-blue-800">
@@ -82,7 +85,9 @@ const TopLocation = () => {
 
               <div className="flex items-center text-gray-600 mb-3">
                 <FaMapMarkerAlt className="mr-2 text-red-500" />
-                <span className="text-sm">{location.country}</span>
+                <span className="text-sm">
+                  {location.country}, {location.state}
+                </span>
               </div>
 
               <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -91,7 +96,10 @@ const TopLocation = () => {
 
               <div className="flex justify-between items-center">
                 <button className="text-blue-600 hover:text-blue-800 text-sm font-medium">
-                  <NavLink to={`/viewDetails/${location.id}`}> View Details</NavLink>
+                  <NavLink to={`/viewDetails/${location.id}`}>
+                    {" "}
+                    View Details
+                  </NavLink>
                 </button>
                 <button
                   onClick={() => handleFavourite(location.id)}

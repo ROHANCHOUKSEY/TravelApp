@@ -13,6 +13,7 @@ const EditLocations = () => {
     editimage: "",
     editlocationName: "",
     editcountry: "",
+    editState: "",
     editrating: "",
     editdescription: "",
     editHoledescription: "",
@@ -30,6 +31,7 @@ const EditLocations = () => {
             image,
             locationName,
             country,
+            state,
             rating,
             description,
             holeDescription,
@@ -41,6 +43,7 @@ const EditLocations = () => {
             editimage: image,
             editlocationName: locationName,
             editcountry: country,
+            editState: state,
             editrating: rating,
             editdescription: description,
             editHoledescription: holeDescription,
@@ -70,6 +73,8 @@ const EditLocations = () => {
         e.target.name === "country"
           ? e.target.value
           : editLocations.editcountry,
+      editState:
+        e.target.name === "state" ? e.target.value : editLocations.editState,
       editrating:
         e.target.name === "rating" ? e.target.value : editLocations.editrating,
       editdescription:
@@ -98,23 +103,25 @@ const EditLocations = () => {
       image: editLocations.editimage,
       locationName: editLocations.editlocationName,
       country: editLocations.editcountry,
+      state: editLocations.editState,
       rating: editLocations.editrating,
       description: editLocations.editdescription,
       holeDescription: editLocations.editHoledescription,
       history: editLocations.editHistory,
       timing: editLocations.editTiming,
-      closing: editLocations.editClosing
+      closing: editLocations.editClosing,
     });
     setEditLocations({
       image: updateItem.image,
       locationName: updateItem.locationName,
       country: updateItem.country,
+      state: updateItem.state,
       rating: updateItem.rating,
       description: updateItem.description,
       holeDescription: updateItem.holeDescription,
       history: updateItem.history,
       timing: updateItem.timing,
-      closing: updateItem.closing
+      closing: updateItem.closing,
     });
     window.location.href = "/host";
   };
@@ -154,6 +161,17 @@ const EditLocations = () => {
               name="country"
               className="w-full p-2 border rounded"
               value={editLocations.editcountry}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Country</label>
+            <input
+              type="text"
+              name="state"
+              className="w-full p-2 border rounded"
+              value={editLocations.editState}
               onChange={handleChange}
             />
           </div>

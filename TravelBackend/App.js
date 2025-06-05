@@ -51,12 +51,12 @@ app.use(
     store: store,
     cookie: {
       secure: false,
-      httpOnly: true,
+      httpOnly: true, 
       sameSite: "lax",
     },
   })
 );
-
+ 
 app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);

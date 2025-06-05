@@ -4,11 +4,12 @@ const user = require("../Models/user");
 exports.postLocation = async (req, res, next) => {
   console.log(req.body);
   try {
-    const { image, locationName, country, rating, description, holeDescription, history, timing, closing } = req.body;
+    const { image, locationName, country, state, rating, description, holeDescription, history, timing, closing } = req.body;
     const newLocation = new TravelLocations({
       image,
       locationName,
       country,
+      state,
       rating,
       description,
       holeDescription,
@@ -67,13 +68,14 @@ exports.getEditLocation = async (req, res, next) => {
 exports.postEditLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { image, locationName, country, rating, description, holeDescription, history, timing, closing} = req.body;
+    const { image, locationName, country, state, rating, description, holeDescription, history, timing, closing} = req.body;
     const updateLocation = await TravelLocations.findByIdAndUpdate(
       id,
       {
         image,
         locationName,
         country,
+        state,
         rating,
         description,
         holeDescription,

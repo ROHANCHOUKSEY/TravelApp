@@ -4,6 +4,7 @@ const LocationSchema = mongoose.Schema({
     image: [{type:String}],
     locationName: {type:String},
     country: {type:String},
+    state: {type:String},
     rating: {type: Number},
     description: {type: String},
     holeDescription: {type: String},

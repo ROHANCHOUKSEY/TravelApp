@@ -81,7 +81,7 @@ const Favourites = () => {
                 {/* Location Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={location.image}
+                    src={location.image[0]}
                     alt={location.locationName}
                     className="w-full h-full object-cover"
                     onError={(e) => {
@@ -113,7 +113,7 @@ const Favourites = () => {
 
                   <div className="flex items-center text-gray-600 mb-3">
                     <FaMapMarkerAlt className="mr-2 text-red-500" />
-                    <span className="text-sm">{location.country}</span>
+                    <span className="text-sm">{location.country}, {location.state}</span>
                   </div>
 
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
