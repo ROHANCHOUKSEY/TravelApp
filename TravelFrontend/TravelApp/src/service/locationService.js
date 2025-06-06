@@ -4,7 +4,7 @@ export const savetodb = async ({
   image,
   locationName,
   country,
-  state, 
+  state,
   rating,
   description,
   holeDescription,
@@ -74,6 +74,46 @@ export const locationFromServer = async () => {
   }
 };
 
+export const stateLocation = async (locationData) => {
+  try {
+    const response = await fetch(
+      "http://localhost:3002/api/host/stateLocation",
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(locationData),
+      }
+    );
+    const data = await response.json();
+    return maplocalValueToserviseValue(data);
+  } catch (error) {
+    console.log("state wise location is not save", error);
+    throw error;
+  }
+};
+
+export const getStateLocation = async () => {
+  try {
+    const response = await fetch(
+      "http://localhost:3002/api/host/stateLocation",
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const stateLocationWise = response.json();
+    return stateLocationWise.map(maplocalValueToserviseValue);
+  } catch (error) {
+    console.log("StateLocation is not fetch");
+  }
+};
+
 export const editFromServer = async (id) => {
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
@@ -92,7 +132,18 @@ export const editFromServer = async (id) => {
 
 export const postEditFromServer = async (
   id,
-  { image, locationName, country, state, rating, description, holeDescription, history, timing, closing}
+  {
+    image,
+    locationName,
+    country,
+    state,
+    rating,
+    description,
+    holeDescription,
+    history,
+    timing,
+    closing,
+  }
 ) => {
   try {
     const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
@@ -109,9 +160,9 @@ export const postEditFromServer = async (
         rating,
         description,
         holeDescription,
-        history, 
+        history,
         timing,
-        closing
+        closing,
       }),
     });
     const updateLocation = await response.json();
@@ -274,6 +325,6 @@ const maplocalValueToserviseValue = (serviseItem) => {
     holeDescription: serviseItem.holeDescription,
     history: serviseItem.history,
     timing: serviseItem.timing,
-    closing: serviseItem.closing
+    closing: serviseItem.closing,
   };
 };

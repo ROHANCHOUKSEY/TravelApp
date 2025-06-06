@@ -4,6 +4,7 @@ export const AppContext = createContext();
 
 export const ContextProvider = (props) => {
   const [locationLists, setLocationLists] = useState([]);
+  const [statebaseLocation, setStatebaseLocation] = useState([]);
   const [isLoggined, setIsLoggined] = useState(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,6 +50,8 @@ export const ContextProvider = (props) => {
       value={{
         locationLists,
         setLocationLists,
+        statebaseLocation, 
+        setStatebaseLocation,
         isLoggined,
         setIsLoggined,
         loading,

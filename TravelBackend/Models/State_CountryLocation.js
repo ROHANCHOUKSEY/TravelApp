@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 
-const stateCountryLocation = mongoose.Schema({
-    madhyaPradesh: [{type: string}],
-    maharashtra: [{type: string}],
-    rajasthan: [{type: string}],
-    tamilNadu: [{type: string}],
-    telangana: [{type: string}],
-    uttarakhand: [{type: string}],
-    himachalPradesh: [{type: string}],
+const locationSchema = new mongoose.Schema({
+  madhyapradesh: { type: Array, default: [] },
+  utterpradesh: { type: Array, default: [] },
+  maharashtra: { type: Array, default: [] },
+  rajasthan: { type: Array, default: [] },
+  tamilnadu: { type: Array, default: [] },
+  telangana: { type: Array, default: [] },
+  karnataka: { type: Array, default: [] },
+  uttarakhand: { type: Array, default: [] },
+  himachalpradesh: { type: Array, default: [] },
 });
 
-module.exports = mongoose.model("state_country", stateCountryLocation);
+module.exports = mongoose.model("StateCountryLocation", locationSchema);

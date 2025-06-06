@@ -1,10 +1,10 @@
-import { useContext, useRef, useState } from "react";
-import { savetodb } from "../../service/locationService";
+import { useContext, useEffect, useRef, useState } from "react";
+import { savetodb, stateLocation } from "../../service/locationService";
 import Host from "./Host";
 import { AppContext } from "../../CreateContext/Context";
 
 const AddLocation = () => {
-  const { locationLists, setLocationLists, setDetails } =
+  const {setLocationLists, statebaseLocation, setStatebaseLocation} =
     useContext(AppContext);
 
   const [newLocationPlace, setNewLocationPlace] = useState({
@@ -62,12 +62,21 @@ const AddLocation = () => {
     const locationData = {
       ...newLocationPlace,
       image: imageUrls, // Set uploaded image URL
+      state: newLocationPlace.state, // Ensure this is correctly set
     };
 
-    const newLocation = await savetodb(locationData);
-    setLocationLists((prev) => [...prev, newLocation]);
+    console.log("Sending location data:", locationData); // Debug log
 
-    window.location.href = "/host";
+    try {
+      const savedLocation = await stateLocation(locationData);
+      const newLocation = await savetodb(locationData);
+      setStatebaseLocation((prev) => [...prev, savedLocation]);
+      setLocationLists((prev) => [...prev, newLocation]);
+      window.location.href = "/host";
+    } catch (error) {
+      console.error("Error saving location:", error);
+      alert("Failed to save location. Please check console for details.");
+    }
   };
 
   return (
@@ -83,7 +92,6 @@ const AddLocation = () => {
               name="image"
               accept="image/*"
               multiple
-              // placeholder="https://example.com/image.jpg"
               className="w-full p-2 border rounded"
               onChange={(e) =>
                 setNewLocationPlace({

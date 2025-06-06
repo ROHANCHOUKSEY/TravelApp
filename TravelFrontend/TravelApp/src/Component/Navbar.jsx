@@ -80,6 +80,9 @@ const Navbar = () => {
                   <NavLink to="/" className={getNavlinkClass}>
                     Explore
                   </NavLink>
+                  <NavLink to="/stateLocation" className={getNavlinkClass}>
+                    StateLocations
+                  </NavLink>
                   <NavLink to="/location" className={getNavlinkClass}>
                     Top Location
                   </NavLink>
