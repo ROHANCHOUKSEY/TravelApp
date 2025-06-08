@@ -17,12 +17,12 @@ const Explore = () => {
         console.log("All location is not fetch", error);
       }
     }
-    fetchLocation();
+    fetchLocation(); 
   }, []);
 
   return (
-    <div className=" min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl mt-10 font-bold text-gray-800 mb-8">
         Your Hosted Locations
       </h1>
 

@@ -107,10 +107,11 @@ export const getStateLocation = async () => {
         },
       }
     );
-    const stateLocationWise = response.json();
-    return stateLocationWise.map(maplocalValueToserviseValue);
+    const stateLocationWise = await response.json();
+    return stateLocationWise;
   } catch (error) {
-    console.log("StateLocation is not fetch");
+    console.log("StateLocation is not fetch", error);
+    throw error;
   }
 };
 

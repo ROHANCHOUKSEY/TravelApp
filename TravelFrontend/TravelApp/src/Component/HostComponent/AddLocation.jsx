@@ -4,7 +4,7 @@ import Host from "./Host";
 import { AppContext } from "../../CreateContext/Context";
 
 const AddLocation = () => {
-  const {setLocationLists, statebaseLocation, setStatebaseLocation} =
+  const { setLocationLists, statebaseLocation, setStatebaseLocation } =
     useContext(AppContext);
 
   const [newLocationPlace, setNewLocationPlace] = useState({
@@ -68,11 +68,15 @@ const AddLocation = () => {
     console.log("Sending location data:", locationData); // Debug log
 
     try {
-      const savedLocation = await stateLocation(locationData);
+      
+      const savedStateLocation = await stateLocation(locationData);
+      setStatebaseLocation((prev) => [...prev, savedStateLocation]);
+      console.log("setStatebaseLocation", setStatebaseLocation)
+
       const newLocation = await savetodb(locationData);
-      setStatebaseLocation((prev) => [...prev, savedLocation]);
       setLocationLists((prev) => [...prev, newLocation]);
-      window.location.href = "/host";
+
+      window.location.href = "/host"; 
     } catch (error) {
       console.error("Error saving location:", error);
       alert("Failed to save location. Please check console for details.");
@@ -203,6 +207,8 @@ const AddLocation = () => {
               onChange={handleChange}
             />
           </div>
+
+          
 
           <button
             type="button"

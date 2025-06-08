@@ -78,7 +78,7 @@ exports.getEditLocation = async (req, res, next) => {
   }
 };
 
-exports.postStateLocation = async (req, res, next) => {
+exports.postStateLocation = async (req, res) => {
   try {
     const {
       image,
@@ -95,7 +95,6 @@ exports.postStateLocation = async (req, res, next) => {
 
     const statekey = state.toLowerCase().replace(/\s+/g, "");
 
-    // Check if the statekey is valid in the schema
     const allowedStates = [
       "madhyapradesh",
       "utterpradesh",
@@ -112,25 +111,7 @@ exports.postStateLocation = async (req, res, next) => {
       return res.status(400).json({ message: `Invalid state name: ${state}` });
     }
 
-    // Make sure a document exists (initialize if not)
-    let doc = await locationState.findOne({});
-    if (!doc) {
-      doc = await locationState.create({
-        madhyapradesh: [],
-        utterpradesh: [],
-        maharashtra: [],
-        rajasthan: [],
-        tamilnadu: [],
-        telangana: [],
-        karnataka: [],
-        uttarakhand: [],
-        himachalpradesh: [],
-      });
-      await doc.save();
-    }
-
-    // Create the new location object
-    const newLocation = {
+    const newLocation = new TravelLocations({
       image,
       locationName,
       country,
@@ -141,27 +122,45 @@ exports.postStateLocation = async (req, res, next) => {
       history,
       timing,
       closing,
-    };
+    });
 
-    // Push the new location to the appropriate state array
-    doc[statekey].push(newLocation);
-    await doc.save();
+    await newLocation.save();
 
-    res.status(200).json({ message: "Location saved", data: updatedDoc });
+    let stateDoc = await locationState.findOne();
+    if (!stateDoc) {
+      stateDoc = new locationState();
+    }
+
+    stateDoc[statekey].push(newLocation._id);
+    const updatedDoc = await stateDoc.save();
+
+    res.status(200).json({
+      message: "Location ID stored in state successfully",
+      data: updatedDoc,
+    });
   } catch (error) {
-    console.log("Location is not saved state", error);
-    res
-      .status(500)
-      .json({ message: "Error saving location", error: error.message });
+    console.error("Error:", error);
+    res.status(500).json({ message: "Failed to save location", error: error.message });
   }
 };
 
 exports.getStateLocation = async (req, res, next) => {
   try {
-    const getStateLocation = await locationState.find();
-    req.status(200).json(getStateLocation);
+    const getlocationState = await locationState.find()
+      .populate("madhyapradesh")
+      .populate("utterpradesh")
+      .populate("maharashtra")
+      .populate("rajasthan")
+      .populate("tamilnadu")
+      .populate("telangana")
+      .populate("karnataka")
+      .populate("uttarakhand")
+      .populate("himachalpradesh");
+
+    res.status(200).json(getlocationState);
   } catch (error) {
     console.log("not get statelocation data", error);
+    res.status(500).json({ message: "Error getting state location data" });
   }
 };
 

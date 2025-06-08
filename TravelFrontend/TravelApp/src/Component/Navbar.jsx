@@ -45,7 +45,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+    <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
