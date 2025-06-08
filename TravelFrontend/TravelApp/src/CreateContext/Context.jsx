@@ -10,6 +10,7 @@ export const ContextProvider = (props) => {
   const [loading, setLoading] = useState(true);
   const [userType, setUsertype] = useState("");
   const [userName, setUsername] = useState("");
+  const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
 
   useEffect(() => {
@@ -28,6 +29,7 @@ export const ContextProvider = (props) => {
           setUser(data.user);
           setUsertype(data.user.usertype);
           setUsername(data.user.firstname);
+          setUserlastname(data.user.lastname)
         } else {
           setIsLoggined(false);
           setUser(null)
@@ -59,6 +61,7 @@ export const ContextProvider = (props) => {
         setUser,
         userType,
         userName,
+        userlastName,
         details,
         setDetails
       }}

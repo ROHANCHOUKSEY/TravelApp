@@ -15,6 +15,6 @@ const userSchema = mongoose.Schema({
   hostLocation: [
     { type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" },
   ],
-});
+}); 
 
 module.exports = mongoose.model("user", userSchema);

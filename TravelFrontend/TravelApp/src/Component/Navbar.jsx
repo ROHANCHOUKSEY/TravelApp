@@ -1,10 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../CreateContext/Context";
+import { CircleUserRound } from "lucide-react";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [dropDown, setDropdown] = useState(false);
+
+  const dropdownRef = useRef();
+
   const {
     isLoggined,
     setIsLoggined,
@@ -13,6 +18,7 @@ const Navbar = () => {
     setUser,
     userType,
     userName,
+    userlastName,
   } = useContext(AppContext);
 
   const getNavlinkClass = ({ isActive }) => {
@@ -47,6 +53,25 @@ const Navbar = () => {
     }
   };
 
+  const userHandle = () => {
+    setDropdown(!dropDown);
+    console.log("Dropdown", dropDown);
+  };
+
+  const handleOutSideClick = (event) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      setDropdown(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      document.addEventListener("mousedown", handleOutSideClick);
+    };
+  }, []);
+
   if (loading) {
     return null;
   }
@@ -74,11 +99,6 @@ const Navbar = () => {
               <span className="ml-2 text-white text-xl font-bold">
                 BrandName
               </span>
-              {isLoggined ? (
-                <h1 className="text-white px-6">Welecome, {userName}</h1>
-              ) : (
-                ""
-              )}
             </div>
           </div>
 
@@ -99,13 +119,31 @@ const Navbar = () => {
                   <NavLink to="/favourites" className={getNavlinkClass}>
                     Favourites
                   </NavLink>
-                  <NavLink
-                    to="/login"
-                    onClick={handleLogout}
-                    className={getNavlinkClass}
-                  >
-                    LogOut
-                  </NavLink>
+
+                  <div className="left-0" ref={dropdownRef}>
+                    <button onClick={userHandle}>
+                      <CircleUserRound />
+                    </button>
+                    {dropDown && (
+                      <div
+                        x-show="dropdownOpen"
+                        class="absolute right-0 top-20 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+                      >
+                        <div>
+                          <h1 className="text-black px-6">
+                            {userName} {userlastName}
+                          </h1>
+                          <NavLink
+                            to="/login"
+                            onClick={handleLogout}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
+                          >
+                            LogOut
+                          </NavLink>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </>
               ) : (
                 <>
@@ -118,13 +156,31 @@ const Navbar = () => {
                   <NavLink to="/addLocation" className={getNavlinkClass}>
                     Add Location
                   </NavLink>
-                  <NavLink
-                    to="/login"
-                    onClick={handleLogout}
-                    className={getNavlinkClass}
-                  >
-                    LogOut
-                  </NavLink>
+
+                  <div className="left-0" ref={dropdownRef}>
+                    <button onClick={userHandle}>
+                      <CircleUserRound />
+                    </button>
+                    {dropDown && (
+                      <div
+                        x-show="dropdownOpen"
+                        class="absolute right-0 top-20 py-2 w-48 bg-white rounded-md shadow-xl z-20"
+                      >
+                        <div>
+                          <h1 className="text-black px-6">
+                            {userName} {userlastName}
+                          </h1>
+                          <NavLink
+                            to="/login"
+                            onClick={handleLogout}
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-100"
+                          >
+                            LogOut
+                          </NavLink>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </>
               )
             ) : (
