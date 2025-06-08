@@ -70,7 +70,7 @@ const AddLocation = () => {
     try {
       
       const savedStateLocation = await stateLocation(locationData);
-      setStatebaseLocation((prev) => [...prev, savedStateLocation]);
+      // setStatebaseLocation((prev) => [...prev, savedStateLocation]);
       console.log("setStatebaseLocation", setStatebaseLocation)
 
       const newLocation = await savetodb(locationData);
