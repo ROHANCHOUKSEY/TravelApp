@@ -35,9 +35,11 @@ const Favourites = () => {
   return (
     <>
       <div className="min-h-screen bg-gray-50 p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">
-          Your Favourites Locations
-        </h1>
+        <div className="mt-15 mb-8">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+            Your Favourite Destinations
+          </h1>
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {locationLists.length <= 0 ? (

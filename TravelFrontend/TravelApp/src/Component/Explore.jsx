@@ -26,7 +26,7 @@ const Explore = () => {
         <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
           Discover Incredible India
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto"> 
           Explore breathtaking destinations and hidden gems across our beautiful
           country
         </p>

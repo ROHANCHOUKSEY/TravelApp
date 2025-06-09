@@ -27,13 +27,20 @@ const Host = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       {locationLists.length === 0 ? (
-        <h1 className="w-full text-center font-bold text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl">
-          There is no hosted Location
-        </h1>
+        <div className="mt-15 mb-8">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+            There is no location shared
+          </h1>
+        </div>
       ) : (
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">
-          Your Hosted Locations
-        </h1>
+        <div className="mt-15 mb-8">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+            Locations You've Shared
+          </h1>
+            <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto">
+            These are the destinations you've added to the platform. Thank you for helping travelers discover new places and experiences.
+          </p>
+        </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

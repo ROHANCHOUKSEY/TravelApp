@@ -40,9 +40,14 @@ const TopLocation = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mt-10 mb-8">
-        Your Hosted Locations
-      </h1>
+      <div className="mt-15 mb-8">
+        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          Must-Visit Destinations
+        </h1>
+        <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto">
+          Explore the most loved and highly rated locations in India.
+        </p>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
           <div

@@ -78,10 +78,14 @@ const StateLocations = () => {
 
   return (
     <div className="container  mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mt-10 mb-8 text-center">
-        Explore Locations by State
-      </h1>
-
+      <div className="mt-15 mb-8">
+        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          Discover India, One State at a Time
+        </h1>
+        <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto"> 
+         Explore breathtaking destinations across India, organized by state. From majestic forts to serene beaches — start your journey with just a click.
+        </p>
+      </div>
       {/* State Selection Tabs */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         {statesWithLocations.map((state) => (
