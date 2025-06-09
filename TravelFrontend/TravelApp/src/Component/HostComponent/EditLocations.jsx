@@ -10,7 +10,7 @@ const EditLocations = () => {
   const { id } = useParams();
 
   const [editLocations, setEditLocations] = useState({
-    editimage: "",
+    editimage: [],
     editlocationName: "",
     editcountry: "",
     editState: "",
@@ -98,9 +98,43 @@ const EditLocations = () => {
     });
   };
 
+  const handleImageChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setEditLocations((prev) => ({
+      ...prev,
+      editimage: selectedFiles,
+    }));
+  };
+
   const editButton = async () => {
+    let imageUrls = [];
+
+    if (
+      editLocations.editimage.length > 0 &&
+      typeof editLocations.editimage[0] !== "string"
+    ) {
+      const formData = new FormData();
+      editLocations.editimage.forEach((file) => {
+        formData.append("images", file);
+      });
+      try {
+        const res = await fetch("http://localhost:3002/api/upload", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+        imageUrls = data.imageUrls;
+      } catch (error) {
+        console.log("Image upload Failed", error);
+        return;
+      }
+    } else {
+      imageUrls = editLocations.editimage;
+    }
+
     const updateItem = await postEditFromServer(id, {
-      image: editLocations.editimage,
+      image: imageUrls,
       locationName: editLocations.editlocationName,
       country: editLocations.editcountry,
       state: editLocations.editState,
@@ -111,8 +145,9 @@ const EditLocations = () => {
       timing: editLocations.editTiming,
       closing: editLocations.editClosing,
     });
+
     setEditLocations({
-      image: updateItem.image,
+      editimage: updateItem.image,
       locationName: updateItem.locationName,
       country: updateItem.country,
       state: updateItem.state,
@@ -133,14 +168,28 @@ const EditLocations = () => {
 
         <form className="space-y-3" action="/host" method="post">
           <div>
-            <label className="block text-sm mb-1">Image URL</label>
+            <label className="block text-sm mb-1">Image Upload</label>
             <input
-              type="url"
+              type="file"
               name="image"
+              accept="image/*" 
+              multiple
               className="w-full p-2 border rounded"
-              value={editLocations.editimage}
-              onChange={handleChange}
+              onChange={handleImageChange}
             />
+            <div className="mt-2 flex flex-wrap gap-2">
+              {Array.isArray(editLocations.editimage) &&
+                editLocations.editimage.map((img, index) => (
+                  <img
+                    key={index}
+                    src={
+                      typeof img === "string" ? img : URL.createObjectURL(img)
+                    }
+                    alt="preview"
+                    className="w-20 h-20 object-cover border rounded"
+                  />
+                ))}
+            </div>
           </div>
 
           <div>

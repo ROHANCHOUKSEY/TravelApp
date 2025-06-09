@@ -68,16 +68,6 @@ exports.getLocation = async (req, res, next) => {
   }
 };
 
-exports.getEditLocation = async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const editLocation = await TravelLocations.findById(id);
-    res.status(200).json(editLocation);
-  } catch (error) {
-    console.log("Edit Location is not get", error);
-  }
-};
-
 exports.postStateLocation = async (req, res) => {
   try {
     const {
@@ -140,13 +130,16 @@ exports.postStateLocation = async (req, res) => {
     });
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ message: "Failed to save location", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to save location", error: error.message });
   }
 };
 
 exports.getStateLocation = async (req, res, next) => {
   try {
-    const getlocationState = await locationState.find()
+    const getlocationState = await locationState
+      .find()
       .populate("madhyapradesh")
       .populate("utterpradesh")
       .populate("maharashtra")
@@ -163,6 +156,16 @@ exports.getStateLocation = async (req, res, next) => {
     res.status(500).json({ message: "Error getting state location data" });
   }
 };
+
+exports.getEditLocation = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const editLocation = await TravelLocations.findById(id);
+    res.status(200).json(editLocation);
+  } catch (error) {
+    console.log("Edit Location is not get", error);
+  }
+}; 
 
 exports.postEditLocation = async (req, res, next) => {
   try {
