@@ -17,14 +17,20 @@ const Explore = () => {
         console.log("All location is not fetch", error);
       }
     }
-    fetchLocation(); 
+    fetchLocation();
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <h1 className="text-3xl mt-10 font-bold text-gray-800 mb-8">
-        Your Hosted Locations
-      </h1>
+      <div className="mt-15 mb-8">
+        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          Discover Incredible India
+        </h1>
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          Explore breathtaking destinations and hidden gems across our beautiful
+          country
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
@@ -62,7 +68,7 @@ const Explore = () => {
                   <span className="text-sm text-blue-800">
                     {location.country}
                   </span>
-                </div> 
+                </div>
               </div>
 
               <div className="flex items-center text-gray-600 mb-3">
@@ -80,16 +86,16 @@ const Explore = () => {
                 {isLoggined ? (
                   <NavLink
                     to={`viewDetails/${location.id}`}
-                    className="text-blue-500"
+                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   >
                     View Details
                   </NavLink>
                 ) : (
                   <NavLink
                     to="login"
-                    className="w-full bg-green-500 hover:bg-green-600 px-5 py-2 rounded-sm text-center text-white text-lg font-bold"
+                    className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                   >
-                    Book
+                    View Details
                   </NavLink>
                 )}
               </div>

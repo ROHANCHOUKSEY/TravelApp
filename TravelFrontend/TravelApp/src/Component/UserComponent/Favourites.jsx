@@ -113,7 +113,9 @@ const Favourites = () => {
 
                   <div className="flex items-center text-gray-600 mb-3">
                     <FaMapMarkerAlt className="mr-2 text-red-500" />
-                    <span className="text-sm">{location.country}, {location.state}</span>
+                    <span className="text-sm">
+                      {location.country}, {location.state}
+                    </span>
                   </div>
 
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
@@ -123,14 +125,28 @@ const Favourites = () => {
                   <div className="flex justify-between items-center">
                     <NavLink
                       to={`/viewDetails/${location.id}`}
-                      className="text-blue-500"
+                      className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >
                       View Details
                     </NavLink>
                     <button
                       onClick={() => handleDelete(location.id)}
-                      className="text-white bg-red-600 hover:bg-red-700 px-4 py-2 text-sm font-medium transition  rounded-lg cursor-pointer"
+                      className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
                     >
+                      <svg
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        class="h-5 w-5 mr-2"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          stroke-width="2"
+                          stroke-linejoin="round"
+                          stroke-linecap="round"
+                        ></path>
+                      </svg>
                       Delete
                     </button>
                   </div>
