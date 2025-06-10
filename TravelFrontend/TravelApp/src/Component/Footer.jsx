@@ -12,10 +12,10 @@ const Footer = () => {
           <div className="mb-6">
             <h2 className="text-2xl font-bold mb-4 flex items-center">
               <span className="bg-blue-500 p-2 rounded-lg mr-2">✈</span>
-              TravelEase
+              Bharat Explorers
             </h2>
             <p className="text-gray-400 mb-4">
-              Discover the world with us. We make travel planning easy and memorable.
+             Explore Bharat with us. We make travel planning simple, seamless, and unforgettable.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white transition duration-300">
@@ -70,11 +70,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <IoCall className="mr-2 text-blue-400" />
-                <span className="text-gray-400">+1 (234) 567-8900</span>
+                <span className="text-gray-400">+91 7898924256</span>
               </li>
               <li className="flex items-center">
                 <IoMail className="mr-2 text-blue-400" />
-                <span className="text-gray-400">info@travelease.com</span>
+                <span className="text-gray-400">contact@bharatexplorers.in</span>
               </li>
             </ul>
           </div>
@@ -85,7 +85,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <h3 className="text-lg font-semibold mb-2">Subscribe to our Newsletter</h3>
-              <p className="text-gray-400">Get the latest travel deals and updates</p>
+              <p className="text-gray-400">This is a demo project. Newsletter feature coming soon.</p>
             </div>
             <div className="flex w-full md:w-auto">
               <input 
@@ -102,7 +102,7 @@ const Footer = () => {
         
         {/* Copyright */}
         <div className="mt-8 text-center text-gray-500 text-sm">
-          <p>© {new Date().getFullYear()} TravelEase. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bharat Explorers. All rights reserved. </p>
         </div>
       </div>
     </footer>

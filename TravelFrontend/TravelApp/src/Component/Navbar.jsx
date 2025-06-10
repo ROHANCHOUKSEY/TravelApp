@@ -95,7 +95,7 @@ const Navbar = () => {
                 />
               </svg>
               <span className="ml-2 text-white text-xl font-bold">
-                BrandName
+                Bharat Explorer
               </span>
             </div>
           </div>
