@@ -7,6 +7,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropDown, setDropdown] = useState(false);
+  const [screenMode, setScreenMode] = useState(true);
   const dropdownRef = useRef();
 
   const {
@@ -18,6 +19,7 @@ const Navbar = () => {
     userType,
     userName,
     userlastName,
+    setMode,
   } = useContext(AppContext);
 
   const getNavlinkClass = ({ isActive }) => {
@@ -73,6 +75,11 @@ const Navbar = () => {
   if (loading) {
     return null;
   }
+
+  const handleToogle = (e) => {
+    console.log(screenMode);
+  }
+
 
   return (
     <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10">
@@ -151,6 +158,19 @@ const Navbar = () => {
                             <LogOut className="h-4 w-4 mr-2 text-indigo-600" />
                             Sign out
                           </button>
+                          <div>
+                          <label class="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                            <input
+                              class="peer sr-only"
+                              id="AcceptConditions"
+                              onChange={handleToogle}
+                              type="checkbox"
+                              checked={(e) => setScreenMode(e.target.value)}
+                            />
+                            <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                          </label>
+                          </div>
+
                         </div>
                       </div>
                     )}
@@ -219,6 +239,14 @@ const Navbar = () => {
                   <NavLink to="/signUp" className={getNavlinkClass}>
                     Sign Up
                   </NavLink>
+                  <label class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                    <input
+                      class="peer sr-only"
+                      id="AcceptConditions"
+                      type="checkbox"
+                    />
+                    <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                  </label>
                 </div>
               </>
             )}

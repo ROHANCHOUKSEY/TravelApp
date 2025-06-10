@@ -12,6 +12,7 @@ export const ContextProvider = (props) => {
   const [userName, setUsername] = useState("");
   const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
+  const [mode, setMode] = useState("lightmode");
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -63,7 +64,8 @@ export const ContextProvider = (props) => {
         userName,
         userlastName,
         details,
-        setDetails
+        setDetails,
+        setMode
       }}
     >
       {props.children}
