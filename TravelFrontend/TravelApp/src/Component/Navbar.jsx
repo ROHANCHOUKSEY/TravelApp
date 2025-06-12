@@ -7,7 +7,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropDown, setDropdown] = useState(false);
-  const [screenMode, setScreenMode] = useState(true);
   const dropdownRef = useRef();
 
   const {
@@ -19,7 +18,9 @@ const Navbar = () => {
     userType,
     userName,
     userlastName,
-    setMode,
+    mode,
+    lightMode,
+    darkMode,
   } = useContext(AppContext);
 
   const getNavlinkClass = ({ isActive }) => {
@@ -77,12 +78,17 @@ const Navbar = () => {
   }
 
   const handleToogle = (e) => {
-    console.log(screenMode);
-  }
+    const modeStatus = e.currentTarget.checked;
+    if(modeStatus){
+      darkMode();
+    }else{
+      lightMode();
+    }
+  } 
 
 
   return (
-    <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10">
+    <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
@@ -133,7 +139,7 @@ const Navbar = () => {
                       <CircleUserRound className="h-5 w-5 mr-1" />
                       <span className="text-sm font-medium">
                         {userName} {userlastName}
-                      </span>
+                      </span>  
                       <ChevronDown
                         className={`h-4 w-4 ml-1 transition-transform duration-200 ${
                           dropDown ? "transform rotate-180" : ""
@@ -160,12 +166,12 @@ const Navbar = () => {
                           </button>
                           <div>
                           <label class="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
-                            <input
+                            <input 
                               class="peer sr-only"
                               id="AcceptConditions"
                               onChange={handleToogle}
-                              type="checkbox"
-                              checked={(e) => setScreenMode(e.target.value)}
+                              type="checkbox" 
+                              checked={mode === "dark"}
                             />
                             <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
                           </label>

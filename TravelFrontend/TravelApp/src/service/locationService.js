@@ -132,7 +132,7 @@ export const editFromServer = async (id) => {
 };
 
 export const postEditFromServer = async (
-  id,
+  id, 
   {
     image,
     locationName,
@@ -291,7 +291,7 @@ export const signUp = async ({
     if (!response.ok) {
       throw newuser;
     }
-
+ 
     return newuser;
   } catch (error) {
     throw error;

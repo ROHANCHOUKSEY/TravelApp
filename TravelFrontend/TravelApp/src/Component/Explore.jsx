@@ -21,7 +21,7 @@ const Explore = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 dark:bg-black">
       <div className="mt-15 mb-8">
         <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
           Discover Incredible India

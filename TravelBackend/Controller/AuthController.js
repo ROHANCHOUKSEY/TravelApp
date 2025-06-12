@@ -92,7 +92,7 @@ exports.postSignUp = [
     }
   },
 ];
-exports.postLogin = async (req, res, next) => {
+exports.postLogin = async (req, res, next) => { 
   try {
     const { email, password } = req.body;
 
@@ -101,7 +101,7 @@ exports.postLogin = async (req, res, next) => {
     if (!user) {
       console.log("Email not found");
       return res.status(400).json({ message: "Invalid Email" });
-    }
+    } 
 
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -112,6 +112,7 @@ exports.postLogin = async (req, res, next) => {
 
     req.session.user = user;
     req.session.isLoggined = true;
+    req.session.screenMode = "light";
     await req.session.save();
 
     res.status(200).json({ message: "Login successful" });
@@ -121,7 +122,7 @@ exports.postLogin = async (req, res, next) => {
 };
 
 
-// Add this to your AuthController
+// Add this to your AuthController 
 exports.postLogout = async (req, res, next) => {
   req.session.destroy((err) => {
     if (err) {
