@@ -94,6 +94,7 @@ exports.postSignUp = [
 exports.postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    const { mode } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -111,6 +112,8 @@ exports.postLogin = async (req, res, next) => {
 
     req.session.user = user;
     req.session.isLoggined = true;
+    req.session.screenmode = mode;
+
     await req.session.save();
 
     res.status(200).json({ message: "Login successful" });
@@ -119,18 +122,18 @@ exports.postLogin = async (req, res, next) => {
   }
 };
 
-exports.postScreenmode = async (req, res, next) => { 
+exports.postScreenmode = async (req, res, next) => {
   const { mode } = req.body;
   req.session.screenmode = mode;
   await req.session.save();
-  res.status(200).json({message: "screen mode is saved"});
+  res.status(200).json({ message: "screen mode is saved" });
 };
 
-exports.getScreenmode = async(req, res, next) => {
-  try{
-    const mode = await req.session.screenmode || "lightmode";
-    res.status(200).json({mode});
-  }catch(error){
+exports.getScreenmode = async (req, res, next) => {
+  try {
+    const mode = (await req.session.screenmode) || "lightmode";
+    res.status(200).json({ mode });
+  } catch (error) {
     console.log("Not get mode from session", error);
   }
 };
