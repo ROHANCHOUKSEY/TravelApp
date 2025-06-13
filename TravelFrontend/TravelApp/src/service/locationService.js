@@ -132,7 +132,7 @@ export const editFromServer = async (id) => {
 };
 
 export const postEditFromServer = async (
-  id, 
+  id,
   {
     image,
     locationName,
@@ -291,27 +291,53 @@ export const signUp = async ({
     if (!response.ok) {
       throw newuser;
     }
- 
+
     return newuser;
   } catch (error) {
     throw error;
   }
 };
 
-export const loginUser = async ({ email, password }) => {
+export const loginUser = async ({ email, password, screenMode }) => {
   const response = await fetch("http://localhost:3002/auth/login", {
     method: "POST",
     credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, screenMode }),
   });
   const user = await response.json();
   if (!response.ok) {
     throw user;
   }
   return user;
+};
+
+export const postsessionmode = async (mode) => {
+  const response = await fetch("http://localhost:3002/auth/screenmode", {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ mode }),
+  });
+  const data = await response.json();
+  console.log("mode data", data);
+  return data;
+};
+
+export const getsessionmode = async () => {
+  const response = await fetch("http://localhost:3002/auth/screenmode", {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const data = response.json();
+  return data;
 };
 
 const maplocalValueToserviseValue = (serviseItem) => {

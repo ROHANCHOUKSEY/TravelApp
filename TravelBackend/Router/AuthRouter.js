@@ -14,7 +14,8 @@ authRouter.get("/session", (req, res) => {
   }
 });
 authRouter.post("/logout", authController.postLogout);
-
+authRouter.post("/screenmode", authController.postScreenmode);
+authRouter.get("/screenmode", authController.getScreenmode);
 
 module.exports = authRouter;
  

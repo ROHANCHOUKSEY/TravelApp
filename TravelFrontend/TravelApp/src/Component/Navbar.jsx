@@ -2,12 +2,18 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../CreateContext/Context";
 import { CircleUserRound, ChevronDown, LogOut, User } from "lucide-react";
+import {
+  getsessionmode,
+  loginUser,
+  postsessionmode,
+} from "../service/locationService";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropDown, setDropdown] = useState(false);
   const dropdownRef = useRef();
+  const [screenMode, setScreenMode] = useState("light");
 
   const {
     isLoggined,
@@ -73,19 +79,41 @@ const Navbar = () => {
     };
   }, []);
 
+  const handleToogle = async (e) => {
+    const modeStatus = e.target.checked;
+    console.log("modeStatus", modeStatus);
+    const mode = modeStatus ? "dark" : "light";
+    try {
+      await postsessionmode(mode);
+      mode === "dark" ? darkMode() : lightMode();
+    } catch (error) {
+      console.log("Mode is not change ", error);
+    }
+  };
+
+  useEffect(() => {
+    async function getScreenMode() {
+      try {
+        const res = await getsessionmode();
+        const data = await res.json();
+        console.log("getsessionmode", data);
+
+        if (data.mode === "dark") {
+          darkMode();
+        } else {
+          lightMode();
+        }
+      } catch (err) {
+        console.error("Failed to get screen mode", err);
+      }
+    }
+
+    getScreenMode();
+  }, []);
+
   if (loading) {
     return null;
   }
-
-  const handleToogle = (e) => {
-    const modeStatus = e.currentTarget.checked;
-    if(modeStatus){
-      darkMode();
-    }else{
-      lightMode();
-    }
-  } 
-
 
   return (
     <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10 ">
@@ -139,7 +167,7 @@ const Navbar = () => {
                       <CircleUserRound className="h-5 w-5 mr-1" />
                       <span className="text-sm font-medium">
                         {userName} {userlastName}
-                      </span>  
+                      </span>
                       <ChevronDown
                         className={`h-4 w-4 ml-1 transition-transform duration-200 ${
                           dropDown ? "transform rotate-180" : ""
@@ -165,18 +193,17 @@ const Navbar = () => {
                             Sign out
                           </button>
                           <div>
-                          <label class="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
-                            <input 
-                              class="peer sr-only"
-                              id="AcceptConditions"
-                              onChange={handleToogle}
-                              type="checkbox" 
-                              checked={mode === "dark"}
-                            />
-                            <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-                          </label>
+                            <label class="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                              <input
+                                class="peer sr-only"
+                                id="AcceptConditions"
+                                onChange={handleToogle}
+                                type="checkbox"
+                                checked={mode === "dark"}
+                              />
+                              <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                            </label>
                           </div>
-
                         </div>
                       </div>
                     )}

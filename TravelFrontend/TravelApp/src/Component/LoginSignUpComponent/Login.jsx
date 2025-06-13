@@ -18,12 +18,12 @@ const Login = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
-  });
+  }); 
 
   const [loginerror, setLoginError] = useState("");
 
   const handleChange = (e) => {
-    setUser({
+    setUser({ 
       ...user,
       [e.target.name]: e.target.value,
     });

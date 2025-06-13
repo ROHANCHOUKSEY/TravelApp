@@ -135,7 +135,7 @@ exports.postStateLocation = async (req, res) => {
       .json({ message: "Failed to save location", error: error.message });
   }
 };
-
+ 
 exports.getStateLocation = async (req, res, next) => {
   try {
     const getlocationState = await locationState

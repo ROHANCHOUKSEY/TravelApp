@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import { getsessionmode } from "../service/locationService";
 
 export const AppContext = createContext();
 
@@ -12,15 +13,15 @@ export const ContextProvider = (props) => {
   const [userName, setUsername] = useState("");
   const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState();
 
   const lightMode = () => {
-    setMode("light")
-  }
+    setMode("light");
+  };
 
   const darkMode = () => {
-    setMode("dark")
-  }
+    setMode("dark");
+  };
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -30,7 +31,7 @@ export const ContextProvider = (props) => {
         });
 
         if (!res.ok) throw new Error("Session check failed");
- 
+
         const data = await res.json();
 
         if (data.isLoggined && data.user) {
@@ -38,11 +39,20 @@ export const ContextProvider = (props) => {
           setUser(data.user);
           setUsertype(data.user.usertype);
           setUsername(data.user.firstname);
-          setUserlastname(data.user.lastname)
+          setUserlastname(data.user.lastname);
         } else {
           setIsLoggined(false);
-          setUser(null)
+          setUser(null);
         }
+
+        const modeRes = await getsessionmode();
+        console.log(modeRes.mode);
+        if (modeRes.mode === "dark") {
+          darkMode();
+        } else if (modeRes.mode === "light") {
+          lightMode();
+        }
+        
       } catch (err) {
         console.error("Error checking session:", err);
         setIsLoggined(false);
@@ -61,12 +71,12 @@ export const ContextProvider = (props) => {
       value={{
         locationLists,
         setLocationLists,
-        statebaseLocation, 
+        statebaseLocation,
         setStatebaseLocation,
         isLoggined,
         setIsLoggined,
         loading,
-        user, 
+        user,
         setUser,
         userType,
         userName,
@@ -75,7 +85,7 @@ export const ContextProvider = (props) => {
         setDetails,
         mode,
         lightMode,
-        darkMode
+        darkMode,
       }}
     >
       {props.children}
