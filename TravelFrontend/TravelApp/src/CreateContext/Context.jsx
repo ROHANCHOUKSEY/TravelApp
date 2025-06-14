@@ -13,7 +13,7 @@ export const ContextProvider = (props) => {
   const [userName, setUsername] = useState("");
   const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
-  const [mode, setMode] = useState(null);
+  const [mode, setMode] = useState();
   // const [mode, setMode] = useState(localStorage.getItem("screenmode") ? localStorage.getItem("screenmode") : "light");
 
   const lightMode = () => {
@@ -49,15 +49,13 @@ export const ContextProvider = (props) => {
         }
 
         const modeRes = await getsessionmode();
-        console.log(modeRes.mode);
-        if (modeRes.mode === "dark") {
+        // console.log("modeRes", modeRes);
+        if (modeRes === "dark") {
           darkMode();
-          localStorage.setItem("screenmode", "dark");
-        } else if (modeRes.mode === "light") {
+        } else if (modeRes === "light") {
           lightMode();
-          localStorage.setItem("screenmode", "light");
         }
-        
+
       } catch (err) {
         console.error("Error checking session:", err);
         setIsLoggined(false);
