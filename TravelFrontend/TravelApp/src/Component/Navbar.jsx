@@ -95,10 +95,10 @@ const Navbar = () => {
     async function getScreenMode() {
       try {
         const res = await getsessionmode();
-        const data = await res.json();
-        console.log("getsessionmode", data);
+        // const data = await res.json();
+        console.log("getsessionmode", res);
 
-        if (data.mode === "dark") {
+        if (res.mode === "dark") {
           darkMode();
         } else {
           lightMode();
@@ -193,15 +193,15 @@ const Navbar = () => {
                             Sign out
                           </button>
                           <div>
-                            <label class="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                            <label className="relative left-3 inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
                               <input
-                                class="peer sr-only"
+                                className="peer sr-only"
                                 id="AcceptConditions"
                                 onChange={handleToogle}
                                 type="checkbox"
                                 checked={mode === "dark"}
                               />
-                              <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                              <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
                             </label>
                           </div>
                         </div>
@@ -272,13 +272,13 @@ const Navbar = () => {
                   <NavLink to="/signUp" className={getNavlinkClass}>
                     Sign Up
                   </NavLink>
-                  <label class="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                  <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
                     <input
-                      class="peer sr-only"
+                      className="peer sr-only"
                       id="AcceptConditions"
                       type="checkbox"
                     />
-                    <span class="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
+                    <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
                   </label>
                 </div>
               </>

@@ -13,11 +13,12 @@ export const ContextProvider = (props) => {
   const [userName, setUsername] = useState("");
   const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
-  const [mode, setMode] = useState("light");
+  const [mode, setMode] = useState(null);
+  // const [mode, setMode] = useState(localStorage.getItem("screenmode") ? localStorage.getItem("screenmode") : "light");
 
   const lightMode = () => {
     setMode("light");
-    localStorage.setItem("screenmode", "light ");
+    localStorage.setItem("screenmode", "light");
   };
 
   const darkMode = () => {
@@ -51,14 +52,16 @@ export const ContextProvider = (props) => {
         console.log(modeRes.mode);
         if (modeRes.mode === "dark") {
           darkMode();
-          localStorage.setItem("screenmode", modeRes.mode);
+          localStorage.setItem("screenmode", "dark");
         } else if (modeRes.mode === "light") {
           lightMode();
-          localStorage.setItem("screenmode", modeRes.mode);
+          localStorage.setItem("screenmode", "light");
         }
+        
       } catch (err) {
         console.error("Error checking session:", err);
         setIsLoggined(false);
+        localStorage.removeItem("screenmode");
         setUser(null);
       } finally {
         setLoading(false);

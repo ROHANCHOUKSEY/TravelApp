@@ -124,17 +124,28 @@ exports.postLogin = async (req, res, next) => {
 
 exports.postScreenmode = async (req, res, next) => {
   const { mode } = req.body;
-  req.session.screenmode = mode;
-  await req.session.save();
-  res.status(200).json({ message: "screen mode is saved" });
+  try {
+    req.session.screenmode = mode;
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
+    user.screenmode = mode;
+    await user.save();
+    res.status(200).json({ message: "Screen mode saved" });
+  } catch (error) {
+    console.log("screen mode is not saved in database", error);
+    res.status(500).json({ message: "Failed to save screen mode" });
+  }
 };
 
 exports.getScreenmode = async (req, res, next) => {
   try {
-    const mode = (await req.session.screenmode) || "lightmode";
-    res.status(200).json({ mode });
+    const userId = req.session.user._id;
+    const user = await User.findById(userId);
+    const screenmode = user.screenmode || "light";
+    res.status(200).json(screenmode);
   } catch (error) {
-    console.log("Not get mode from session", error);
+    console.log("not get screenmode from database", error);
+    res.status(500).json({ message: "Failed to get screen mode" });
   }
 };
 
@@ -145,6 +156,7 @@ exports.postLogout = async (req, res, next) => {
       console.log("Error destroying session:", err);
       return res.status(500).json({ message: "Logout failed" });
     }
+    // req.session.screenmode = 'light';
     res.clearCookie("connect.sid"); // Clear the session cookie
     res.status(200).json({ message: "Logout successful" });
   });

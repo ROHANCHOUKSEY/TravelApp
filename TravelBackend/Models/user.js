@@ -5,6 +5,7 @@ const userSchema = mongoose.Schema({
   lastname: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  screenmode: {type:String, required: true, enum: ["light", "dark"], default: "light"},
   usertype: {
     type: String, 
     required: true,
