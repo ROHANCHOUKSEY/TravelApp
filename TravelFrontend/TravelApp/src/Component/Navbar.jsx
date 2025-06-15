@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AppContext } from "../CreateContext/Context";
 import { CircleUserRound, ChevronDown, LogOut, User } from "lucide-react";
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon } from "lucide-react";
 import {
   getsessionmode,
   loginUser,
@@ -258,7 +258,28 @@ const Navbar = () => {
                               {userName} {userlastName}
                             </p>
                           </div>
-
+                          {/* Dark/Light Mode Toggle */}
+                          <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
+                            <div className="flex items-center">
+                              {mode === "dark" ? (
+                                <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                              ) : (
+                                <Sun className="h-4 w-4 mr-2 text-indigo-600" />
+                              )}
+                              <span>
+                                {mode === "dark" ? "Dark" : "Light"} Mode
+                              </span>
+                            </div>
+                            <label className="relative inline-flex items-center cursor-pointer">
+                              <input
+                                type="checkbox"
+                                className="sr-only peer"
+                                checked={mode === "dark"}
+                                onChange={handleToogle}
+                              />
+                              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                            </label>
+                          </div>
                           <button
                             onClick={handleLogout}
                             className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200"

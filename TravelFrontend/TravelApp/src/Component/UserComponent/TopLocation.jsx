@@ -39,8 +39,8 @@ const TopLocation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
-      <div className="mt-15 mb-8">
+    <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
+      <div className="mb-8">
         <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 dark:text-white mb-2">
           Must-Visit Destinations
         </h1>

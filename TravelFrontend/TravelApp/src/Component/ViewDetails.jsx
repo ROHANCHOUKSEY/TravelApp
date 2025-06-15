@@ -59,9 +59,9 @@ const ViewDetails = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen  from-blue-50 bg-gray-100 dark:bg-gray-900 to-indigo-50 py-12 px-4  sm:px-6 lg:px-8"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="relative top-[64px] max-w-6xl mx-auto">
         
         {/* Header with image */}
         {/* <div className="relative rounded-2xl overflow-hidden shadow-xl mb-8">
@@ -115,8 +115,8 @@ const ViewDetails = () => {
         </div> */}
 
         {/* Image Gallery */}
-        <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 px-6 pt-6">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-8">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white px-6 pt-6">
             Photo Gallery
           </h2>
 
@@ -165,30 +165,30 @@ const ViewDetails = () => {
         </div>
 
         {/* Content tabs */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+        <div className="bg-white dark:bg-gray-800  rounded-2xl shadow-lg overflow-hidden mb-8">
           <div className="border-b border-gray-200">
-            <nav className="flex -mb-px">
+            <nav className="sm:flex -mb-px">
               <button
                 onClick={() => setActiveTab("description")}
                 className={`py-4 px-6 text-center border-b-2 font-medium text-sm flex items-center justify-center ${
                   activeTab === "description"
                     ? "border-indigo-500 text-indigo-600"
-                    : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
+                    : "border-transparent dark:text-gray- text-gray-500 dark:text-white hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                <FaInfoCircle className="mr-2" />
-                Overview
+                <FaInfoCircle className="mr-2 dark:text-white" />
+                <p className="dark:text-white">Overview</p>
               </button>
               <button
-                onClick={() => setActiveTab("history")}
+                onClick={() => setActiveTab("history")} 
                 className={`py-4 px-6 text-center border-b-2 font-medium text-sm flex items-center justify-center ${
                   activeTab === "history"
                     ? "border-indigo-500 text-indigo-600"
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                <FaHistory className="mr-2" />
-                History
+                <FaHistory className="mr-2 dark:text-white" />
+                <p className="dark:text-white">History</p>
               </button>
               <button
                 onClick={() => setActiveTab("timing")}
@@ -198,8 +198,8 @@ const ViewDetails = () => {
                     : "border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300"
                 }`}
               >
-                <FaClock className="mr-2" />
-                Visiting Hours
+                <FaClock className="mr-2 dark:text-white" />
+                <p className="dark:text-white">Visiting Hours</p>
               </button>
             </nav>
           </div>
@@ -211,16 +211,16 @@ const ViewDetails = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
                   About {details.locationName}
                 </h2>
-                <p className="text-gray-600 mb-6 leading-relaxed">
+                <p className="text-gray-600 mb-6 leading-relaxed dark:text-white">
                   {details.description}
                 </p>
-                <h3 className="text-xl font-semibold mb-3 text-gray-800">
+                <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
                   Details
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed dark:text-white">
                   {details.holeDescription}
                 </p>
               </motion.div>
@@ -232,10 +232,10 @@ const ViewDetails = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
                   Historical Background
                 </h2>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed dark:text-white">
                   {details.history}
                 </p>
               </motion.div>
@@ -247,7 +247,7 @@ const ViewDetails = () => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+                <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">
                   Visiting Hours
                 </h2>
                 <div className="bg-blue-50 p-6 rounded-lg">
@@ -264,10 +264,10 @@ const ViewDetails = () => {
                   </div>
                 </div>
                 <div className="mt-6">
-                  <h3 className="text-lg font-semibold mb-2 text-gray-800">
+                  <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">
                     Best Time to Visit
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-white">
                     Early mornings or weekdays are recommended to avoid crowds.
                   </p>
                 </div>
@@ -280,12 +280,12 @@ const ViewDetails = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <motion.div
             whileHover={{ y: -5 }}
-            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
+            className="dark:bg-gray-800 bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
           >
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">
+            <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Visitor Tips
             </h3>
-            <ul className="space-y-2 text-gray-600">
+            <ul className="space-y-2 text-gray-600 dark:text-white">
               <li className="flex items-start">
                 <span className="text-indigo-500 mr-2">•</span>
                 Wear comfortable shoes for walking
@@ -303,15 +303,15 @@ const ViewDetails = () => {
 
           <motion.div
             whileHover={{ y: -5 }}
-            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
+            className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition-shadow dark:bg-gray-800"
           >
-            <h3 className="text-xl font-semibold mb-3 text-gray-800">
+            <h3 className="text-xl font-semibold mb-3 text-gray-800 dark:text-white">
               Quick Facts
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-3 dark:text-white">
               <div>
                 <p className="text-sm text-gray-500">Location</p>
-                <p className="font-medium">{details.country}</p>
+                <p className="font-medium dark:text-white">{details.country}</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500">Average Visit Duration</p>

@@ -20,8 +20,8 @@ const Explore = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300">
-      <div className="mt-15 mb-8">
+    <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300">
+      <div className="mb-8">
         <h1 className="text-center font-sans text-3xl underline underline-offset-4 font-bold text-gray-800 dark:text-gray-100 mb-2">
           Discover Incredible India
         </h1>
