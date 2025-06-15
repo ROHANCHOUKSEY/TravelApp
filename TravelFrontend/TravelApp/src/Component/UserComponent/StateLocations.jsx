@@ -77,25 +77,27 @@ const StateLocations = () => {
       : [];
 
   return (
-    <div className="container  mx-auto px-4 py-8">
+    <div className="container  mx-auto px-4 py-8 dark:bg-gray-900">
       <div className="mt-15 mb-8">
-        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+        <h1 className="text-center font-sans text-3xl dark:text-white underline underline-offset-4  font-bold text-gray-800 mb-2">
           Discover India, One State at a Time
         </h1>
-        <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto"> 
-         Explore breathtaking destinations across India, organized by state. From majestic forts to serene beaches — start your journey with just a click.
+        <p className="text-lg text-center dark:text-white text-gray-600 max-w-2xl mx-auto">
+          Explore breathtaking destinations across India, organized by state.
+          From majestic forts to serene beaches — start your journey with just a
+          click.
         </p>
       </div>
       {/* State Selection Tabs */}
-      <div className="flex flex-wrap justify-center gap-2 mb-8">
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
         {statesWithLocations.map((state) => (
           <button
             key={state}
             onClick={() => setActiveState(state)}
-            className={`px-4 py-2 rounded-full ${
+            className={`px-5 py-2 rounded-full font-medium text-sm sm:text-base transition-all duration-300 ease-in-out transform hover:scale-105 ${
               activeState === state
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30 dark:shadow-blue-700/50"
+                : "bg-white text-gray-700 hover:text-blue-600 shadow-md hover:shadow-lg dark:bg-gray-700 dark:text-gray-200 dark:hover:text-blue-300 border border-gray-200 dark:border-gray-600"
             }`}
           >
             {formatStateName(state)}
@@ -106,7 +108,7 @@ const StateLocations = () => {
       {/* Locations for Selected State */}
       {activeState && currentLocations.length > 0 && (
         <div>
-          <h2 className="text-2xl font-semibold mb-6">
+          <h2 className="text-2xl font-semibold mb-6 dark:text-white">
             {formatStateName(activeState)} ({currentLocations.length} locations)
           </h2>
 
@@ -120,7 +122,7 @@ const StateLocations = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   {/* Render location details */}
                   {location.image &&
@@ -135,7 +137,7 @@ const StateLocations = () => {
 
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="text-xl font-semibold">
+                      <h3 className="text-xl dark:text-white font-semibold">
                         {location.locationName || "Unnamed Location"}
                       </h3>
                       {location.rating && (
@@ -145,13 +147,13 @@ const StateLocations = () => {
                       )}
                     </div>
 
-                    <p className="text-gray-600 mb-3">
+                    <p className="text-gray-600 dark:text-white mb-3">
                       {location.state ? formatStateName(location.state) : ""},{" "}
                       {location.country || ""}
                     </p>
 
                     {location.description && (
-                      <p className="text-gray-700 mb-3">
+                      <p className="text-gray-700 dark:text-white mb-3">
                         {location.description}
                       </p>
                     )}
@@ -159,13 +161,13 @@ const StateLocations = () => {
                     <div className="flex justify-between">
                       <NavLink
                         to={`/viewDetails/${location._id}`}
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                       >
                         View Details
                       </NavLink>
                       <button
                         onClick={() => handleFavourite(location.id)}
-                        className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg  dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                       >
                         Favourites
                       </button>
@@ -184,4 +186,3 @@ const StateLocations = () => {
 };
 
 export default StateLocations;
- 

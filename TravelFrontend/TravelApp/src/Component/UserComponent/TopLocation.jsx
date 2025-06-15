@@ -39,12 +39,12 @@ const TopLocation = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
       <div className="mt-15 mb-8">
-        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 dark:text-white mb-2">
           Must-Visit Destinations
         </h1>
-        <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto">
+        <p className="text-lg text-center text-gray-600 dark:text-white max-w-2xl mx-auto">
           Explore the most loved and highly rated locations in India.
         </p>
       </div>
@@ -52,7 +52,7 @@ const TopLocation = () => {
         {locationLists.map((location) => (
           <div
             key={location.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            className="bg-white rounded-xl dark:bg-gray-800 shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
           >
             {/* Location Image */}
             <div className="relative h-48 overflow-hidden">
@@ -75,8 +75,8 @@ const TopLocation = () => {
 
             {/* Location Details */}
             <div className="p-5">
-              <div className="flex justify-between items-start mb-2">
-                <h2 className="text-xl font-bold text-gray-800">
+              <div className="flex dark:text-white justify-between items-start mb-2">
+                <h2 className="text-xl font-bold  text-gray-800 dark:text-white">
                   {location.locationName}
                 </h2>
 
@@ -95,7 +95,7 @@ const TopLocation = () => {
                 </span>
               </div>
 
-              <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+              <p className="text-gray-600 dark:text-white text-sm mb-4 line-clamp-2">
                 {location.description}
               </p>
 

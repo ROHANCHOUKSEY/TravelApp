@@ -34,9 +34,9 @@ const Favourites = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 p-6">
+      <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
         <div className="mt-15 mb-8">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
             Your Favourite Destinations
           </h1>
         </div>
@@ -46,7 +46,7 @@ const Favourites = () => {
             <div className="col-span-full flex flex-col items-center justify-center py-16 px-4 text-center">
               <div className="mb-6 p-6 bg-blue-50 rounded-full animate-pulse">
                 <svg
-                  className="w-20 h-20 text-blue-400"
+                  className="w-20 h-20 text-blue-400 "
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -60,10 +60,10 @@ const Favourites = () => {
                   />
                 </svg>
               </div>
-              <h1 className="text-3xl font-bold text-gray-800 mb-3">
+              <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-3">
                 No Favorites Yet
               </h1>
-              <p className="text-lg text-gray-600 max-w-md mb-6">
+            <p className="text-lg text-gray-600 dark:text-white max-w-md mb-6">
                 You haven't saved any locations to your favorites. Start
                 exploring and add places you love!
               </p>
@@ -78,7 +78,7 @@ const Favourites = () => {
             locationLists.map((location) => (
               <div
                 key={location.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
               >
                 {/* Location Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -102,7 +102,7 @@ const Favourites = () => {
                 {/* Location Details */}
                 <div className="p-5">
                   <div className="flex justify-between items-start mb-2">
-                    <h2 className="text-xl font-bold text-gray-800">
+                    <h2 className="text-xl font-bold dark:text-white text-gray-800">
                       {location.locationName}
                     </h2>
                     <div className="flex items-center bg-blue-100 px-2 py-1 rounded">
@@ -120,7 +120,7 @@ const Favourites = () => {
                     </span>
                   </div>
 
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+                  <p className="text-gray-600 dark:text-white text-sm mb-4 line-clamp-2">
                     {location.description}
                   </p>
 
