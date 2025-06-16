@@ -68,108 +68,49 @@ exports.getLocation = async (req, res, next) => {
   }
 };
 
-// exports.postStateLocation = async (req, res) => {
-//   try {
-//     const {
-//       image,
-//       locationName,
-//       country,
-//       state,
-//       rating,
-//       description,
-//       holeDescription,
-//       history,
-//       timing,
-//       closing,
-//     } = req.body;
-
-//     const statekey = state.toLowerCase().replace(/\s+/g, "");
-
-//     const allowedStates = [
-//       "madhyapradesh",
-//       "utterpradesh",
-//       "maharashtra",
-//       "rajasthan",
-//       "tamilnadu",
-//       "telangana",
-//       "karnataka",
-//       "uttarakhand",
-//       "himachalpradesh",
-//     ];
-
-//     if (!allowedStates.includes(statekey)) {
-//       return res.status(400).json({ message: `Invalid state name: ${state}` });
-//     }
-
-//     const existingLocation = await TravelLocations.findOne({
-//       locationName,
-//       state,
-//     });
-
-//     if (!existingLocation) {
-//       return res.status(404).json({
-//         message: "Location not found in TravelLocations. Please add it first.",
-//       });
-//     }
-
-//     const newLocation = new TravelLocations({
-//       image,
-//       locationName,
-//       country,
-//       state,
-//       rating,
-//       description,
-//       holeDescription,
-//       history,
-//       timing,
-//       closing,
-//     });
-
-//     await newLocation.save();
-
-//     let stateDoc = await locationState.findOne();
-//     if (!stateDoc) {
-//       stateDoc = new locationState();
-//     }
-
-//     stateDoc[statekey].push(newLocation._id);
-//     const updatedDoc = await stateDoc.save();
-
-//     res.status(200).json({
-//       message: "Location ID stored in state successfully",
-//       data: updatedDoc,
-//     });
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res
-//       .status(500)
-//       .json({ message: "Failed to save location", error: error.message });
-//   }
-// };
-
 exports.postStateLocation = async (req, res) => {
   try {
     const { locationName, state } = req.body;
 
-    const statekey = state.toLowerCase().replace(/\s+/g, "");
+    const stateKey = state.toLowerCase().replace(/\s/g, "");
 
-    const allowedStates = [
-      "madhyapradesh",
-      "utterpradesh",
-      "maharashtra",
-      "rajasthan",
-      "tamilnadu",
-      "telangana",
-      "karnataka",
-      "uttarakhand",
+    const allowedstate = [
+      "andhrapradesh",
+      "arunachalpradesh",
+      "assam",
+      "bihar",
+      "chhattisgarh",
+      "goa",
+      "gujarat",
+      "haryana",
       "himachalpradesh",
+      "jharkhand",
+      "karnataka",
+      "kerala",
+      "madhyapradesh",
+      "maharashtra",
+      "manipur",
+      "meghalaya",
+      "mizoram",
+      "nagaland",
+      "odisha",
+      "punjab",
+      "rajasthan",
+      "sikkim",
+      "tamil nadu",
+      "telangana",
+      "tripura",
+      "uttarpradesh",
+      "uttarakhand",
+      "westbengal",
     ];
 
-    if (!allowedStates.includes(statekey)) {
-      return res.status(400).json({ message: `Invalid state name: ${state}` });
+    if (!allowedstate.includes(stateKey)) {
+      return res
+        .status(404)
+        .json({ message: ` message: Invalid state name: ${state}.` });
     }
 
-    // ✅ Step 1: Find the existing location by name and state
     const existingLocation = await TravelLocations.findOne({
       locationName,
       state,
@@ -181,37 +122,63 @@ exports.postStateLocation = async (req, res) => {
       });
     }
 
-    // ✅ Step 2: Find or create the locationState document
     let stateDoc = await locationState.findOne();
+
     if (!stateDoc) {
-      stateDoc = new locationState(); // creates an empty doc with all state arrays
+      stateDoc = new locationState({
+        andhrapradesh: [],
+        arunachalpradesh: [],
+        assam: [],
+        bihar: [],
+        chhattisgarh: [],
+        goa: [],
+        gujarat: [],
+        haryana: [],
+        himachalpradesh: [],
+        jharkhand: [],
+        karnataka: [],
+        kerala: [],
+        madhyapradesh: [],
+        maharashtra: [],
+        manipur: [],
+        meghalaya: [],
+        mizoram: [],
+        nagaland: [],
+        odisha: [],
+        punjab: [],
+        rajasthan: [],
+        sikkim: [],
+        tamilnadu: [],
+        telangana: [],
+        tripura: [],
+        uttarpradesh: [],
+        uttarakhand: [],
+        westbengal: [],
+      });
+      await stateDoc.save();
     }
 
-    // ✅ Step 3: Prevent duplicate ID in state array
-    const alreadyExists = stateDoc[statekey].some(
+    const alreadyExist = stateDoc[stateKey].some(
       (id) => id.toString() === existingLocation._id.toString()
     );
-    if (alreadyExists) {
+
+    if (alreadyExist) {
       return res
         .status(409)
         .json({ message: "Location already added to this state." });
     }
 
-    // ✅ Step 4: Push the existing location's ID
-    stateDoc[statekey].push(existingLocation._id);
-    const updatedDoc = await stateDoc.save();
+    stateDoc[stateKey].push(existingLocation._id);
 
-    // ✅ Step 5: Return success
+    const updateDoc = await stateDoc.save();
+
     res.status(200).json({
       message: "Existing location ID stored in state successfully",
-      data: updatedDoc,
+      data: updateDoc,
     });
   } catch (error) {
-    console.error("Error saving location to state:", error);
-    res.status(500).json({
-      message: "Failed to save location to state",
-      error: error.message,
-    });
+    res.status(500).json({ message: "Failed to save location to state" });
+    console.log("Error during save location in state", error);
   }
 };
 
@@ -219,15 +186,34 @@ exports.getStateLocation = async (req, res, next) => {
   try {
     const getlocationState = await locationState
       .find()
+      .populate("andhrapradesh")
+      .populate("arunachalpradesh")
+      .populate("assam")
+      .populate("bihar")
+      .populate("chhattisgarh")
+      .populate("goa")
+      .populate("gujarat")
+      .populate("haryana")
+      .populate("himachalpradesh")
+      .populate("jharkhand")
+      .populate("karnataka")
+      .populate("kerala")
       .populate("madhyapradesh")
-      .populate("utterpradesh")
       .populate("maharashtra")
+      .populate("manipur")
+      .populate("meghalaya")
+      .populate("mizoram")
+      .populate("nagaland")
+      .populate("odisha")
+      .populate("punjab")
       .populate("rajasthan")
+      .populate("sikkim")
       .populate("tamilnadu")
       .populate("telangana")
-      .populate("karnataka")
+      .populate("tripura")
+      .populate("uttarpradesh")
       .populate("uttarakhand")
-      .populate("himachalpradesh");
+      .populate("westbengal");
 
     res.status(200).json(getlocationState);
   } catch (error) {
@@ -287,10 +273,22 @@ exports.postEditLocation = async (req, res, next) => {
 exports.deleteLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
-    await TravelLocations.findByIdAndDelete(id);
+
+    // First, find the location
+    const deletedLocation = await TravelLocations.findByIdAndDelete(id);
+
+    if (!deletedLocation) {
+      return res.status(404).json({ message: "Location not found" });
+    }
+
+    // Then remove from the state location array
+    const stateKey = deletedLocation.state.toLowerCase().replaceAll(" ", "");
+    await locationState.updateOne({}, { $pull: { [stateKey]: id } });
+
     res.status(200).json({ _id: id });
   } catch (error) {
-    console.log("Data is not delete from database");
+    console.log("Data is not deleted from database", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
- 
+
