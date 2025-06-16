@@ -11,6 +11,7 @@ const Explore = () => {
     async function fetchLocation() {
       try {
         const response = await locationFromServer();
+        console.log("Explore Response", response);
         setLocationLists(response);
       } catch (error) {
         console.log("All location is not fetch", error);

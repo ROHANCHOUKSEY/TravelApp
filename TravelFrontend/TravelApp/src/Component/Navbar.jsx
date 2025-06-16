@@ -206,12 +206,12 @@ const Navbar = () => {
                                 onChange={handleToogle}
                               />
                               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
-                            </label>
+                            </label> 
                           </div>
 
                           <button
                             onClick={handleLogout}
-                            className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
+                            className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
                           >
                             <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
                             Sign out
@@ -250,9 +250,9 @@ const Navbar = () => {
                     </button>
 
                     {dropDown && (
-                      <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200">
+                      <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                         <div className="py-1">
-                          <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50">
+                          <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
                             <p className="font-medium">Host Dashboard</p>
                             <p className="truncate">
                               {userName} {userlastName}
@@ -282,9 +282,9 @@ const Navbar = () => {
                           </div>
                           <button
                             onClick={handleLogout}
-                            className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200"
+                            className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
                           >
-                            <LogOut className="h-4 w-4 mr-2 text-indigo-600" />
+                            <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
                             Sign out
                           </button>
                         </div>

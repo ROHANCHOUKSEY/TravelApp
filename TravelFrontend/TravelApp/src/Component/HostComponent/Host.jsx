@@ -25,19 +25,19 @@ const Host = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
       {locationLists.length === 0 ? (
         <div className="mt-15 mb-8">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
             There is no location shared
           </h1>
         </div>
       ) : (
         <div className="mt-15 mb-8">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
             Locations You've Shared
           </h1>
-            <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto dark:text-white">
             These are the destinations you've added to the platform. Thank you for helping travelers discover new places and experiences.
           </p>
         </div>
@@ -47,7 +47,7 @@ const Host = () => {
         {locationLists.map((location) => (
           <div
             key={location.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+            className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
           >
             {/* Location Image */}
             <div className="relative h-48 overflow-hidden">
@@ -71,7 +71,7 @@ const Host = () => {
             {/* Location Details */}
             <div className="p-5">
               <div className="flex justify-between items-start mb-2">
-                <h2 className="text-xl font-bold text-gray-800">
+                <h2 className="text-xl font-bold text-gray-800 dark:text-white">
                   {location.locationName}
                 </h2>
                 <div className="flex items-center bg-blue-100 px-2 py-1 rounded">
@@ -87,7 +87,7 @@ const Host = () => {
                 <span className="text-sm">{location.country}</span>
               </div>
 
-              <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+              <p className="text-gray-600 text-sm mb-4 line-clamp-2 dark:text-white">
                 {location.description}
               </p>
 

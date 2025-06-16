@@ -93,7 +93,7 @@ exports.postSignUp = [
 ];
 exports.postLogin = async (req, res, next) => {
   try {
-    const { email, password } = req.body; 
+    const { email, password } = req.body;
 
     const user = await User.findOne({ email });
 
@@ -111,7 +111,7 @@ exports.postLogin = async (req, res, next) => {
 
     req.session.user = user;
     req.session.isLoggined = true;
-    req.session.screenmode = user.screenmode || 'light';
+    req.session.screenmode = user.screenmode || "light";
 
     await req.session.save();
 
@@ -122,7 +122,7 @@ exports.postLogin = async (req, res, next) => {
 };
 
 exports.postScreenmode = async (req, res, next) => {
-  const { mode } = req.body; 
+  const { mode } = req.body;
   try {
     req.session.screenmode = mode;
     const userId = req.session.user._id;
@@ -138,8 +138,11 @@ exports.postScreenmode = async (req, res, next) => {
 
 exports.getScreenmode = async (req, res, next) => {
   try {
+    if (!req.session.user || !req.session.user._id) {
+      return res.status(401).json({ message: "User not logged in" });
+    }
     const userId = req.session.user._id;
-    console.log("userId", userId)
+    // console.log("userId", userId)
     const user = await User.findById(userId);
     const screenmode = user.screenmode || "light";
     res.status(200).json(screenmode);
