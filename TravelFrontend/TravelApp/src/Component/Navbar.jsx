@@ -14,7 +14,6 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropDown, setDropdown] = useState(false);
   const dropdownRef = useRef();
-  const [screenMode, setScreenMode] = useState("light");
 
   const {
     isLoggined,
@@ -206,7 +205,7 @@ const Navbar = () => {
                                 onChange={handleToogle}
                               />
                               <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
-                            </label> 
+                            </label>
                           </div>
 
                           <button
@@ -305,14 +304,15 @@ const Navbar = () => {
                   <NavLink to="/signUp" className={getNavlinkClass}>
                     Sign Up
                   </NavLink>
-                  <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-300 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-gray-900">
+                  {/* <label className="relative inline-flex items-center cursor-pointer">
                     <input
-                      className="peer sr-only"
-                      id="AcceptConditions"
                       type="checkbox"
+                      className="sr-only peer"
+                      checked={mode === "dark"}
+                      onChange={handleToogle}
                     />
-                    <span className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-300 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"></span>
-                  </label>
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                  </label> */}
                 </div>
               </>
             )}

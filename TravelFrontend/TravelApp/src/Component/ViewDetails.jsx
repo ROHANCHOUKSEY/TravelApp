@@ -59,61 +59,10 @@ const ViewDetails = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="min-h-screen  from-blue-50 bg-gray-100 dark:bg-gray-900 to-indigo-50 py-12 px-4  sm:px-6 lg:px-8"
+      className="relative top-[64px] min-h-screen  from-blue-50 bg-gray-100 dark:bg-gray-900 to-indigo-50 py-12 px-4  sm:px-6 lg:px-8"
     >
-      <div className="relative top-[64px] max-w-6xl mx-auto">
+      <div className=" max-w-6xl mx-auto">
         
-        {/* Header with image */}
-        {/* <div className="relative rounded-2xl overflow-hidden shadow-xl mb-8">
-          {details.image.length > 1 ? (
-            // Carousel for multiple images
-            <div className="relative h-auto overflow-hidden">
-              {details.image.map((img, index) => (
-                <img
-                  key={index}
-                  src={img}
-                  alt={`${details.locationName} ${index + 1}`}
-                  className={`w-full h-full object-cover ${
-                    index === 0 ? "block" : "hidden"
-                  }`}
-                />
-              ))}
-              <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                {details.image.map((_, index) => (
-                  <button
-                    key={index}
-                    className={`w-3 h-3 rounded-full ${
-                      index === 0 ? "bg-white" : "bg-white/50"
-                    }`}
-                    aria-label={`Go to slide ${index + 1}`}
-                  ></button>
-                ))}
-              </div>
-            </div>
-          ) : (
-            // Single image display
-            <img
-              src={details.image[0]}
-              alt={details.locationName}
-              className="object-cover"
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-          <div className="absolute bottom-0 left-0 p-8 text-white">
-            <h1 className="text-4xl font-bold mb-2">{details.locationName}</h1>
-            <div className="flex items-center space-x-4">
-              <span className="flex items-center">
-                <FaMapMarkerAlt className="mr-1" />
-                {details.country}
-              </span>
-              <span className="flex items-center">
-                {renderStars()}
-                <span className="ml-1">({details.rating})</span>
-              </span>
-            </div>
-          </div>
-        </div> */}
-
         {/* Image Gallery */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-8">
           <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white px-6 pt-6">

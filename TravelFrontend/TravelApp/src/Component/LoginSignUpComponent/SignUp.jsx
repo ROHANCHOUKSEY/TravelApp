@@ -55,8 +55,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full mt-15 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden">
+    <div className="relative top-[64px] min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+      <div className="w-full  max-w-md bg-white rounded-xl shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-center">
           <h1 className="text-3xl font-bold text-white">Create Your Account</h1>

@@ -11,7 +11,7 @@ const Explore = () => {
     async function fetchLocation() {
       try {
         const response = await locationFromServer();
-        console.log("Explore Response", response);
+        console.log("Explore Response", response); 
         setLocationLists(response);
       } catch (error) {
         console.log("All location is not fetch", error);
@@ -31,7 +31,7 @@ const Explore = () => {
           country
         </p>
       </div>
-
+ 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
           <div
@@ -54,8 +54,8 @@ const Explore = () => {
                 <span className="font-semibold text-gray-800 dark:text-gray-200">
                   {location.rating}
                 </span>
-              </div>
-            </div>
+              </div>  
+            </div> 
 
             {/* Location Details */}
             <div className="p-5">

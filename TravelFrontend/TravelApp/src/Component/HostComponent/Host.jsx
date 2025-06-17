@@ -25,7 +25,7 @@ const Host = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
+    <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
       {locationLists.length === 0 ? (
         <div className="mt-15 mb-8">
           <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
@@ -33,7 +33,7 @@ const Host = () => {
           </h1>
         </div>
       ) : (
-        <div className="mt-15 mb-8">
+        <div className="mb-8">
           <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
             Locations You've Shared
           </h1>

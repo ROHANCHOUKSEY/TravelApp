@@ -14,16 +14,13 @@ export const ContextProvider = (props) => {
   const [userlastName, setUserlastname] = useState("");
   const [details, setDetails] = useState("");
   const [mode, setMode] = useState();
-  // const [mode, setMode] = useState(localStorage.getItem("screenmode") ? localStorage.getItem("screenmode") : "light");
 
   const lightMode = () => {
     setMode("light");
-    localStorage.setItem("screenmode", "light");
   };
 
   const darkMode = () => {
     setMode("dark");
-    localStorage.setItem("screenmode", "dark");
   };
 
   useEffect(() => {
@@ -59,7 +56,6 @@ export const ContextProvider = (props) => {
       } catch (err) {
         console.error("Error checking session:", err);
         setIsLoggined(false);
-        localStorage.removeItem("screenmode");
         setUser(null);
       } finally {
         setLoading(false);
@@ -68,7 +64,7 @@ export const ContextProvider = (props) => {
 
     checkLoginStatus();
     console.log(isLoggined);
-  }, [isLoggined]);
+  }, [isLoggined, mode]);
 
   return (
     <AppContext.Provider

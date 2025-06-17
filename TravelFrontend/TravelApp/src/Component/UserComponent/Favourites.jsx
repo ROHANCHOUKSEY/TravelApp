@@ -63,7 +63,7 @@ const Favourites = () => {
               <h1 className="text-3xl font-bold text-gray-800 dark:text-white mb-3">
                 No Favorites Yet
               </h1>
-            <p className="text-lg text-gray-600 dark:text-white max-w-md mb-6">
+              <p className="text-lg text-gray-600 dark:text-white max-w-md mb-6">
                 You haven't saved any locations to your favorites. Start
                 exploring and add places you love!
               </p>
@@ -78,7 +78,7 @@ const Favourites = () => {
             locationLists.map((location) => (
               <div
                 key={location.id}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
               >
                 {/* Location Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -127,7 +127,7 @@ const Favourites = () => {
                   <div className="flex justify-between items-center">
                     <NavLink
                       to={`/viewDetails/${location.id}`}
-                      className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                      className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  shadow-blue-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                     >
                       View Details
                     </NavLink>

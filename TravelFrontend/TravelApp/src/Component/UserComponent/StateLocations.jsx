@@ -77,8 +77,8 @@ const StateLocations = () => {
       : [];
 
   return (
-    <div className="container  mx-auto px-4 py-8 dark:bg-gray-900">
-      <div className="mt-15 mb-8">
+    <div className="relative top-[64px] container  mx-auto px-4 py-8 dark:bg-gray-900">
+      <div className="mb-8">
         <h1 className="text-center font-sans text-3xl dark:text-white underline underline-offset-4  font-bold text-gray-800 mb-2">
           Discover India, One State at a Time
         </h1>
@@ -122,13 +122,13 @@ const StateLocations = () => {
               return (
                 <div
                   key={index}
-                  className="bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
                 >
                   {/* Render location details */}
                   {location.image &&
                     Array.isArray(location.image) &&
                     location.image[0] && (
-                      <img
+                      <img 
                         src={location.image[0]}
                         alt={location.locationName || "Location image"}
                         className="w-full h-48 object-cover"
@@ -161,13 +161,13 @@ const StateLocations = () => {
                     <div className="flex justify-between">
                       <NavLink
                         to={`/viewDetails/${location._id}`}
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                       >
                         View Details
                       </NavLink>
                       <button
                         onClick={() => handleFavourite(location.id)}
-                        className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg  dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                        className="text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                       >
                         Favourites
                       </button>
