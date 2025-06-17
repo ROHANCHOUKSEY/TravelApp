@@ -13,7 +13,7 @@ const Explore = () => {
         const response = await locationFromServer();
         console.log("Explore Response", response); 
         setLocationLists(response);
-      } catch (error) {
+      } catch (error) { 
         console.log("All location is not fetch", error);
       }
     }
