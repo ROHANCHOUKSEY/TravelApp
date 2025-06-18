@@ -15,6 +15,7 @@ const AddLocation = () => {
     description: "",
     holeDescription: "",
     history: "",
+    VisitorTips: "",
     timing: "",
     closing: "",
   });
@@ -107,7 +108,7 @@ const AddLocation = () => {
                       className="mx-auto h-12 w-12 text-gray-400"
                       stroke="currentColor"
                       fill="none"
-                      viewBox="0 0 48 48"
+                      viewBox="0 0 48 48" 
                       aria-hidden="true"
                     >
                       <path
@@ -197,7 +198,7 @@ const AddLocation = () => {
               onChange={handleChange}
               required
             ></textarea>
-          </div>
+          </div> 
 
           {/* Full Description */}
           <div className="space-y-2">
@@ -219,6 +220,18 @@ const AddLocation = () => {
               name="history"
               rows="4"
               placeholder="Historical significance of this location..."
+              className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          {/* VisitorTips */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium">Visitor Tips</label>
+            <textarea
+              name="VisitorTips"
+              rows="4"
+              placeholder="Visitor Tips To Help Turiest"
               className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
               onChange={handleChange}
             ></textarea>

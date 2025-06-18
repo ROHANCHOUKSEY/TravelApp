@@ -9,6 +9,7 @@ const LocationSchema = mongoose.Schema({
     description: {type: String},
     holeDescription: {type: String},
     history: {type: String},
+    VisitorTips: {type: String},
     timing: {type: String},
     closing: {type: String}
 });

@@ -18,6 +18,7 @@ const EditLocations = () => {
     editdescription: "",
     editHoledescription: "",
     editHistory: "",
+    editVisitorTips: "",
     editTiming: "",
     editClosing: "",
   });
@@ -36,6 +37,7 @@ const EditLocations = () => {
             description,
             holeDescription,
             history,
+            VisitorTips,
             timing,
             closing,
           } = editItem;
@@ -48,6 +50,7 @@ const EditLocations = () => {
             editdescription: description,
             editHoledescription: holeDescription,
             editHistory: history,
+            editVisitorTips: VisitorTips,
             editTiming: timing,
             editClosing: closing,
           });
@@ -89,6 +92,10 @@ const EditLocations = () => {
         e.target.name === "history"
           ? e.target.value
           : editLocations.editHistory,
+      editVisitorTips:
+        e.target.value === "VisitorTips"
+          ? e.target.value
+          : editLocations.editVisitorTips,
       editTiming:
         e.target.name === "timing" ? e.target.value : editLocations.editTiming,
       editClosing:
@@ -142,6 +149,7 @@ const EditLocations = () => {
       description: editLocations.editdescription,
       holeDescription: editLocations.editHoledescription,
       history: editLocations.editHistory,
+      VisitorTips: editLocations.editVisitorTips,
       timing: editLocations.editTiming,
       closing: editLocations.editClosing,
     });
@@ -155,6 +163,7 @@ const EditLocations = () => {
       description: updateItem.description,
       holeDescription: updateItem.holeDescription,
       history: updateItem.history,
+      VisitorTips: updateItem.VisitorTips,
       timing: updateItem.timing,
       closing: updateItem.closing,
     });
@@ -172,7 +181,7 @@ const EditLocations = () => {
             <input
               type="file"
               name="image"
-              accept="image/*" 
+              accept="image/*"
               multiple
               className="w-full p-2 border rounded"
               onChange={handleImageChange}
@@ -263,6 +272,17 @@ const EditLocations = () => {
 
           <div>
             <label className="block text-sm mb-1">Histoy Location</label>
+            <textarea
+              name="VisitorTips"
+              rows="3"
+              className="w-full p-2 border rounded"
+              value={editLocations.editVisitorTips}
+              onChange={handleChange}
+            ></textarea> 
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">VisitorTips</label>
             <textarea
               name="history"
               rows="3"

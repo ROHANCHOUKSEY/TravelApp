@@ -28,7 +28,7 @@ const ViewDetails = () => {
     fetchDetails();
   }, [id]);
 
-  if (!details) {
+  if (!details) { 
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-pulse flex flex-col items-center">
@@ -37,7 +37,7 @@ const ViewDetails = () => {
           <div className="h-4 bg-gray-200 rounded w-1/2"></div>
         </div>
       </div>
-    );
+    ); 
   }
 
   // Generate star rating
@@ -53,7 +53,7 @@ const ViewDetails = () => {
     }
     return stars;
   };
-
+ 
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -235,7 +235,7 @@ const ViewDetails = () => {
               Visitor Tips
             </h3>
             <ul className="space-y-2 text-gray-600 dark:text-white">
-              <li className="flex items-start">
+              {/* <li className="flex items-start">
                 <span className="text-indigo-500 mr-2">•</span>
                 Wear comfortable shoes for walking
               </li>
@@ -243,10 +243,11 @@ const ViewDetails = () => {
                 <span className="text-indigo-500 mr-2">•</span>
                 Bring water and sunscreen
               </li>
-              <li className="flex items-start">
+              <li className="flex items-start"> 
                 <span className="text-indigo-500 mr-2">•</span>
                 Photography is allowed but check for restricted areas
-              </li>
+              </li> */}
+              {details.VisitorTips}
             </ul>
           </motion.div>
 

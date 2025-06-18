@@ -12,9 +12,10 @@ exports.postLocation = async (req, res, next) => {
       country,
       state,
       rating,
-      description,
+      description, 
       holeDescription,
       history,
+      VisitorTips,
       timing,
       closing,
     } = req.body;
@@ -27,8 +28,9 @@ exports.postLocation = async (req, res, next) => {
       description,
       holeDescription,
       history,
+      VisitorTips,
       timing,
-      closing,
+      closing, 
     });
 
     await newLocation.save();
