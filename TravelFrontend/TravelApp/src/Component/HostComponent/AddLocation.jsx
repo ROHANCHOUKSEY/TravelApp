@@ -160,7 +160,7 @@ const AddLocation = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1">State</label>
+              <label className="block text-sm font-medium mb-1">state</label>
               <input
                 type="text"
                 name="state"

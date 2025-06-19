@@ -355,6 +355,7 @@ const maplocalValueToserviseValue = (serviseItem) => {
     description: serviseItem.description,
     holeDescription: serviseItem.holeDescription,
     history: serviseItem.history,
+    VisitorTips: serviseItem.VisitorTips, 
     timing: serviseItem.timing,
     closing: serviseItem.closing,
   };

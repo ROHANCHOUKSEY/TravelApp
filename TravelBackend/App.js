@@ -71,7 +71,7 @@ app.post("/api/upload", (req, res) => {
 
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: "No files uploaded" });
-    }
+    } 
 
     const fileUrls = req.files.map(
       (file) => `http://localhost:${PORT}/uploads/${file.filename}`

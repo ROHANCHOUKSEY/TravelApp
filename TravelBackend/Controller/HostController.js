@@ -1,7 +1,9 @@
 const TravelLocations = require("../Models/TravelLocation");
 const user = require("../Models/user");
 const locationState = require("../Models/State_CountryLocation");
-const { default: mongoose } = require("mongoose");
+// const { default: mongoose } = require("mongoose");
+const path = require("path");
+const fs = require("fs");
 
 exports.postLocation = async (req, res, next) => {
   // console.log(req.body);
@@ -12,7 +14,7 @@ exports.postLocation = async (req, res, next) => {
       country,
       state,
       rating,
-      description, 
+      description,
       holeDescription,
       history,
       VisitorTips,
@@ -30,16 +32,31 @@ exports.postLocation = async (req, res, next) => {
       history,
       VisitorTips,
       timing,
-      closing, 
+      closing,
     });
 
     await newLocation.save();
 
+    console.log("FromLocation", state);
+
     const userId = req.session.user._id;
     const User = await user.findById(userId);
     User.hostLocation.push(newLocation._id);
-    // console.log("HostLocation: ", User.hostLocation);
     await User.save();
+
+    const stateKey = state.toLowerCase().replace(/\s/g, "");
+
+    let stateDoc = await locationState.findOne();
+    if (!stateDoc) {
+      stateDoc = new locationState({});
+      await stateDoc.save();
+    }
+
+    if (!stateDoc[stateKey].includes(newLocation._id)) {
+      stateDoc[stateKey].push(newLocation._id);
+      await stateDoc.save();
+    }
+
     res.status(200).json(newLocation);
   } catch (error) {
     console.log("Data is not assign in database", error);
@@ -76,6 +93,8 @@ exports.postStateLocation = async (req, res) => {
 
     const stateKey = state.toLowerCase().replace(/\s/g, "");
 
+    console.log("stateKeyFromState", stateKey);
+
     const allowedstate = [
       "andhrapradesh",
       "arunachalpradesh",
@@ -99,7 +118,7 @@ exports.postStateLocation = async (req, res) => {
       "punjab",
       "rajasthan",
       "sikkim",
-      "tamil nadu",
+      "tamilnadu",
       "telangana",
       "tripura",
       "uttarpradesh",
@@ -246,6 +265,7 @@ exports.postEditLocation = async (req, res, next) => {
       description,
       holeDescription,
       history,
+      VisitorTips,
       timing,
       closing,
     } = req.body;
@@ -260,12 +280,27 @@ exports.postEditLocation = async (req, res, next) => {
         description,
         holeDescription,
         history,
+        VisitorTips,
         timing,
         closing,
       },
       { new: true }
     );
     await updateLocation.save();
+
+    // if (updateLocation.image) {
+    //   const imageUrl = updateLocation.image;
+    //   const filename = imageUrl[0].split("/").pop();
+    //   const filePath = path.join(__dirname, "../uploads", filename);
+    //   fs.unlink(filePath, (err) => {
+    //     if (err) {
+    //       console.error("Error deleting image:", filename, err);
+    //     } else {
+    //       console.log("Deleted image:", filename);
+    //     }
+    //   });
+    // }
+
     res.status(200).json(updateLocation);
   } catch (error) {
     console.log("Edit data is not post in database", error);
@@ -283,9 +318,28 @@ exports.deleteLocation = async (req, res, next) => {
       return res.status(404).json({ message: "Location not found" });
     }
 
-    // Then remove from the state location array
-    const stateKey = deletedLocation.state.toLowerCase().replaceAll(" ", "");
-    await locationState.updateOne({}, { $pull: { [stateKey]: id } });
+    const userId = req.session.user._id;
+    const User = await user.findById(userId);
+
+    if (User.hostLocation.includes(id)) {
+      User.hostLocation = User.hostLocation.filter(
+        (locationId) => locationId.toString() !== id
+      );
+      await User.save();
+    }
+
+    if (deletedLocation.image) {
+      const imageUrl = deletedLocation.image;
+      const filename = imageUrl[0].split("/").pop();
+      const filePath = path.join(__dirname, "../uploads", filename);
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error("Error deleting image:", filename, err);
+        } else {
+          console.log("Deleted image:", filename);
+        }
+      });
+    }
 
     res.status(200).json({ _id: id });
   } catch (error) {
@@ -293,4 +347,3 @@ exports.deleteLocation = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
-

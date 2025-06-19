@@ -93,7 +93,7 @@ const EditLocations = () => {
           ? e.target.value
           : editLocations.editHistory,
       editVisitorTips:
-        e.target.value === "VisitorTips"
+        e.target.name === "VisitorTips"
           ? e.target.value
           : editLocations.editVisitorTips,
       editTiming:
@@ -224,7 +224,7 @@ const EditLocations = () => {
           </div>
 
           <div>
-            <label className="block text-sm mb-1">Country</label>
+            <label className="block text-sm mb-1">State</label>
             <input
               type="text"
               name="state"
@@ -273,23 +273,23 @@ const EditLocations = () => {
           <div>
             <label className="block text-sm mb-1">Histoy Location</label>
             <textarea
-              name="VisitorTips"
-              rows="3"
-              className="w-full p-2 border rounded"
-              value={editLocations.editVisitorTips}
-              onChange={handleChange}
-            ></textarea> 
-          </div>
-
-          <div>
-            <label className="block text-sm mb-1">VisitorTips</label>
-            <textarea
               name="history"
               rows="3"
               className="w-full p-2 border rounded"
               value={editLocations.editHistory}
               onChange={handleChange}
             ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">VisitorTips</label>
+            <textarea
+              name="VisitorTips"
+              rows="3"
+              className="w-full p-2 border rounded"
+              value={editLocations.editVisitorTips}
+              onChange={handleChange}
+            ></textarea> 
           </div>
 
           <div>
