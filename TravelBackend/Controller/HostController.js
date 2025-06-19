@@ -256,6 +256,7 @@ exports.getEditLocation = async (req, res, next) => {
 exports.postEditLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
+    console.log("updateLocationId", id);
     const {
       image,
       locationName,
@@ -269,6 +270,10 @@ exports.postEditLocation = async (req, res, next) => {
       timing,
       closing,
     } = req.body;
+
+    const oldLocation = await TravelLocations.findById(id);
+    const imgurl = oldLocation.image;
+
     const updateLocation = await TravelLocations.findByIdAndUpdate(
       id,
       {
@@ -288,18 +293,17 @@ exports.postEditLocation = async (req, res, next) => {
     );
     await updateLocation.save();
 
-    // if (updateLocation.image) {
-    //   const imageUrl = updateLocation.image;
-    //   const filename = imageUrl[0].split("/").pop();
-    //   const filePath = path.join(__dirname, "../uploads", filename);
-    //   fs.unlink(filePath, (err) => {
-    //     if (err) {
-    //       console.error("Error deleting image:", filename, err);
-    //     } else {
-    //       console.log("Deleted image:", filename);
-    //     }
-    //   });
-    // }
+    if (oldLocation.image) {
+      const filename = imgurl[0].split("/").pop();
+      const filepath = path.join(__dirname, "../uploads", filename);
+      fs.unlink(filepath, (err) => {
+        if (err) {
+          console.log("LastImage is not remove from upload");
+        } else {
+          console.log("LastImage is remove from upload");
+        }
+      });
+    }
 
     res.status(200).json(updateLocation);
   } catch (error) {
