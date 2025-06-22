@@ -262,7 +262,7 @@ export const deleteFromFavourite = async (id) => {
   }
 };
 
-export const postReview = async (id, review) => {
+export const postReview = async (id, text, postuserName, createdAt) => {
   const response = await fetch(
     `http://localhost:3002/api/user/reviewpost/${id}`,
     {
@@ -271,7 +271,7 @@ export const postReview = async (id, review) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ review }),
+      body: JSON.stringify({ text, postuserName, createdAt }),
     }
   );
   const data = await response.json();

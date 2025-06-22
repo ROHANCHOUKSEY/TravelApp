@@ -56,9 +56,10 @@ exports.deleteFavourites = async (req, res, next) => {
 exports.reviewPost = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { review } = req.body;
+    const { text, postuserName, createdAt } = req.body;
     const travellocation = await TravelLocations.findById(id);
-    travellocation.review.push(review);
+    const newReview = {text, postuserName, createdAt};
+    travellocation.review.push(newReview);
     await travellocation.save();
     res.status(200).json({message: "Review posted successfully", updatelocation: travellocation});
   } catch (error) {

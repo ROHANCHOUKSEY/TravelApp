@@ -17,14 +17,12 @@ import {
   FaExclamationCircle,
 } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Review from "./Review/Review";
 
 const ViewDetails = () => {
   const [details, setDetails] = useState(null);
-  const [takeReview, setTakeReview] = useState("");
-  const [printReview, setPrintReview] = useState([]);
 
   const { id } = useParams();
-
 
   useEffect(() => {
     async function fetchDetails() {
@@ -39,26 +37,6 @@ const ViewDetails = () => {
 
     fetchDetails();
   }, []);
-
-  const handleReviewPost = async () => {
-    try {
-      await postReview(id, takeReview);
-      const data = await getReview(id);
-      setPrintReview(data.LocationReview);
-      setTakeReview("");
-    } catch (error) {
-      console.log("Error when post review", error);
-    }
-  };
-
-  useEffect(() => {
-    async function getuserReview() {
-      const data = await getReview(id);
-      console.log("data", data.LocationReview);
-      setPrintReview(data.LocationReview);
-    }
-    getuserReview();
-  }, [id]);
 
   if (!details) {
     return (
@@ -281,38 +259,7 @@ const ViewDetails = () => {
             </motion.div>
           </div>
         </div>
-        <div className="flex gap-5">
-          <input
-            type="text"
-            name="postreview"
-            // value={takeReview}
-            // onChange={handleReviewPostChange}
-            onChange={(e) => setTakeReview(e.target.value)}
-            value={takeReview}
-            className="bg-white dark:bg-blue-900/30  border-2 border-black dark:border-white w-full h-10 p-2 text-black dark:text-white rounded-sm"
-            placeholder="Enter Your Review"
-            required
-          />
-          <button
-            className="dark:bg-blue dark:text-white w-20 border-2 border-blue-600 rounded"
-            onClick={handleReviewPost}
-          >
-            POST
-          </button>
-        </div>
-        {printReview.length > 0 ? (
-          <ul>
-            {printReview.map((review, ind) => (
-              <div className="w-full h-20 border-2 border-white mt-10 p-2">
-                <li key={ind} className="text-sm text-gray-700 dark:text-white">
-                  {review}
-                </li>
-              </div>
-            ))}
-          </ul>
-        ) : (
-          <p className="text-sm text-gray-500">No reviews yet.</p>
-        )}
+        <Review />
       </div>
     </motion.div>
   );
