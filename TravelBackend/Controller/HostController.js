@@ -59,6 +59,7 @@ exports.postLocation = async (req, res, next) => {
 
     res.status(200).json(newLocation);
   } catch (error) {
+    alert("Please check state");
     console.log("Data is not assign in database", error);
   }
 };

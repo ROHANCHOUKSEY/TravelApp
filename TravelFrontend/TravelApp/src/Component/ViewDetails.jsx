@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { locationDetails } from "../service/locationService";
-import { FaMapMarkerAlt, FaStar, FaClock, FaInfoCircle, FaHistory, FaLandmark, FaTicketAlt, FaWheelchair, FaExclamationCircle } from "react-icons/fa";
+import {
+  getReview,
+  locationDetails,
+  postReview,
+} from "../service/locationService";
+import {
+  FaMapMarkerAlt,
+  FaStar,
+  FaClock,
+  FaInfoCircle,
+  FaHistory,
+  FaLandmark,
+  FaTicketAlt,
+  FaWheelchair,
+  FaExclamationCircle,
+} from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const ViewDetails = () => {
   const [details, setDetails] = useState(null);
+  const [takeReview, setTakeReview] = useState("");
+  const [printReview, setPrintReview] = useState([]);
+
   const { id } = useParams();
+
 
   useEffect(() => {
     async function fetchDetails() {
       try {
         const data = await locationDetails(id);
+        console.log("fetchDetailsData", data);
         setDetails(data);
       } catch (error) {
         console.error("Error fetching details:", error);
@@ -19,6 +38,26 @@ const ViewDetails = () => {
     }
 
     fetchDetails();
+  }, []);
+
+  const handleReviewPost = async () => {
+    try {
+      await postReview(id, takeReview);
+      const data = await getReview(id);
+      setPrintReview(data.LocationReview);
+      setTakeReview("");
+    } catch (error) {
+      console.log("Error when post review", error);
+    }
+  };
+
+  useEffect(() => {
+    async function getuserReview() {
+      const data = await getReview(id);
+      console.log("data", data.LocationReview);
+      setPrintReview(data.LocationReview);
+    }
+    getuserReview();
   }, [id]);
 
   if (!details) {
@@ -34,12 +73,14 @@ const ViewDetails = () => {
   }
 
   const renderStars = () => {
-    return Array(5).fill(0).map((_, i) => (
-      <FaStar
-        key={i}
-        className={i < details.rating ? "text-yellow-400" : "text-gray-300"}
-      />
-    ));
+    return Array(5)
+      .fill(0)
+      .map((_, i) => (
+        <FaStar
+          key={i}
+          className={i < details.rating ? "text-yellow-400" : "text-gray-300"}
+        />
+      ));
   };
 
   return (
@@ -170,7 +211,8 @@ const ViewDetails = () => {
                       Tips & Guidelines
                     </h3>
                     <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                      {details.VisitorTips && typeof details.VisitorTips === 'string' ? (
+                      {details.VisitorTips &&
+                      typeof details.VisitorTips === "string" ? (
                         <li>{details.VisitorTips}</li>
                       ) : (
                         details.VisitorTips?.map((tip, index) => (
@@ -192,8 +234,18 @@ const ViewDetails = () => {
                         Wheelchair accessible
                       </li>
                       <li className="flex items-center">
-                        <svg className="w-4 h-4 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-4 h-4 text-blue-500 mr-2"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                         Guided tours available
                       </li>
@@ -216,10 +268,12 @@ const ViewDetails = () => {
                       Regular Hours
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300">
-                      <span className="font-medium">Open:</span> {details.timing}
+                      <span className="font-medium">Open:</span>{" "}
+                      {details.timing}
                     </p>
                     <p className="text-gray-600 dark:text-gray-300">
-                      <span className="font-medium">Close:</span> {details.closing}
+                      <span className="font-medium">Close:</span>{" "}
+                      {details.closing}
                     </p>
                   </div>
                 </div>
@@ -227,6 +281,38 @@ const ViewDetails = () => {
             </motion.div>
           </div>
         </div>
+        <div className="flex gap-5">
+          <input
+            type="text"
+            name="postreview"
+            // value={takeReview}
+            // onChange={handleReviewPostChange}
+            onChange={(e) => setTakeReview(e.target.value)}
+            value={takeReview}
+            className="bg-white dark:bg-blue-900/30  border-2 border-black dark:border-white w-full h-10 p-2 text-black dark:text-white rounded-sm"
+            placeholder="Enter Your Review"
+            required
+          />
+          <button
+            className="dark:bg-blue dark:text-white w-20 border-2 border-blue-600 rounded"
+            onClick={handleReviewPost}
+          >
+            POST
+          </button>
+        </div>
+        {printReview.length > 0 ? (
+          <ul>
+            {printReview.map((review, ind) => (
+              <div className="w-full h-20 border-2 border-white mt-10 p-2">
+                <li key={ind} className="text-sm text-gray-700 dark:text-white">
+                  {review}
+                </li>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-gray-500">No reviews yet.</p>
+        )}
       </div>
     </motion.div>
   );

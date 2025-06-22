@@ -11,7 +11,8 @@ const LocationSchema = mongoose.Schema({
     history: {type: String},
     VisitorTips: {type: String},
     timing: {type: String},
-    closing: {type: String}
+    closing: {type: String},
+    review: [{type: String}]
 });
 
 module.exports = mongoose.model("TravelLocation", LocationSchema);     

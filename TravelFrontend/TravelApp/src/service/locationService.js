@@ -262,6 +262,37 @@ export const deleteFromFavourite = async (id) => {
   }
 };
 
+export const postReview = async (id, review) => {
+  const response = await fetch(
+    `http://localhost:3002/api/user/reviewpost/${id}`,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ review }),
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const getReview = async (id) => {
+  const response = await fetch(
+    `http://localhost:3002/api/user/reviewpost/${id}`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  const data = await response.json();
+  return data;
+};
+
 // Authentication -----------------------------
 
 export const signUp = async ({
@@ -355,8 +386,9 @@ const maplocalValueToserviseValue = (serviseItem) => {
     description: serviseItem.description,
     holeDescription: serviseItem.holeDescription,
     history: serviseItem.history,
-    VisitorTips: serviseItem.VisitorTips, 
+    VisitorTips: serviseItem.VisitorTips,
     timing: serviseItem.timing,
     closing: serviseItem.closing,
+    review: serviseItem.review,
   };
 };
