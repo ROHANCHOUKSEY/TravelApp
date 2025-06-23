@@ -297,7 +297,7 @@ const EditLocations = () => {
             <input
               name="timing"
               rows="3"
-              type="time"
+              type="text"
               className="w-full p-2 border rounded"
               value={editLocations.editTiming}
               onChange={handleChange}
@@ -309,7 +309,7 @@ const EditLocations = () => {
             <input
               name="closing"
               rows="3"
-              type="time"
+              type="text"
               className="w-full p-2 border rounded"
               value={editLocations.editClosing}
               onChange={handleChange}
