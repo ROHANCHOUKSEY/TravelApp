@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   getReview,
@@ -18,8 +18,12 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Review from "./Review/Review";
+import { AppContext } from "../CreateContext/Context";
 
 const ViewDetails = () => {
+
+  const{userType} = useContext(AppContext);
+
   const [details, setDetails] = useState(null);
 
   const { id } = useParams();
@@ -259,7 +263,7 @@ const ViewDetails = () => {
             </motion.div>
           </div>
         </div>
-        <Review />
+        {userType === "guest" ?  <Review /> : "" }
       </div>
     </motion.div>
   );
