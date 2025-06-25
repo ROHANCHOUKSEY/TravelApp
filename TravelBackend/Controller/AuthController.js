@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 exports.postSignUp = [
   check("firstname")
     .trim()
-    .isLength({ min: 2 })
+    .isLength({ min: 2 }) 
     .withMessage("First name must be at least 2 character long")
     .matches(/^[a-zA-Z]+$/)
     .withMessage("First name can only contain letters"),

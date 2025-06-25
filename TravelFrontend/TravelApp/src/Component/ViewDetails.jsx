@@ -245,11 +245,11 @@ const ViewDetails = () => {
                   </h2>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
+                  <div className="w-full">
                     <h3 className="font-medium text-gray-800 dark:text-white mb-2">
                       Regular Hours
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
+                    <p className=" text-gray-600 dark:text-gray-300">
                       <span className="font-medium">Open:</span>{" "}
                       {details.timing}
                     </p>
