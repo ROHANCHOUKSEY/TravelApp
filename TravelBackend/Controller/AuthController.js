@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 exports.postSignUp = [
   check("firstname")
     .trim()
-    .isLength({ min: 2 }) 
+    .isLength({ min: 2 })
     .withMessage("First name must be at least 2 character long")
     .matches(/^[a-zA-Z]+$/)
     .withMessage("First name can only contain letters"),
@@ -75,7 +75,7 @@ exports.postSignUp = [
 
       bcrypt.hash(password, 12).then(async (hashedPassword) => {
         const newUser = await new User({
-          firstname,
+          firstname, 
           lastname,
           email,
           password: hashedPassword,
@@ -84,7 +84,7 @@ exports.postSignUp = [
 
         await newUser.save();
         res.status(200).json(newUser);
-      });
+      }); 
     } catch (error) {
       console.log("Uers is not SignUp", error);
       res.status(500).json({ message: "Server error" });
