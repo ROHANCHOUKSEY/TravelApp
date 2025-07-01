@@ -58,23 +58,33 @@ exports.reviewPost = async (req, res, next) => {
     const { id } = req.params;
     const { text, postuserName, createdAt } = req.body;
     const travellocation = await TravelLocations.findById(id);
-    const newReview = {text, postuserName, createdAt};
+    const newReview = { text, postuserName, createdAt };
     travellocation.review.push(newReview);
     await travellocation.save();
-    res.status(200).json({message: "Review posted successfully", updatelocation: travellocation});
+    res
+      .status(200)
+      .json({
+        message: "Review posted successfully",
+        updatelocation: travellocation,
+      });
   } catch (error) {
     console.log("Error during post review", error);
     res.status(400).json({ message: "Error to post review" });
   }
 };
 
-
-exports.reviewGet = async(req, res, next) => {
-  const {id} = req.params;
-  const getLocationReview = await TravelLocations.findById(id);
-  if(!getLocationReview){
-    return res.status(402).json({message:"Location is not found"});
+exports.reviewGet = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const getLocationReview = await TravelLocations.findById(id);
+    if (!getLocationReview) {
+      return res.status(402).json({ message: "Location is not found" });
+    }
+    const getReview = getLocationReview.review;
+    res
+      .status(200)
+      .json({ message: "Review get successfully", LocationReview: getReview });
+  } catch (error) {
+    console.log("There is something wrong to get review", error);
   }
-  const getReview =  getLocationReview.review;
-  res.status(200).json({message:"Review get successfully", LocationReview: getReview});
-}
+};

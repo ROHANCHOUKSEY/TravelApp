@@ -11,7 +11,7 @@ exports.postSignUp = [
     .withMessage("First name can only contain letters"),
  
   check("lastname")
-    .trim()
+    .trim() 
     .isLength({ min: 2 })
     .withMessage("Last name must be at least 2 character long")
     .matches(/^[a-zA-Z]+$/)
