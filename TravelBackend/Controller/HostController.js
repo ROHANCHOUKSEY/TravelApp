@@ -257,6 +257,11 @@ exports.getEditLocation = async (req, res, next) => {
 exports.postEditLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
+
+    const oldLocation = await TravelLocations.findById(id);
+    if (!oldLocation)
+      return res.status(404).json({ message: "Location not found" });
+
     console.log("updateLocationId", id);
     const {
       image,
@@ -272,8 +277,13 @@ exports.postEditLocation = async (req, res, next) => {
       closing,
     } = req.body;
 
-    const oldLocation = await TravelLocations.findById(id);
-    const imgurl = oldLocation.image;
+    // const imgurl = oldLocation.image;
+
+    let newImagePath; 
+    if (req.file) {
+      newImagePath = `/uploads/${req.file.filename}`;
+      updateData.image = newImagePath;
+    }
 
     const updateLocation = await TravelLocations.findByIdAndUpdate(
       id,
@@ -289,20 +299,19 @@ exports.postEditLocation = async (req, res, next) => {
         VisitorTips,
         timing,
         closing,
-      },
+      }, 
       { new: true }
     );
     await updateLocation.save();
 
-    if (oldLocation.image) {
-      const filename = imgurl[0].split("/").pop();
-      const filepath = path.join(__dirname, "../uploads", filename);
-      fs.unlink(filepath, (err) => {
-        if (err) {
-          console.log("LastImage is not remove from upload");
-        } else {
-          console.log("LastImage is remove from upload");
-        }
+    if (newImagePath && oldLocation.image) {
+      const oldFileName = (Array.isArray(oldLocation.image) ? oldLocation.image[0] : oldLocation.image)
+                            .split('/').pop();
+      const oldFilePath = path.join(__dirname, '../uploads', oldFileName);
+
+      fs.unlink(oldFilePath, (err) => {
+        if (err) console.log('Could not remove old image:', err.message);
+        else     console.log('Old image removed');
       });
     }
 

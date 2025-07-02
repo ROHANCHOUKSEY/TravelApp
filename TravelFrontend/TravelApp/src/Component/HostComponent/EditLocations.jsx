@@ -293,18 +293,18 @@ const EditLocations = () => {
           </div>
 
           <div>
-            <label className="block text-sm mb-1">Opening Timing</label>
-            <input
+            <label className="block text-sm mb-1">Timing Details</label>
+            <textarea
               name="timing"
               rows="3"
               type="text"
               className="w-full p-2 border rounded"
               value={editLocations.editTiming}
               onChange={handleChange}
-            ></input>
+            ></textarea>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-sm mb-1">Closing Timing</label>
             <input
               name="closing"
@@ -314,7 +314,7 @@ const EditLocations = () => {
               value={editLocations.editClosing}
               onChange={handleChange}
             ></input>
-          </div>
+          </div> */}
 
           <button
             type="button"

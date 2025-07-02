@@ -238,26 +238,19 @@ const AddLocation = () => {
           </div>
 
           {/* Timing */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium">Opening Time</label>
-              <input
+              <label className="block text-sm font-medium">Enter Timing Details</label>
+              <textarea
                 type="text"
                 name="timing"
+                rows="4"
                 className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
                 onChange={handleChange}
+                placeholder="Enter Timing Details Of Place"
               />
             </div>
-            <div className="space-y-2">
-              <label className="block text-sm font-medium">Closing Time</label>
-              <input
-                type="text"
-                name="closing"
-                className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+          {/* </div> */}
 
           {/* Submit Button */}
           <div className="pt-4">

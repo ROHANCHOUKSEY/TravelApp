@@ -244,21 +244,21 @@ const ViewDetails = () => {
                     Visiting Hours
                   </h2>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
                   <div className="w-full">
                     <h3 className="font-medium text-gray-800 dark:text-white mb-2">
                       Regular Hours
                     </h3>
                     <p className=" text-gray-600 dark:text-gray-300">
-                      <span className="font-medium">Open:</span>{" "}
+                      {/* <span className="font-medium">Open:</span>{" "} */}
                       {details.timing}
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300">
+                    {/* <p className="text-gray-600 dark:text-gray-300">
                       <span className="font-medium">Close:</span>{" "}
                       {details.closing}
-                    </p>
+                    </p> */}
                   </div>
-                </div>
+                {/* </div> */}
               </div>
             </motion.div>
           </div>
