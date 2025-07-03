@@ -194,14 +194,16 @@ const ViewDetails = () => {
                     </h3>
                     <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       {details.VisitorTips &&
-                      typeof details.VisitorTips === "string" ? (
-                        <li>{details.VisitorTips}</li>
-                      ) : (
+                      typeof details.VisitorTips === "string" ? details.VisitorTips.split("\n").map((tips, index) => (
+                        <li key={index} className="flex items-start">
+                          {tips}
+                        </li>
+                      )) : (
                         details.VisitorTips?.map((tip, index) => (
                           <li key={index} className="flex items-start">
                             <span className="text-blue-500 mr-2">•</span>
                             {tip}
-                          </li>
+                          </li> 
                         ))
                       )}
                     </ul>
