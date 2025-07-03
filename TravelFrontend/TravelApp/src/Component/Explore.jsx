@@ -3,18 +3,20 @@ import { AppContext } from "../CreateContext/Context";
 import { locationFromServer } from "../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
+import { Search } from "lucide-react";
 
 const Explore = () => {
-  const { locationLists, setLocationLists, isLoggined } = useContext(AppContext);
+  const { locationLists, setLocationLists, isLoggined } =
+    useContext(AppContext);
 
   useEffect(() => {
     async function fetchLocation() {
       try {
         const response = await locationFromServer();
-        console.log("Explore Response", response); 
+        console.log("Explore Response", response);
         setLocationLists(response);
-      } catch (error) { 
-        console.log("All location is not fetch", error);
+      } catch (error) {
+        console.log("All location is not fetch", error); 
       }
     }
     fetchLocation();
@@ -31,7 +33,18 @@ const Explore = () => {
           country
         </p>
       </div>
- 
+
+      <div className="relative">
+        <input
+          type="text"
+          className="block w-full p-4 pl-10 pr-3 py-3 mb-5 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent "
+          placeholder="Search Your Place..."
+        />
+        <div className="text-gray-500 p-2 absolute inset-y-0 left-0 pr-3 flex items-center">
+          <Search />
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
           <div
@@ -54,8 +67,8 @@ const Explore = () => {
                 <span className="font-semibold text-gray-800 dark:text-gray-200">
                   {location.rating}
                 </span>
-              </div>  
-            </div> 
+              </div>
+            </div>
 
             {/* Location Details */}
             <div className="p-5">
