@@ -109,7 +109,7 @@ const SearchBar = ({ setLocationResult }) => {
         <div className="text-gray-500 p-2 absolute inset-y-0 left-0 pr-3 flex items-center ">
           <Search />
         </div>
-      </div>
+      </div> 
     </>
   );
 };
