@@ -21,6 +21,7 @@ import PageNotFound from "./Component/PageNotFound.jsx";
 import ProtectedRoute from "./Component/ProtectedRoute.jsx";
 import ViewDetails from "./Component/ViewDetails.jsx";
 import StateLocations from "./Component/UserComponent/StateLocations.jsx";
+import SearchStateLocations from "./Component/UserComponent/SearchStateLocations.jsx";
 
 
 const router = createBrowserRouter(
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
       <Route path="addLocation" element={<ProtectedRoute><AddLocation /></ProtectedRoute>} />
       <Route path="viewDetails/:id" element={<ProtectedRoute><ViewDetails/></ProtectedRoute>} />
       <Route path="editLocation/:id" element={<ProtectedRoute><EditLocations/></ProtectedRoute>} />
+      <Route path="stateSearch/:stateName" element={<ProtectedRoute><SearchStateLocations/></ProtectedRoute>}/>
       <Route path="login" element={<Login/>} />
       <Route path="signUp" element={<SignUp/>} />
       <Route path="*" element={<PageNotFound/>} />

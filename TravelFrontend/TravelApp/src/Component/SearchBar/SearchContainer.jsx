@@ -10,9 +10,9 @@ const SearchContainer = () => {
   }
 
   return (
-    <>
+    <> 
       <div className="mb-5">
-        <SearchBar setLocationResult={setLocationResult} />
+        <SearchBar setLocationResult={setLocationResult}/>
         {locationResult.map((loc) => (
           <ul
             key={loc.locationId}
@@ -21,7 +21,7 @@ const SearchContainer = () => {
             <li className="p-2 hover:bg-gray-200 cursor-pointer">
               {loc.locationName
                 ? <NavLink to={`viewDetails/${loc.locationId}`}>{loc.locationName.toUpperCase()}, {loc.state.toUpperCase()}</NavLink>
-                : <div onClick={stateHandle}>{loc.state.toUpperCase()}</div>}
+                : <NavLink to={`/stateSearch/${loc.state}`}>{loc.state.toUpperCase()}</NavLink>}
             </li>
           </ul>
         ))}

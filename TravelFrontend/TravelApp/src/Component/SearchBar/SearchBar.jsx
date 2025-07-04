@@ -1,8 +1,11 @@
 import { Search } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
+import { AppContext } from "../../CreateContext/Context";
 
 const SearchBar = ({ setLocationResult }) => {
+
+  const { setStateLocation } = useContext(AppContext);
   const [searchQuery, setSearchQuery] = useState("");
   const controllRef = useRef(null);
 
@@ -55,9 +58,14 @@ const SearchBar = ({ setLocationResult }) => {
 
       const response = await fetch("http://localhost:3002/api/host", { signal });
       const data = await response.json();
+
       const uniqueState = new Set(data.map((loc) => loc.state.toLowerCase()));
 
       if (uniqueState.has(searchValue)) {
+        const stateLocation = data.filter((loc) =>
+          loc.state.toLowerCase() === searchValue
+        )
+        setStateLocation(stateLocation);
         setLocationResult([{ locationName: "", state: searchValue }]);
         return;
       }
