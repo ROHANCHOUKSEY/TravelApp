@@ -4,6 +4,8 @@ import { locationFromServer } from "../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 import { Search } from "lucide-react";
+import SearchBar from "./SearchBar/SearchBar";
+import SearchContainer from "./SearchBar/SearchContainer";
 
 const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =
@@ -16,7 +18,7 @@ const Explore = () => {
         console.log("Explore Response", response);
         setLocationLists(response);
       } catch (error) {
-        console.log("All location is not fetch", error); 
+        console.log("All location is not fetch", error);
       }
     }
     fetchLocation();
@@ -32,19 +34,10 @@ const Explore = () => {
           Explore breathtaking destinations and hidden gems across our beautiful
           country
         </p>
-      </div>
+      </div> 
 
-      <div className="relative">
-        <input
-          type="text"
-          className="block w-full p-4 pl-10 pr-3 py-3 mb-5 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:border-transparent "
-          placeholder="Search Your Place..."
-        />
-        <div className="text-gray-500 p-2 absolute inset-y-0 left-0 pr-3 flex items-center">
-          <Search />
-        </div>
-      </div>
-
+      {/* Search Bar */}
+      <SearchContainer/>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
           <div
