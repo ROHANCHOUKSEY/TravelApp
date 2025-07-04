@@ -1,26 +1,32 @@
 import React, { useState } from "react";
 import SearchBar from "./SearchBar";
+import { NavLink } from "react-router-dom";
 
 const SearchContainer = () => {
   const [locationResult, setLocationResult] = useState([]);
+
+  const stateHandle = () => {
+    console.log("State is Searched")
+  }
+
   return (
     <>
       <div className="mb-5">
         <SearchBar setLocationResult={setLocationResult} />
-        {locationResult.map((loc, id) => (
+        {locationResult.map((loc) => (
           <ul
-            key={id}
+            key={loc.locationId}
             className="w-full bg-gray-100 rounded shadow-gray-200 shadow-xl dark:shadow-transparent"
           >
-            <li className="p-2">
+            <li className="p-2 hover:bg-gray-200 cursor-pointer">
               {loc.locationName
-                ? `${loc.locationName.toUpperCase()}, ${loc.state.toUpperCase()}`
-                : loc.state.toUpperCase()}
+                ? <NavLink to={`viewDetails/${loc.locationId}`}>{loc.locationName.toUpperCase()}, {loc.state.toUpperCase()}</NavLink>
+                : <div onClick={stateHandle}>{loc.state.toUpperCase()}</div>}
             </li>
           </ul>
         ))}
       </div>
-    </> 
+    </>
   );
 };
 
