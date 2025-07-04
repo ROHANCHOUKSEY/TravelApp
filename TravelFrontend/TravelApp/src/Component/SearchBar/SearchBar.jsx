@@ -98,18 +98,28 @@ const SearchBar = ({ setLocationResult }) => {
 
   return (
     <>
-      <div className="relative">
+      <div className="relative max-w-lg mx-auto">
         <input
           type="text"
-          className="block w-full p-4 pl-10 pr-3 py-3  border border-gray-300 rounded-lg bg-gray-50  focus:outline-0"
-          placeholder="Search Your Place..."
+          className="block w-full p-4 pl-12 pr-10 py-3 border border-gray-300 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm transition-all duration-200"
+          placeholder="Search your place..."
           value={searchQuery}
           onChange={(e) => handleChange(e.target.value)}
         />
-        <div className="text-gray-500 p-2 absolute inset-y-0 left-0 pr-3 flex items-center ">
-          <Search />
+        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+          <Search className="w-5 h-5 text-gray-400" />
         </div>
-      </div> 
+        {searchQuery && (
+          <button
+            onClick={() => handleChange('')}
+            className="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+      </div>
     </>
   );
 };
