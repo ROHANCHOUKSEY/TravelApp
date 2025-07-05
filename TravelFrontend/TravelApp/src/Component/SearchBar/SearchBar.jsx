@@ -1,34 +1,50 @@
 import { Search } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../CreateContext/Context";
 
 const SearchBar = ({ setLocationResult }) => {
 
-  const { setStateLocation } = useContext(AppContext);
   const [searchQuery, setSearchQuery] = useState("");
   const controllRef = useRef(null);
 
-  //   const fetchLocationData = async (value) => {
-  //     const searchValue = value.toLowerCase().trim();
+  const fetchLocationData = async (searchValue) => {
 
-  //     if (!searchValue) {
-  //       setLocationResult([]);
-  //       return;
-  //     }
+    if (controllRef.current) controllRef.current.abort();
+    controllRef.current = new AbortController();
+    const { signal } = controllRef.current;
 
-  //     const response = await fetch("http://localhost:3002/api/host");
-  //     const data = await response.json();
-  //     const filterLocations = data.filter((location) => {
-  //       const nameMatch = location.locationName
-  //         .toLowerCase()
-  //         .includes(searchValue);
-  //       const stateMatch = location.state.toLowerCase().includes(searchValue);
-  //       return nameMatch || stateMatch;
-  //     });
-  //     console.log("FilterLocation: ", filterLocations);
-  //     setLocationResult(filterLocations);
-  //   };
+    try {
+
+      const response = await fetch("http://localhost:3002/api/host", { signal });
+      const data = await response.json();
+
+      const uniqueState = new Set(data.map((loc) => loc.state.toLowerCase()));
+
+      if (uniqueState.has(searchValue)) {
+        setLocationResult([{ locationName: "", state: searchValue }]);
+        return;
+      }
+
+      const uniqueLocation = data.map((loc) => ({
+        locationName: loc.locationName,
+        state: loc.state,
+        locationId: loc._id,
+      }));
+
+      const filteredLocation = uniqueLocation.filter((loc) => {
+        const searchLocationName = loc.locationName.toLowerCase().includes(searchValue);
+        const searchState = loc.state.toLowerCase().includes(searchValue);
+        return searchLocationName || searchState;
+      });
+
+      setLocationResult(filteredLocation);
+    } catch (error) {
+      if (error.name !== "AbortError") {
+        console.log(error);
+      }
+    }
+  };
 
   useEffect(() => {
     const searchValue = searchQuery.toLowerCase().trim();
@@ -48,52 +64,8 @@ const SearchBar = ({ setLocationResult }) => {
 
   }, [searchQuery]);
 
-  const fetchLocationData = async (searchValue) => {
-
-    if (controllRef.current) controllRef.current.abort();
-    controllRef.current = new AbortController();
-    const { signal } = controllRef.current;
-
-    try {
-
-      const response = await fetch("http://localhost:3002/api/host", { signal });
-      const data = await response.json();
-
-      const uniqueState = new Set(data.map((loc) => loc.state.toLowerCase()));
-
-      if (uniqueState.has(searchValue)) {
-        const stateLocation = data.filter((loc) =>
-          loc.state.toLowerCase() === searchValue
-        )
-        setStateLocation(stateLocation);
-        setLocationResult([{ locationName: "", state: searchValue }]);
-        return;
-      }
-
-      const uniqueLocation = data.map((loc) => ({
-        locationName: loc.locationName,
-        state: loc.state,
-        locationId: loc._id,
-      }));
-
-      const filteredLocation = uniqueLocation.filter((loc) => {
-
-        const searchLocationName = loc.locationName.toLowerCase().includes(searchValue);
-        const searchState = loc.state.toLowerCase().includes(searchValue);
-        return searchLocationName || searchState;
-      });
-
-      setLocationResult(filteredLocation);
-    } catch (error) {
-      if (error.name !== "AbortError") {
-        console.log(error);
-      }
-    }
-  };
-
   const handleChange = (value) => {
     setSearchQuery(value);
-    // fetchLocationData(value);
   };
 
   return (

@@ -5,10 +5,6 @@ import { NavLink } from "react-router-dom";
 const SearchContainer = () => {
   const [locationResult, setLocationResult] = useState([]);
 
-  const stateHandle = () => {
-    console.log("State is Searched")
-  }
-
   return (
     <>
       <div className="mb-5 max-w-lg mx-auto">
@@ -27,7 +23,7 @@ const SearchContainer = () => {
                   <div className="flex items-center">
                     <svg
                       className={`w-5 h-5 mr-3 ${loc.locationName ? 'text-blue-500' : 'text-purple-500'}`}
-                      fill="none"
+                      fill="none" 
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >

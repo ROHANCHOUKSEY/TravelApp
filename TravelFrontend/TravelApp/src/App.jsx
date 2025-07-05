@@ -11,7 +11,6 @@ const App = () => {
   useEffect(() => {
     document.querySelector("html").classList.remove("light", "dark");
     document.querySelector("html").classList.add(mode);
-    console.log("Appmode", mode);
   }, [mode]);
 
   return (

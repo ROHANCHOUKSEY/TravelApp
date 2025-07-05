@@ -1,23 +1,34 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AppContext } from '../../CreateContext/Context';
 import { FaGlobe, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const SearchStateLocations = () => {
-    const { stateLocation, isLoggined } = useContext(AppContext);
+    const { setStateLocation, stateLocation, isLoggined, setStateName, stateName } = useContext(AppContext);
+    const { stateName: urlStateName } = useParams();
 
-    console.log("stateLocation", stateLocation);
+    useEffect(() => {
+        const fetchStateLocations = async () => {
+            const response = await fetch("http://localhost:3002/api/host");
+            const data = await response.json();
+            const filterState = data.filter((loc) => loc.state.toLowerCase() === urlStateName.toLowerCase());
+            setStateName(urlStateName.toUpperCase());
+            setStateLocation(filterState);
+        }
+        fetchStateLocations();
+    }, [urlStateName])
 
     return (
         <>
             <div className='relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300'>
+                <h1 className='m-2 text-center text-2xl font-bold dark:text-white'>EXPLORE {stateName}</h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {stateLocation.map((location) => (
                         <div
-                            key={location.id}
+                            key={location._id}
                             className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
                         >
-                            {/* Location Image */}
+                            {/* Location Image */} 
                             <div className="relative h-48 overflow-hidden">
                                 <img
                                     src={location.image[0]}

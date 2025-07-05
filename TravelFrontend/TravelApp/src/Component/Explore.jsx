@@ -15,7 +15,6 @@ const Explore = () => {
     async function fetchLocation() {
       try {
         const response = await locationFromServer();
-        console.log("Explore Response", response);
         setLocationLists(response);
       } catch (error) {
         console.log("All location is not fetch", error);
@@ -34,10 +33,11 @@ const Explore = () => {
           Explore breathtaking destinations and hidden gems across our beautiful
           country
         </p>
-      </div> 
+      </div>
 
       {/* Search Bar */}
-      <SearchContainer/>
+      {isLoggined ? <SearchContainer /> : ""}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (
           <div
