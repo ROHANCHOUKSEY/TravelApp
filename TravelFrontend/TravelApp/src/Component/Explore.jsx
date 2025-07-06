@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../CreateContext/Context";
 import { locationFromServer } from "../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
@@ -11,6 +11,7 @@ const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =
     useContext(AppContext);
 
+
   useEffect(() => {
     async function fetchLocation() {
       try {
@@ -22,6 +23,35 @@ const Explore = () => {
     }
     fetchLocation();
   }, []);
+
+  const suffleCard = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  const [locationCards, setLocationCards] = useState([]);
+
+  useEffect(() => {
+    if (locationLists && locationLists.length) {
+      const isPageReload =
+        window.performance.getEntriesByType("navigation")[0]?.type === "reload";
+
+      if (isPageReload) {
+        const shuffledCards = suffleCard(locationLists);
+        setLocationCards(shuffledCards);
+        console.log("Shuffled because page was reloaded manually");
+      } else {
+        setLocationCards(locationLists);
+        console.log("Used original order because it was not a page reload");
+      }
+    }
+  }, [locationLists]); 
+
+
 
   return (
     <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300">
@@ -39,7 +69,7 @@ const Explore = () => {
       {isLoggined ? <SearchContainer /> : ""}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {locationLists.map((location) => (
+        {locationCards.map((location) => (
           <div
             key={location.id}
             className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
