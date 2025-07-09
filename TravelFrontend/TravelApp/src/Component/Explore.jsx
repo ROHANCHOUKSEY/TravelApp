@@ -36,20 +36,17 @@ const Explore = () => {
   const [locationCards, setLocationCards] = useState([]);
 
   useEffect(() => {
-    if (locationLists && locationLists.length) {
-      const isPageReload =
-        window.performance.getEntriesByType("navigation")[0]?.type === "reload";
-
-      if (isPageReload) {
-        const shuffledCards = suffleCard(locationLists);
-        setLocationCards(shuffledCards);
-        console.log("Shuffled because page was reloaded manually");
-      } else {
-        setLocationCards(locationLists);
-        console.log("Used original order because it was not a page reload");
-      }
+    const isPageReload = window.performance.getEntriesByType("navigation")[0]?.type === "reload";
+    if (isPageReload && locationLists && locationLists.length) {
+      const shuffledCards = suffleCard(locationLists);
+      setLocationCards(shuffledCards);
+      console.log("Shuffled because page was reloaded manually");
+    }else {
+      setLocationCards(locationLists);
+      console.log("Used original order because it was not a page reload");
     }
-  }, [locationLists]); 
+
+  }, [locationLists]);
 
 
 
