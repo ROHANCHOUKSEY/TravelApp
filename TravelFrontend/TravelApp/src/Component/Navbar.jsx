@@ -111,9 +111,9 @@ const Navbar = () => {
     getScreenMode();
   }, []);
 
-  if (loading) {
-    return null;
-  }
+  // if (loading) {
+  //   return null;
+  // }
 
   return (
     <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10 ">
@@ -143,179 +143,177 @@ const Navbar = () => {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-2">
-            {isLoggined ? (
-              userType === "guest" ? (
+            {loading ? (<>
+              <div className="flex space-x-4">
+                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+              </div>
+            </>) :
+              isLoggined ? (
+                userType === "guest" ? (
+                  <>
+                    <NavLink to="/" className={getNavlinkClass}>
+                      Discover
+                    </NavLink>
+                    <NavLink to="/stateLocation" className={getNavlinkClass}>
+                      By State
+                    </NavLink>
+                    <NavLink to="/location" className={getNavlinkClass}>
+                      Top Picks
+                    </NavLink>
+                    <NavLink to="/favourites" className={getNavlinkClass}>
+                      Favourites
+                    </NavLink>
+
+                    <div className="relative ml-2" ref={dropdownRef}>
+                      <button
+                        onClick={toggleDropdown}
+                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
+                      >
+                        <CircleUserRound className="h-5 w-5 mr-1" />
+                        <span className="text-sm font-medium">
+                          {userName} {userlastName}
+                        </span>
+                        <ChevronDown
+                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${dropDown ? "transform rotate-180" : ""
+                            }`}
+                        />
+                      </button>
+
+                      {dropDown && (
+                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                          <div className="py-1">
+                            <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                              <p className="font-medium">Welcome back!</p>
+                              <p className="truncate">
+                                {userName} {userlastName}
+                              </p>
+                            </div>
+
+                            {/* Dark/Light Mode Toggle */}
+                            <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
+                              <div className="flex items-center">
+                                {mode === "dark" ? (
+                                  <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                                ) : (
+                                  <Sun className="h-4 w-4 mr-2 text-indigo-600" />
+                                )}
+                                <span>
+                                  {mode === "dark" ? "Dark" : "Light"} Mode
+                                </span>
+                              </div>
+                              <label className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  className="sr-only peer"
+                                  checked={mode === "dark"}
+                                  onChange={handleToogle}
+                                />
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                              </label>
+                            </div>
+
+                            <button
+                              onClick={handleLogout}
+                              className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
+                            >
+                              <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                              Sign out
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <NavLink to="/" className={getNavlinkClass}>
+                      Explore
+                    </NavLink>
+                    <NavLink to="/host" className={getNavlinkClass}>
+                      Host
+                    </NavLink>
+                    <NavLink to="/addLocation" className={getNavlinkClass}>
+                      Add Location
+                    </NavLink>
+
+                    <div className="relative ml-2" ref={dropdownRef}>
+                      <button
+                        onClick={toggleDropdown}
+                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
+                      >
+                        <CircleUserRound className="h-5 w-5 mr-1" />
+                        <span className="text-sm font-medium">
+                          {userName} {userlastName}
+                        </span>
+                        <ChevronDown
+                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${dropDown ? "transform rotate-180" : ""
+                            }`}
+                        />
+                      </button>
+
+                      {dropDown && (
+                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                          <div className="py-1">
+                            <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
+                              <p className="font-medium">Host Dashboard</p>
+                              <p className="truncate">
+                                {userName} {userlastName}
+                              </p>
+                            </div>
+                            {/* Dark/Light Mode Toggle */}
+                            <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
+                              <div className="flex items-center">
+                                {mode === "dark" ? (
+                                  <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                                ) : (
+                                  <Sun className="h-4 w-4 mr-2 text-indigo-600" />
+                                )}
+                                <span>
+                                  {mode === "dark" ? "Dark" : "Light"} Mode
+                                </span>
+                              </div>
+                              <label className="relative inline-flex items-center cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  className="sr-only peer"
+                                  checked={mode === "dark"}
+                                  onChange={handleToogle}
+                                />
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                              </label>
+                            </div>
+                            <button
+                              onClick={handleLogout}
+                              className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
+                            >
+                              <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                              Sign out
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
+                )
+              ) : (
                 <>
                   <NavLink to="/" className={getNavlinkClass}>
                     Discover
                   </NavLink>
-                  <NavLink to="/stateLocation" className={getNavlinkClass}>
-                    By State
-                  </NavLink>
-                  <NavLink to="/location" className={getNavlinkClass}>
-                    Top Picks
-                  </NavLink>
-                  <NavLink to="/favourites" className={getNavlinkClass}>
-                    Favourites
-                  </NavLink>
-
-                  <div className="relative ml-2" ref={dropdownRef}>
-                    <button
-                      onClick={toggleDropdown}
-                      className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
-                    >
-                      <CircleUserRound className="h-5 w-5 mr-1" />
-                      <span className="text-sm font-medium">
-                        {userName} {userlastName}
-                      </span>
-                      <ChevronDown
-                        className={`h-4 w-4 ml-1 transition-transform duration-200 ${
-                          dropDown ? "transform rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {dropDown && (
-                      <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="py-1">
-                          <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                            <p className="font-medium">Welcome back!</p>
-                            <p className="truncate">
-                              {userName} {userlastName}
-                            </p>
-                          </div>
-
-                          {/* Dark/Light Mode Toggle */}
-                          <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
-                            <div className="flex items-center">
-                              {mode === "dark" ? (
-                                <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                              ) : (
-                                <Sun className="h-4 w-4 mr-2 text-indigo-600" />
-                              )}
-                              <span>
-                                {mode === "dark" ? "Dark" : "Light"} Mode
-                              </span>
-                            </div>
-                            <label className="relative inline-flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                className="sr-only peer"
-                                checked={mode === "dark"}
-                                onChange={handleToogle}
-                              />
-                              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
-                            </label>
-                          </div>
-
-                          <button
-                            onClick={handleLogout}
-                            className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
-                          >
-                            <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                            Sign out
-                          </button>
-                        </div>
-                      </div>
-                    )}
+                  <div className="hidden md:flex items-center space-x-4 ml-6">
+                    <NavLink to="/login" className={getNavlinkClass}>
+                      Login
+                    </NavLink>
+                    <NavLink to="/signUp" className={getNavlinkClass}>
+                      Sign Up
+                    </NavLink>
                   </div>
                 </>
-              ) : (
-                <>
-                  <NavLink to="/" className={getNavlinkClass}>
-                    Explore
-                  </NavLink>
-                  <NavLink to="/host" className={getNavlinkClass}>
-                    Host
-                  </NavLink>
-                  <NavLink to="/addLocation" className={getNavlinkClass}>
-                    Add Location
-                  </NavLink>
-
-                  <div className="relative ml-2" ref={dropdownRef}>
-                    <button
-                      onClick={toggleDropdown}
-                      className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
-                    >
-                      <CircleUserRound className="h-5 w-5 mr-1" />
-                      <span className="text-sm font-medium">
-                        {userName} {userlastName}
-                      </span>
-                      <ChevronDown
-                        className={`h-4 w-4 ml-1 transition-transform duration-200 ${
-                          dropDown ? "transform rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    {dropDown && (
-                      <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                        <div className="py-1">
-                          <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                            <p className="font-medium">Host Dashboard</p>
-                            <p className="truncate">
-                              {userName} {userlastName}
-                            </p>
-                          </div>
-                          {/* Dark/Light Mode Toggle */}
-                          <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
-                            <div className="flex items-center">
-                              {mode === "dark" ? (
-                                <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                              ) : (
-                                <Sun className="h-4 w-4 mr-2 text-indigo-600" />
-                              )}
-                              <span>
-                                {mode === "dark" ? "Dark" : "Light"} Mode
-                              </span>
-                            </div>
-                            <label className="relative inline-flex items-center cursor-pointer">
-                              <input
-                                type="checkbox"
-                                className="sr-only peer"
-                                checked={mode === "dark"}
-                                onChange={handleToogle}
-                              />
-                              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
-                            </label>
-                          </div>
-                          <button
-                            onClick={handleLogout}
-                            className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
-                          >
-                            <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                            Sign out
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )
-            ) : (
-              <>
-                <NavLink to="/" className={getNavlinkClass}>
-                  Discover
-                </NavLink>
-                <div className="hidden md:flex items-center space-x-4 ml-6">
-                  <NavLink to="/login" className={getNavlinkClass}>
-                    Login
-                  </NavLink>
-                  <NavLink to="/signUp" className={getNavlinkClass}>
-                    Sign Up
-                  </NavLink>
-                  {/* <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      className="sr-only peer"
-                      checked={mode === "dark"}
-                      onChange={handleToogle}
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
-                  </label> */}
-                </div>
-              </>
-            )}
+              )}
           </div>
 
           {/* Mobile menu button */}

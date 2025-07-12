@@ -49,7 +49,6 @@ export const ContextProvider = (props) => {
         }
 
         const modeRes = await getsessionmode();
-        // console.log("modeRes", modeRes);
         if (modeRes === "dark") {
           darkMode();
         } else if (modeRes === "light") {
@@ -66,7 +65,6 @@ export const ContextProvider = (props) => {
     };
 
     checkLoginStatus();
-    console.log(isLoggined);
   }, [isLoggined, mode]);
 
   return (
