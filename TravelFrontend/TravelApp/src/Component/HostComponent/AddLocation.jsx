@@ -257,7 +257,7 @@ const AddLocation = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full py-3 px-4 rounded-lg font-medium text-white bg-gradient-to-r from-blue-600 to-indigo-700 dark:from-indigo-700 dark:to-indigo-800 hover:from-blue-700 hover:to-indigo-800 dark:hover:from-indigo-600 dark:hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-indigo-500 transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
+              className={`w-full py-3 px-4 rounded-lg font-medium text-white bg-gradient-to-r cursor-pointer from-blue-600 to-indigo-700 dark:from-indigo-700 dark:to-indigo-800 hover:from-blue-700 hover:to-indigo-800 dark:hover:from-indigo-600 dark:hover:to-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-indigo-500 transition-all duration-300 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">

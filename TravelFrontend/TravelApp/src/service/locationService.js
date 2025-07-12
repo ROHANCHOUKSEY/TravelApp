@@ -359,7 +359,7 @@ export const postsessionmode = async (mode) => {
     body: JSON.stringify({ mode }),
   });
   const data = await response.json();
-  console.log("mode data", data);
+  // console.log("mode data", data);
   return data;
 };
 

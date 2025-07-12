@@ -81,7 +81,7 @@ const Navbar = () => {
 
   const handleToogle = async (e) => {
     const modeStatus = e.target.checked;
-    console.log("modeStatus", modeStatus);
+    // console.log("modeStatus", modeStatus);
     const mode = modeStatus ? "dark" : "light";
     try {
       await postsessionmode(mode);
@@ -96,7 +96,7 @@ const Navbar = () => {
       try {
         const res = await getsessionmode();
         // const data = await res.json();
-        console.log("getsessionmode", res);
+        // console.log("getsessionmode", res);
 
         if (res.mode === "dark") {
           darkMode();
@@ -168,10 +168,10 @@ const Navbar = () => {
                       Favourites
                     </NavLink>
 
-                    <div className="relative ml-2" ref={dropdownRef}>
+                    <div className="relative ml-2 " ref={dropdownRef}>
                       <button
                         onClick={toggleDropdown}
-                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
+                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300 cursor-pointer"
                       >
                         <CircleUserRound className="h-5 w-5 mr-1" />
                         <span className="text-sm font-medium">

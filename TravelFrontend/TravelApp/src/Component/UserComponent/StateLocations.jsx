@@ -17,7 +17,7 @@ const StateLocations = () => {
 
         if (data && data.length > 0) {
           const locationsData = data[0];
-          console.log("locationsData", locationsData);
+          // console.log("locationsData", locationsData);
           setStatebaseLocation(locationsData);
 
           // Verify the data structure and set first valid state
