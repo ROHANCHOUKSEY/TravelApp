@@ -29,7 +29,7 @@ export const ContextProvider = (props) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const res = await fetch("http://localhost:3002/auth/session", {
+        const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/session`, {
           credentials: "include", // send cookies for session
         });
 
@@ -43,18 +43,16 @@ export const ContextProvider = (props) => {
           setUsertype(data.user.usertype);
           setUsername(data.user.firstname);
           setUserlastname(data.user.lastname);
+          const modeRes = await getsessionmode();
+          if (modeRes === "dark") {
+            darkMode();
+          } else if (modeRes === "light") {
+            lightMode();
+          }
         } else {
           setIsLoggined(false);
           setUser(null);
         }
-
-        const modeRes = await getsessionmode();
-        if (modeRes === "dark") {
-          darkMode();
-        } else if (modeRes === "light") {
-          lightMode();
-        }
-
       } catch (err) {
         console.error("Error checking session:", err);
         setIsLoggined(false);

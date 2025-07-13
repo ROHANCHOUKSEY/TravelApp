@@ -9,7 +9,7 @@ const SearchStateLocations = () => {
 
     useEffect(() => {
         const fetchStateLocations = async () => {
-            const response = await fetch("http://localhost:3002/api/host");
+            const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host`);
             const data = await response.json();
             const filterState = data.filter((loc) => loc.state.toLowerCase() === urlStateName.toLowerCase());
             setStateName(urlStateName.toUpperCase());

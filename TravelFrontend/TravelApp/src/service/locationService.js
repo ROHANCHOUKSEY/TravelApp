@@ -14,26 +14,29 @@ export const savetodb = async ({
   closing,
 }) => {
   try {
-    const response = await fetch("http://localhost:3002/api/host", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        image,
-        locationName,
-        country,
-        state,
-        rating,
-        description,
-        holeDescription,
-        VisitorTips,
-        history,
-        timing,
-        closing,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image,
+          locationName,
+          country,
+          state,
+          rating,
+          description,
+          holeDescription,
+          VisitorTips,
+          history,
+          timing,
+          closing,
+        }),
+      }
+    );
     const newLocation = await response.json();
     return maplocalValueToserviseValue(newLocation);
   } catch (error) {
@@ -44,7 +47,7 @@ export const savetodb = async ({
 export const hostlocation = async () => {
   try {
     const response = await fetch(
-      "http://localhost:3002/api/host/hostLocation",
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/hostLocation`,
       {
         method: "GET",
         credentials: "include",
@@ -62,13 +65,16 @@ export const hostlocation = async () => {
 
 export const locationFromServer = async () => {
   try {
-    const response = await fetch("http://localhost:3002/api/host", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const allLocation = await response.json();
     return allLocation.map(maplocalValueToserviseValue);
   } catch (error) {
@@ -79,7 +85,9 @@ export const locationFromServer = async () => {
 export const stateLocation = async (locationData) => {
   try {
     const response = await fetch(
-      "http://localhost:3002/api/host/stateLocation",
+      `${
+        import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+      }/api/host/stateLocation`,
       {
         method: "POST",
         credentials: "include",
@@ -100,7 +108,9 @@ export const stateLocation = async (locationData) => {
 export const getStateLocation = async () => {
   try {
     const response = await fetch(
-      "http://localhost:3002/api/host/stateLocation",
+      `${
+        import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+      }/api/host/stateLocation`,
       {
         method: "GET",
         credentials: "include",
@@ -119,13 +129,16 @@ export const getStateLocation = async () => {
 
 export const editFromServer = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/edit/${id}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const editLocation = await response.json();
     return maplocalValueToserviseValue(editLocation);
   } catch (error) {
@@ -150,26 +163,29 @@ export const postEditFromServer = async (
   }
 ) => {
   try {
-    const response = await fetch(`http://localhost:3002/api/host/edit/${id}`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        image,
-        locationName,
-        country,
-        state,
-        rating,
-        description,
-        holeDescription,
-        history,
-        VisitorTips,
-        timing,
-        closing,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/edit/${id}`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          image,
+          locationName,
+          country,
+          state,
+          rating,
+          description,
+          holeDescription,
+          history,
+          VisitorTips,
+          timing,
+          closing,
+        }),
+      }
+    );
     const updateLocation = await response.json();
     return maplocalValueToserviseValue(updateLocation);
   } catch (error) {
@@ -178,13 +194,16 @@ export const postEditFromServer = async (
 };
 
 export const deleteFromServer = async (id) => {
-  await fetch(`http://localhost:3002/api/host/${id}`, {
-    method: "DELETE",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  await fetch(
+    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/${id}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
   return id;
 };
 
@@ -193,7 +212,9 @@ export const deleteFromServer = async (id) => {
 export const locationDetails = async (id) => {
   try {
     const response = await fetch(
-      `http://localhost:3002/api/user/details/${id}`,
+      `${
+        import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+      }/api/user/details/${id}`,
       {
         method: "GET",
         credentials: "include",
@@ -211,14 +232,17 @@ export const locationDetails = async (id) => {
 
 export const userFavourite = async (Locationid) => {
   try {
-    const response = await fetch("http://localhost:3002/api/user", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ Locationid }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/user`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Locationid }),
+      }
+    );
     const favouriteLocation = await response.json();
     return maplocalValueToserviseValue(favouriteLocation);
   } catch (error) {
@@ -228,13 +252,16 @@ export const userFavourite = async (Locationid) => {
 
 export const favouriteFromServer = async () => {
   try {
-    const response = await fetch("http://localhost:3002/api/user/favourites", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/user/favourites`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const data = await response.json();
     return data.map(maplocalValueToserviseValue);
   } catch (error) {
@@ -246,7 +273,9 @@ export const favouriteFromServer = async () => {
 export const deleteFromFavourite = async (id) => {
   try {
     const response = await fetch(
-      `http://localhost:3002/api/user/favourites/${id}`,
+      `${
+        import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+      }/api/user/favourites/${id}`,
       {
         method: "DELETE",
         credentials: "include",
@@ -264,7 +293,9 @@ export const deleteFromFavourite = async (id) => {
 
 export const postReview = async (id, text, postuserName, createdAt) => {
   const response = await fetch(
-    `http://localhost:3002/api/user/reviewpost/${id}`,
+    `${
+      import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+    }/api/user/reviewpost/${id}`,
     {
       method: "POST",
       credentials: "include",
@@ -280,7 +311,9 @@ export const postReview = async (id, text, postuserName, createdAt) => {
 
 export const getReview = async (id) => {
   const response = await fetch(
-    `http://localhost:3002/api/user/reviewpost/${id}`,
+    `${
+      import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+    }/api/user/reviewpost/${id}`,
     {
       method: "GET",
       credentials: "include",
@@ -305,22 +338,25 @@ export const signUp = async ({
   terms,
 }) => {
   try {
-    const response = await fetch("http://localhost:3002/auth/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
-        password,
-        confirm_password,
-        usertype,
-        terms,
-      }),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/signup`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email,
+          password,
+          confirm_password,
+          usertype,
+          terms,
+        }),
+      }
+    );
     const newuser = await response.json();
 
     if (!response.ok) {
@@ -334,14 +370,17 @@ export const signUp = async ({
 };
 
 export const loginUser = async ({ email, password, screenMode }) => {
-  const response = await fetch("http://localhost:3002/auth/login", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password, screenMode }),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/login`,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, screenMode }),
+    }
+  );
   const user = await response.json();
   if (!response.ok) {
     throw user;
@@ -350,29 +389,46 @@ export const loginUser = async ({ email, password, screenMode }) => {
 };
 
 export const postsessionmode = async (mode) => {
-  const response = await fetch("http://localhost:3002/auth/screenmode", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ mode }),
-  });
+  const response = await fetch(
+    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/screenmode`,
+    {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ mode }),
+    }
+  );
   const data = await response.json();
   // console.log("mode data", data);
   return data;
 };
 
 export const getsessionmode = async () => {
-  const response = await fetch("http://localhost:3002/auth/screenmode", {
-    method: "GET",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = response.json();
-  return data;
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/screenmode`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        }, 
+      }
+    );
+    
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("Backend error:", errorData);
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    return await response.json();
+  } catch (error) {
+    console.log("Error", error);
+    throw error; // Re-throw to handle in the component
+  }
 };
 
 const maplocalValueToserviseValue = (serviseItem) => {

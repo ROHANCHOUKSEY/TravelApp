@@ -16,7 +16,7 @@ const SearchBar = ({ setLocationResult }) => {
 
     try {
 
-      const response = await fetch("http://localhost:3002/api/host", { signal });
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host`, { signal });
       const data = await response.json();
 
       const uniqueState = new Set(data.map((loc) => loc.state.toLowerCase()));

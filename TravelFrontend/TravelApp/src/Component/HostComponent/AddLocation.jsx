@@ -42,9 +42,9 @@ const AddLocation = () => {
       const formData = new FormData();
       Array.from(newLocationPlace.image).forEach((file) => {
         formData.append("images", file);
-      });
+      }); 
 
-      const res = await fetch("http://localhost:3002/api/upload", {
+      const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/upload`, {
         method: "POST",
         body: formData,
       });

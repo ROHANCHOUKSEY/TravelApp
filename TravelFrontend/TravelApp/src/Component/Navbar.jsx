@@ -43,7 +43,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://localhost:3002/auth/logout", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });
@@ -91,30 +91,39 @@ const Navbar = () => {
     }
   };
 
-  useEffect(() => {
-    async function getScreenMode() {
-      try {
-        const res = await getsessionmode();
-        // const data = await res.json();
-        // console.log("getsessionmode", res);
+  // useEffect(() => {
+  //   async function getScreenMode() {
+  //     try {
+  //       const res = await getsessionmode();
+  //       // const data = await res.json();
+  //       console.log("getsessionmode", res);
 
-        if (res.mode === "dark") {
-          darkMode();
-        } else {
-          lightMode();
-        }
-      } catch (err) {
-        console.error("Failed to get screen mode", err);
-      }
-    }
+  //       if (res.mode === "dark") {
+  //         darkMode();
+  //       } else {
+  //         lightMode();
+  //       }
+  //     } catch (err) {
+  //       console.error("Failed to get screen mode", err);
+  //     }
+  //   }
 
-    getScreenMode();
-  }, []);
+  //   getScreenMode();
+  // }, []);
 
   // if (loading) {
   //   return null;
   // }
 
+  useEffect(() => {
+    // Only change mode if already set in context
+    if (mode === "dark") {
+      darkMode();
+    } else if (mode === "light") {
+      lightMode();
+    }
+  }, [mode]);
+ 
   return (
     <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

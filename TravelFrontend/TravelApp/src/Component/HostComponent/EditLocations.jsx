@@ -114,7 +114,7 @@ const EditLocations = () => {
   };
 
   const editButton = async () => {
-    let imageUrls = [];
+    let imageUrls = []; 
 
     if (
       editLocations.editimage.length > 0 &&
@@ -125,7 +125,7 @@ const EditLocations = () => {
         formData.append("images", file);
       });
       try {
-        const res = await fetch("http://localhost:3002/api/upload", {
+        const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/upload`, {
           method: "POST",
           body: formData,
         });
