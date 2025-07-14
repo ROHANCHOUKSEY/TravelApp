@@ -4,6 +4,8 @@ const locationState = require("../Models/State_CountryLocation");
 // const { default: mongoose } = require("mongoose");
 const path = require("path");
 const fs = require("fs");
+const { error } = require("console");
+const cloudinary = require("cloudinary").v2;
 
 exports.postLocation = async (req, res, next) => {
   // console.log(req.body);
@@ -259,10 +261,10 @@ exports.postEditLocation = async (req, res, next) => {
     const { id } = req.params;
 
     const oldLocation = await TravelLocations.findById(id);
-    if (!oldLocation)
+    if (!oldLocation) {
       return res.status(404).json({ message: "Location not found" });
+    }
 
-    console.log("updateLocationId", id);
     const {
       image,
       locationName,
@@ -277,47 +279,62 @@ exports.postEditLocation = async (req, res, next) => {
       closing,
     } = req.body;
 
-    // const imgurl = oldLocation.image;
+    // Prepare update object
+    const updatedFields = {
+      image,
+      locationName,
+      country,
+      state,
+      rating,
+      description,
+      holeDescription,
+      history,
+      VisitorTips,
+      timing,
+      closing,
+    };
 
-    let newImagePath; 
-    if (req.file) {
-      newImagePath = `/uploads/${req.file.filename}`;
-      updateData.image = newImagePath;
+    // If new image uploaded via Cloudinary
+    if (req.files && req.files.length > 0) {
+      if (oldLocation.image && Array.isArray(oldLocation.image)) {
+        for (const imageUrl of oldLocation.image) {
+          if (typeof imageUrl === "string") {
+            const urlparts = imageUrl.split("/");
+            const filenameWithExtension = urlparts[urlparts.length - 1];
+            const public_id = filenameWithExtension.split(".")[0];
+            console.log("public_id", public_id);
+
+            await cloudinary.uploader.destroy(
+              `travelApp/${public_id}`,
+              (error, result) => {
+                if (error) {
+                  console.error(
+                    "Failed to delete image from Cloudinary:",
+                    error
+                  );
+                } else {
+                  console.log("Image deleted from Cloudinary:", result);
+                }
+              }
+            );
+          }
+        }
+      }
+
+      updatedFields.image = req.files.map((file) => file.path);
     }
 
-    const updateLocation = await TravelLocations.findByIdAndUpdate(
+    // Perform the update
+    const updatedLocation = await TravelLocations.findByIdAndUpdate(
       id,
-      {
-        image,
-        locationName,
-        country,
-        state,
-        rating,
-        description,
-        holeDescription,
-        history,
-        VisitorTips,
-        timing,
-        closing,
-      }, 
+      updatedFields,
       { new: true }
     );
-    await updateLocation.save();
 
-    if (newImagePath && oldLocation.image) {
-      const oldFileName = (Array.isArray(oldLocation.image) ? oldLocation.image[0] : oldLocation.image)
-                            .split('/').pop();
-      const oldFilePath = path.join(__dirname, '../uploads', oldFileName);
-
-      fs.unlink(oldFilePath, (err) => {
-        if (err) console.log('Could not remove old image:', err.message);
-        else     console.log('Old image removed');
-      });
-    }
-
-    res.status(200).json(updateLocation);
+    res.status(200).json(updatedLocation);
   } catch (error) {
     console.log("Edit data is not post in database", error);
+    res.status(500).json({ message: "Something went wrong" });
   }
 };
 
@@ -342,19 +359,27 @@ exports.deleteLocation = async (req, res, next) => {
       await User.save();
     }
 
-    if (deletedLocation.image) {
-      const imageUrl = deletedLocation.image;
-      const filename = imageUrl[0].split("/").pop();
-      const filePath = path.join(__dirname, "../uploads", filename);
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting image:", filename, err);
-        } else {
-          console.log("Deleted image:", filename);
-        }
-      });
-    }
+    if (deletedLocation.image && Array.isArray(deletedLocation.image)) {
+      for (const imageUrl of deletedLocation.image) {
+        if (typeof imageUrl === "string") {
+          const urlparts = imageUrl.split("/");
+          const filenameWithExtension = urlparts[urlparts.length - 1];
+          const public_id = filenameWithExtension.split(".")[0];
+          console.log("public_id", public_id);
 
+          await cloudinary.uploader.destroy(
+            `travelApp/${public_id}`,
+            (error, result) => {
+              if (error) {
+                console.error("Failed to delete image from Cloudinary:", error);
+              } else {
+                console.log("Image deleted from Cloudinary:", result);
+              }
+            }
+          );
+        }
+      }
+    }
     res.status(200).json({ _id: id });
   } catch (error) {
     console.log("Data is not deleted from database", error);

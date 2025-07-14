@@ -9,7 +9,7 @@ const locationSchema = new mongoose.Schema({
   goa: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
   gujarat: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
   haryana: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
-  himachalpradesh: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
+  himachalpradesh: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }], 
   jharkhand: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
   karnataka: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }], 
   kerala: [{ type: mongoose.Schema.Types.ObjectId, ref: "TravelLocation" }],
