@@ -42,8 +42,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    credentials: true,
+    origin: process.env.FRONTEND_URL,
+    credentials: true, 
   })
 );
 
@@ -79,13 +79,24 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
   res.status(200).json({ imageUrls: fileUrls });
 });
 
+// mongoose
+//   .connect(process.env.MONGO_URI)
+//   .then(() => {
+//     app.listen(process.env.PORT, () => {
+//       console.log("Server Start At Port:", process.env.PORT);
+//     });
+//   })
+//   .catch((error) => {
+//     console.log("Mongoose is not connected", error);
+//   });
+
 mongoose
   .connect(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(process.env.PORT, () => {
-      console.log("Server Start At Port:", process.env.PORT);
-    });
-  })
-  .catch((error) => {
-    console.log("Mongoose is not connected", error);
-  });
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.log("Mongoose is not connected", err));
+
+app.get("/", (req, res) => {
+  res.send("Backend is live!");
+});
+ 
+module.exports = app;
