@@ -43,7 +43,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
-    credentials: true, 
+    credentials: true,
   })
 );
 
@@ -74,9 +74,13 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
     return res.status(400).json({ error: "No files uploaded" });
   }
 
-  const fileUrls = req.files.map(file => file.path); // file.path is Cloudinary URL
+  const fileUrls = req.files.map((file) => file.path); // file.path is Cloudinary URL
 
   res.status(200).json({ imageUrls: fileUrls });
+});
+
+app.listen(process.env.PORT, () => {
+  console.log("Server Start At Port:", process.env.PORT);
 });
 
 // mongoose
@@ -98,5 +102,5 @@ mongoose
 app.get("/", (req, res) => {
   res.send("Backend is live!");
 });
- 
-module.exports = app;
+
+// module.exports = app;
