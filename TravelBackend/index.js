@@ -39,7 +39,7 @@ const store = new mongodbStore({
 });
 
 app.use(express.json());
-
+ 
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
