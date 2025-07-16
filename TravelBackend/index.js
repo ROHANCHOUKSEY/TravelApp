@@ -11,7 +11,7 @@ require("dotenv").config();
 
 const hostRouter = require("./Router/HostRouter");
 const userRouter = require("./Router/UserRouter");
-const authRouter = require("./Router/AuthRouter");
+const authRouter = require("./Router/AuthRouter"); 
 
 const app = express();
 
