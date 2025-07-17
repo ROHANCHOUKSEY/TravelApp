@@ -39,7 +39,7 @@ const store = new mongodbStore({
 });
 
 app.use(express.json());
- 
+
 app.use(
   cors({
     origin: process.env.FRONTEND_URL,
@@ -79,28 +79,22 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
   res.status(200).json({ imageUrls: fileUrls });
 });
 
-app.listen(process.env.PORT, () => {
-  console.log("Server Start At Port:", process.env.PORT);
-});
-
-// mongoose
-//   .connect(process.env.MONGO_URI)
-//   .then(() => {
-//     app.listen(process.env.PORT, () => {
-//       console.log("Server Start At Port:", process.env.PORT);
-//     });
-//   })
-//   .catch((error) => { 
-//     console.log("Mongoose is not connected", error);
-//   });
-
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log("Mongoose is not connected", err));
-
+// app.listen(process.env.PORT, () => {
+//   console.log("Server Start At Port:", process.env.PORT);
+// });
+ 
 app.get("/", (req, res) => {
   res.send("Backend is live!");
 });
 
-module.exports = app;
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT || 3002, () => {
+      console.log("Server Start At Port:", process.env.PORT || 3002);
+    });
+  })
+  .catch((error) => {
+    console.log("Mongoose is not connected", error);
+  });
+ 
