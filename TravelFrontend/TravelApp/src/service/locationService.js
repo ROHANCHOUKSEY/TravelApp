@@ -57,6 +57,7 @@ export const hostlocation = async () => {
       }
     );
     const data = await response.json();
+    console.log("hostLocationData: ",data);
     return data.map(maplocalValueToserviseValue);
   } catch (error) {
     console.log("host location is not fetch: ", error);
