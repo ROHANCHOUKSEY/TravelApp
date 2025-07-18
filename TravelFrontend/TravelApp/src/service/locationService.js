@@ -416,7 +416,7 @@ export const getsessionmode = async () => {
           "Content-Type": "application/json",
         }, 
       }
-    );
+    ); 
     
     if (!response.ok) {
       const errorData = await response.json();

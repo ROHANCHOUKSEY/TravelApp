@@ -64,7 +64,7 @@ export const ContextProvider = (props) => {
     };
 
     checkLoginStatus();
-  }, [isLoggined, mode]);
+  }, []);
 
   return (
     <AppContext.Provider
