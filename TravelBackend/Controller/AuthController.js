@@ -123,7 +123,7 @@ exports.postLogin = async (req, res, next) => {
         user: req.session.user,
         isLoggined: true,
       });
-  } catch (error) {
+      } catch (error) {
     console.log("user is not login", error);
   }
 };
