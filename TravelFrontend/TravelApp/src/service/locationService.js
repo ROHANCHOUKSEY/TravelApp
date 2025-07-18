@@ -370,22 +370,33 @@ export const signUp = async ({
 };
 
 export const loginUser = async ({ email, password, screenMode }) => {
-  const response = await fetch(
-    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/login`,
-    {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password, screenMode }),
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/login`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password, screenMode }),
+      }
+    );
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Login failed");
     }
-  );
-  const user = await response.json();
-  if (!response.ok) {
-    throw user;
+
+    const user = await response.json();
+    if (!response.ok) {
+      throw user;
+    }
+    return user;
+  } catch (error) {
+    console.error("Login error:", error);
+    throw error;
   }
-  return user;
 };
 
 export const postsessionmode = async (mode) => {
@@ -414,16 +425,16 @@ export const getsessionmode = async () => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        }, 
+        },
       }
-    ); 
-    
+    );
+
     if (!response.ok) {
       const errorData = await response.json();
       console.error("Backend error:", errorData);
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.log("Error", error);
