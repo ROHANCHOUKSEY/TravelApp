@@ -62,7 +62,7 @@ export const ContextProvider = (props) => {
         setLoading(false);
       }
     };
-
+    console.log("isLoggined: ", isLoggined);
     checkLoginStatus();
   }, [isLoggined, mode]);
 
