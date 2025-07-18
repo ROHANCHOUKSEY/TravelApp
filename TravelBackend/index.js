@@ -42,8 +42,12 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: [
+      "https://travelapp-frontend-4b88.onrender.com",
+      "http://localhost:5173", // For local dev
+    ],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
@@ -56,9 +60,9 @@ app.use(
     saveUninitialized: false,
     store: store,
     cookie: {
-      secure: false,
-      httpOnly: true,
-      sameSite: "lax",
+      secure: true,
+      httpOnly: true, 
+      sameSite: "none",
     },
   })
 );
@@ -82,7 +86,7 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
 // app.listen(process.env.PORT, () => {
 //   console.log("Server Start At Port:", process.env.PORT);
 // });
- 
+
 app.get("/", (req, res) => {
   res.send("Backend is live!");
 });
@@ -97,4 +101,3 @@ mongoose
   .catch((error) => {
     console.log("Mongoose is not connected", error);
   });
- 
