@@ -8,10 +8,10 @@
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "Rohan Chouksey", 
+  "author": "Rohan Chouksey",
   "license": "ISC",
   "engines": {
-    "node": "18.x" 
+    "node": "18.x"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -26,6 +26,7 @@
     "mongoose": "^8.15.0",
     "multer": "^2.0.1",
     "multer-storage-cloudinary": "^4.0.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "readable-stream": "^3.6.2"
   }
 }
