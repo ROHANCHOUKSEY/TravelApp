@@ -2,13 +2,13 @@
   "name": "travelbackend",
   "version": "1.0.0",
   "description": "Travel App",
-  "main": "api/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
-  "author": "Rohan Chouksey",
+  "author": "Rohan Chouksey", 
   "license": "ISC",
   "engines": {
     "node": "18.x" 
