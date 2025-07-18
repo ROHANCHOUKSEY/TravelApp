@@ -91,6 +91,7 @@ exports.postSignUp = [
     }
   },
 ];
+
 exports.postLogin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -115,10 +116,10 @@ exports.postLogin = async (req, res, next) => {
 
     await req.session.save();
 
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json({ message: "Login successful", user: req.session.user, isLoggined: true });
   } catch (error) {
     console.log("user is not login", error);
-  }
+  } 
 };
 
 exports.postScreenmode = async (req, res, next) => {
