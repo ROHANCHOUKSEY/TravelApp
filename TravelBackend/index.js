@@ -42,7 +42,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL || "https://travelapp-frontend-4b88.onrender.com"],
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -50,18 +50,16 @@ app.use(
 
 app.use("/uploads", express.static("uploads"));
 
-const isProduction = process.env.NODE_ENV === "production";
-
 app.use(
-  session({
+  session({ 
     secret: "rohanchouksey",
     resave: false,
     saveUninitialized: false,
     store: store,
     cookie: {
-      secure: isProduction,
+      secure: false,
       httpOnly: true,
-      sameSite: isProduction ? "none" : "lax",
+      sameSite: "lax",
     },
   })
 );
