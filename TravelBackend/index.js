@@ -40,21 +40,11 @@ const store = new mongodbStore({
 
 app.use(express.json());
 
-const allowedOrigins = [
-  "http://localhost:5173",
-  "https://travelapp-frontend-4b88.onrender.com",
-];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: [process.env.FRONTEND_URL || "https://travelapp-frontend-4b88.onrender.com"],
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
