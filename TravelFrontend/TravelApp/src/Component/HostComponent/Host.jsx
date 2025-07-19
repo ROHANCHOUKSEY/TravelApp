@@ -8,7 +8,7 @@ const Host = () => {
 
   const id = useParams();
 
-  console.log("locationLists: ", typeof(locationLists));
+  console.log("locationLists: ", typeof (locationLists));
 
   useEffect(() => {
     async function fetchLocation() {
@@ -41,7 +41,7 @@ const Host = () => {
           <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
             Locations You've Shared
           </h1>
-            <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto dark:text-white">
+          <p className="text-lg text-center text-gray-600 max-w-2xl mx-auto dark:text-white">
             These are the destinations you've added to the platform. Thank you for helping travelers discover new places and experiences.
           </p>
         </div>
@@ -56,7 +56,11 @@ const Host = () => {
             {/* Location Image */}
             <div className="relative h-48 overflow-hidden">
               <img
-                src={location.image[0]}
+                src={
+                  Array.isArray(location.image) && location.image.length > 0
+                    ? location.image[0]
+                    : "https://via.placeholder.com/400x300?text=Image+Not+Available"
+                }
                 alt={location.locationName}
                 className="w-full h-full object-cover"
                 onError={(e) => {
@@ -64,6 +68,7 @@ const Host = () => {
                     "https://via.placeholder.com/400x300?text=Image+Not+Available";
                 }}
               />
+
               <div className="absolute top-2 right-2 bg-white bg-opacity-80 px-2 py-1 rounded-full flex items-center">
                 <FaStar className="text-yellow-500 mr-1" />
                 <span className="font-semibold text-gray-800">
