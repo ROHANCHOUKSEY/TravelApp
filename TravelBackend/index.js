@@ -50,19 +50,21 @@ app.use(
 
 app.use("/uploads", express.static("uploads"));
 
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
-  session({ 
+  session({
     secret: "rohanchouksey",
     resave: false,
     saveUninitialized: false,
     store: store,
     cookie: {
-      secure: false,
+      secure: isProduction,
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: isProduction ? "none" : "lax",
     },
   })
-); 
+);
 
 app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
