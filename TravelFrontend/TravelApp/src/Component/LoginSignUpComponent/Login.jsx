@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { FaUser, FaLock, FaSignInAlt } from "react-icons/fa";
-import { AppContext } from "../../CreateContext/Context";
 import { loginUser } from "../../service/locationService";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const Login = () => {
   const [password, setPassword] = useState(true);

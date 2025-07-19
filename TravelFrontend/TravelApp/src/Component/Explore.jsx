@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "../CreateContext/Context";
 import { locationFromServer } from "../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 import { Search } from "lucide-react";
 import SearchBar from "./SearchBar/SearchBar";
 import SearchContainer from "./SearchBar/SearchContainer";
+import { AppContext } from "../CreateContext/AppContext";
 
 const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =

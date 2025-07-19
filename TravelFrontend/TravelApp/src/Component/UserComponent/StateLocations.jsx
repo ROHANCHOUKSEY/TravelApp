@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../CreateContext/Context";
 import { getStateLocation } from "../../service/locationService";
 import { NavLink, useParams } from "react-router-dom";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const StateLocations = () => {
   const { statebaseLocation, setStatebaseLocation } = useContext(AppContext);

@@ -24,6 +24,8 @@ const Host = () => {
     setLocationLists(UpdateList);
   };
 
+  console.log("locationLists2.0: ", locationLists);
+
   return (
     <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
       {locationLists.length === 0 ? (

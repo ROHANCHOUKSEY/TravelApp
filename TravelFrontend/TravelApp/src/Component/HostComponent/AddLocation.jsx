@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { savetodb, stateLocation } from "../../service/locationService";
-import { AppContext } from "../../CreateContext/Context";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const AddLocation = () => {
   const { setLocationLists, setStatebaseLocation, mode } = useContext(AppContext);

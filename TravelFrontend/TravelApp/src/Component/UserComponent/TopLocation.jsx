@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import { AppContext } from "../../CreateContext/Context";
 import {
   locationFromServer,
   userFavourite,
 } from "../../service/locationService";
 import { FaStar, FaMapMarkerAlt, FaGlobe } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const TopLocation = () => {
   const { locationLists, setLocationLists } = useContext(AppContext);

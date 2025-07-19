@@ -18,7 +18,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Review from "./Review/Review";
-import { AppContext } from "../CreateContext/Context";
+import { AppContext } from "../CreateContext/AppContext";
 
 const ViewDetails = () => {
 

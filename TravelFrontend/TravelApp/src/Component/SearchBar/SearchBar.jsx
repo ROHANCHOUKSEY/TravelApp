@@ -1,7 +1,6 @@
 import { Search } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AppContext } from "../../CreateContext/Context";
 
 const SearchBar = ({ setLocationResult }) => {
 

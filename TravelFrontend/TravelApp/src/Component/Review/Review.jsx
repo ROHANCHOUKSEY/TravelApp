@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getReview, postReview } from "../../service/locationService";
 import { useParams } from "react-router-dom";
-import { AppContext } from "../../CreateContext/Context";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const Review = () => {
   const [takeReview, setTakeReview] = useState("");

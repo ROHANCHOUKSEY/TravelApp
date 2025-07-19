@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
-import { AppContext } from '../../CreateContext/Context';
 import { FaGlobe, FaMapMarkerAlt, FaStar } from 'react-icons/fa';
 import { NavLink, useParams } from 'react-router-dom';
+import { AppContext } from '../../CreateContext/AppContext';
 
 const SearchStateLocations = () => {
     const { setStateLocation, stateLocation, isLoggined, setStateName, stateName } = useContext(AppContext);

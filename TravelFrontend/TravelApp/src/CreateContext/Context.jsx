@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import { getsessionmode } from "../service/locationService";
-
-export const AppContext = createContext();
+import { AppContext } from "./AppContext";
+ 
 
 export const ContextProvider = (props) => {
+
   const [locationLists, setLocationLists] = useState([]);
   const [statebaseLocation, setStatebaseLocation] = useState([]);
   const [isLoggined, setIsLoggined] = useState(null);
@@ -38,7 +39,7 @@ export const ContextProvider = (props) => {
  
         const data = await res.json();
 
-        if (data.isLoggined && data.user) {
+        if (data.isLoggined === true && data.user) {
           setIsLoggined(true);
           setUser(data.user);
           setUsertype(data.user.usertype);
@@ -63,8 +64,9 @@ export const ContextProvider = (props) => {
       }
     };
     console.log("isLoggined: ", isLoggined);
+    console.log("userType: ", userType);
     checkLoginStatus();
-  }, []);
+  }, [isLoggined, mode]);
 
   return (
     <AppContext.Provider

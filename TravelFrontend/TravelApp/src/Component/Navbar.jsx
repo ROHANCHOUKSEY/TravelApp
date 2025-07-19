@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { AppContext } from "../CreateContext/Context";
 import { CircleUserRound, ChevronDown, LogOut, User } from "lucide-react";
 import { Sun, Moon } from "lucide-react";
 import {
@@ -8,6 +7,7 @@ import {
   loginUser,
   postsessionmode,
 } from "../service/locationService";
+import { AppContext } from "../CreateContext/AppContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
