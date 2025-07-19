@@ -12,11 +12,19 @@ const Host = () => {
 
   useEffect(() => {
     async function fetchLocation() {
-      const response = await hostlocation();
-      setLocationLists(response);
+      try {
+        const response = await hostlocation();
+        // Ensure response is an array. If not, fallback to []
+        setLocationLists(Array.isArray(response) ? response : []);
+      } catch (error) {
+        console.error("Failed to fetch locations", error);
+        setLocationLists([]); // fallback to prevent crash
+      }
     }
+
     fetchLocation();
   }, []);
+
 
   const deleteLocation = async (id) => {
     const deleteLocation = await deleteFromServer(id);
