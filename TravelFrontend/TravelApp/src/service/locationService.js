@@ -53,14 +53,14 @@ export const hostlocation = async () => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        },  
+        },
       }
     );
     console.log("hostlocationResponse: ", response);
     const data = await response.json();
-    console.log("hostLocationData2: ", data);
-
-    return Array.isArray(data) ? data.map(maplocalValueToserviseValue) : [];
+    console.log("hostLocationData2: ",data);
+    
+    return data.map(maplocalValueToserviseValue) || [];
   } catch (error) {
     console.log("host location is not fetch: ", error);
   }
