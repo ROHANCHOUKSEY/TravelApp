@@ -44,28 +44,6 @@ export const savetodb = async ({
   }
 };
 
-// export const hostlocation = async () => {
-//   try {
-//     const response = await fetch(
-//       `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/hostLocation`,
-//       {
-//         method: "GET",
-//         credentials: "include",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     console.log("hostlocationResponse: ", response);
-//     const data = await response.json();
-//     console.log("hostLocationData2: ",data);
-    
-//     return data.map(maplocalValueToserviseValue) || [];
-//   } catch (error) {
-//     console.log("host location is not fetch: ", error);
-//   }
-// };
-
 export const hostlocation = async () => {
   try {
     const response = await fetch(
@@ -74,22 +52,17 @@ export const hostlocation = async () => {
         method: "GET",
         credentials: "include",
         headers: {
-          "Content-Type": "application/json", 
+          "Content-Type": "application/json",
         },
       }
     );
+    console.log("hostlocationResponse: ", response);
     const data = await response.json();
-    console.log("hostLocationData2: ", data);
-
-    if (!Array.isArray(data)) {
-      console.error("hostlocation response is not an array:", data);
-      return []; // return empty array to avoid breaking the UI
-    }
-
+    console.log("hostLocationData2: ",data);
+    
     return data.map(maplocalValueToserviseValue);
   } catch (error) {
     console.log("host location is not fetch: ", error);
-    return [];
   }
 };
 
