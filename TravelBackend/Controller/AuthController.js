@@ -9,9 +9,9 @@ exports.postSignUp = [
     .withMessage("First name must be at least 2 character long")
     .matches(/^[a-zA-Z]+$/)
     .withMessage("First name can only contain letters"),
-
+ 
   check("lastname")
-    .trim()
+    .trim() 
     .isLength({ min: 2 })
     .withMessage("Last name must be at least 2 character long")
     .matches(/^[a-zA-Z]+$/)
@@ -75,7 +75,7 @@ exports.postSignUp = [
 
       bcrypt.hash(password, 12).then(async (hashedPassword) => {
         const newUser = await new User({
-          firstname,
+          firstname, 
           lastname,
           email,
           password: hashedPassword,
@@ -84,7 +84,7 @@ exports.postSignUp = [
 
         await newUser.save();
         res.status(200).json(newUser);
-      });
+      }); 
     } catch (error) {
       console.log("Uers is not SignUp", error);
       res.status(500).json({ message: "Server error" });
@@ -114,18 +114,12 @@ exports.postLogin = async (req, res, next) => {
     req.session.isLoggined = true;
     req.session.screenmode = user.screenmode || "light";
 
-    await req.session.save();
+    await req.session.save();  
 
-    res
-      .status(200)
-      .json({
-        message: "Login successful",
-        user: req.session.user,
-        isLoggined: true,
-      });
-      } catch (error) {
+    res.status(200).json({ message: "Login successful"});
+  } catch (error) {
     console.log("user is not login", error);
-  }
+  } 
 };
 
 exports.postScreenmode = async (req, res, next) => {

@@ -13,4 +13,4 @@ hostRouter.delete("/:id", hostController.deleteLocation);
 hostRouter.post("/stateLocation", hostController.postStateLocation);
 hostRouter.get("/stateLocation", hostController.getStateLocation);
 
-module.exports = hostRouter; 
+module.exports = hostRouter;  

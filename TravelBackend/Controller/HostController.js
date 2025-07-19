@@ -68,16 +68,26 @@ exports.postLocation = async (req, res, next) => {
 
 exports.getHostLocation = async (req, res, next) => {
   try {
+    if (!req.session.user) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
     const userId = req.session.user._id;
 
     const User = await user.findById(userId).populate("hostLocation");
 
-    const getLocations = User.hostLocation;
+    if (!User) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const getLocations = User.hostLocation || [];
+
+    console.log("getLocations: ", getLocations);
 
     res.status(200).json(getLocations);
-  } catch (error) {
+  } catch (error) { 
     console.log("Host Data is not fetched from database", error);
-    res.status(500).json({ message: "Failed to fetch host locations" });
+    res.status(500).json({ message: "Failed to fetch host locations", error: error.message });
   }
 };
 
