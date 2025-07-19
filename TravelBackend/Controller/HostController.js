@@ -68,9 +68,9 @@ exports.postLocation = async (req, res, next) => {
 
 exports.getHostLocation = async (req, res, next) => {
   try {
-    if (!req.session.user) {
-      return res.status(401).json({ message: "Not authenticated" });
-    }
+    // if (!req.session.user) {
+    //   return res.status(401).json({ message: "Not authenticated" });
+    // }
 
     const userId = req.session.user._id;
 
