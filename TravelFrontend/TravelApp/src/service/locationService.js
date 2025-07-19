@@ -53,7 +53,7 @@ export const hostlocation = async () => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        }, 
+        },  
       }
     );
     console.log("hostlocationResponse: ", response);
