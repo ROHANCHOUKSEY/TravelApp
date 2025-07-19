@@ -40,18 +40,28 @@ const store = new mongodbStore({
 
 app.use(express.json());
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://travelapp-frontend-4b88.onrender.com",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // only production URL
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 
 app.use("/uploads", express.static("uploads"));
 
 const isProduction = process.env.NODE_ENV === "production";
- 
+
 app.use(
   session({
     secret: "rohanchouksey",
@@ -61,7 +71,7 @@ app.use(
     cookie: {
       secure: isProduction,
       httpOnly: true,
-      sameSite: "none",
+      sameSite: isProduction ? "none" : "lax",
     },
   })
 );
