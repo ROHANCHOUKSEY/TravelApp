@@ -31,7 +31,7 @@ export const ContextProvider = (props) => {
     const checkLoginStatus = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/session`, {
-          credentials: "include", // send cookies for session
+          credentials: "include", 
         });
         console.log("Response:", res);
 
