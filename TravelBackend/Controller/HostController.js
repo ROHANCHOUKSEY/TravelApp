@@ -20,6 +20,7 @@ exports.postLocation = async (req, res, next) => {
       holeDescription,
       history,
       VisitorTips,
+      howtoReach,
       timing,
       closing,
     } = req.body;
@@ -33,6 +34,7 @@ exports.postLocation = async (req, res, next) => {
       holeDescription,
       history,
       VisitorTips,
+      howtoReach,
       timing,
       closing,
     });
@@ -277,6 +279,7 @@ exports.postEditLocation = async (req, res, next) => {
       holeDescription,
       history,
       VisitorTips,
+      howtoReach,
       timing,
       closing,
     } = req.body;
@@ -292,6 +295,7 @@ exports.postEditLocation = async (req, res, next) => {
       holeDescription,
       history,
       VisitorTips,
+      howtoReach,
       timing,
       closing,
     };

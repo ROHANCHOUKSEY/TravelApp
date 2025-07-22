@@ -42,7 +42,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', 'https://travelapp-frontend-uaz9.onrender.com'],
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
@@ -51,15 +51,15 @@ app.use(
 app.use("/uploads", express.static("uploads"));
 
 app.use(
-  session({ 
+  session({
     secret: "rohanchouksey",
     resave: false,
     saveUninitialized: false,
     store: store,
     cookie: {
-      secure: true,
-      // httpOnly: true,
-      sameSite: "none",
+      secure: false,
+      httpOnly: true,
+      sameSite: "lax",
     },
   })
 );
