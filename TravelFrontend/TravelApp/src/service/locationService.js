@@ -9,6 +9,7 @@ export const savetodb = async ({
   description,
   holeDescription,
   VisitorTips,
+  howtoReach,
   history,
   timing,
   closing,
@@ -31,6 +32,7 @@ export const savetodb = async ({
           description,
           holeDescription,
           VisitorTips,
+          howtoReach,
           history,
           timing,
           closing,
@@ -161,6 +163,7 @@ export const postEditFromServer = async (
     holeDescription,
     history,
     VisitorTips,
+    howtoReach,
     timing,
     closing,
   }
@@ -184,6 +187,7 @@ export const postEditFromServer = async (
           holeDescription,
           history,
           VisitorTips,
+          howtoReach, 
           timing,
           closing,
         }),
@@ -202,7 +206,7 @@ export const deleteFromServer = async (id) => {
     {
       method: "DELETE",
       credentials: "include",
-      headers: {
+      headers: { 
         "Content-Type": "application/json",
       },
     }
@@ -223,7 +227,7 @@ export const locationDetails = async (id) => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        },
+        }, 
       }
     );
     const data = await response.json();
@@ -457,6 +461,7 @@ const maplocalValueToserviseValue = (serviseItem) => {
     holeDescription: serviseItem.holeDescription,
     history: serviseItem.history,
     VisitorTips: serviseItem.VisitorTips,
+    howtoReach: serviseItem.howtoReach,
     timing: serviseItem.timing,
     closing: serviseItem.closing,
     review: serviseItem.review,

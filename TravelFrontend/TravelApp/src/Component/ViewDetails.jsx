@@ -22,7 +22,7 @@ import { AppContext } from "../CreateContext/AppContext";
 
 const ViewDetails = () => {
 
-  const{userType} = useContext(AppContext);
+  const { userType } = useContext(AppContext);
 
   const [details, setDetails] = useState(null);
 
@@ -83,11 +83,10 @@ const ViewDetails = () => {
             {details.image.map((img, index) => (
               <div
                 key={index}
-                className={`relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-lg ${
-                  index === 0
-                    ? "sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2"
-                    : ""
-                }`}
+                className={`relative group overflow-hidden rounded-xl shadow-md transition-all duration-300 hover:shadow-lg ${index === 0
+                  ? "sm:col-span-2 md:col-span-2 lg:col-span-2 row-span-2"
+                  : ""
+                  }`}
               >
                 <img
                   src={img}
@@ -194,45 +193,38 @@ const ViewDetails = () => {
                     </h3>
                     <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                       {details.VisitorTips &&
-                      typeof details.VisitorTips === "string" ? details.VisitorTips.split("\n").map((tips, index) => (
-                        <li key={index} className="flex items-start">
-                          {tips}
-                        </li>
-                      )) : (
+                        typeof details.VisitorTips === "string" ? details.VisitorTips.split("\n").map((tips, index) => (
+                          <li key={index} className="flex items-start">
+                            {tips}
+                          </li>
+                        )) : (
                         details.VisitorTips?.map((tip, index) => (
                           <li key={index} className="flex items-start">
                             <span className="text-blue-500 mr-2">•</span>
                             {tip}
-                          </li> 
+                          </li>
                         ))
                       )}
                     </ul>
                   </div>
                   <div className="bg-blue-50 dark:bg-gray-700 p-4 rounded-lg">
                     <h3 className="font-semibold mb-2 text-gray-800 dark:text-white">
-                      Facilities
+                      How To Reach
                     </h3>
                     <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                      <li className="flex items-center">
-                        <FaWheelchair className="text-blue-500 mr-2" />
-                        Wheelchair accessible
-                      </li>
-                      <li className="flex items-center">
-                        <svg
-                          className="w-4 h-4 text-blue-500 mr-2"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
-                        Guided tours available
-                      </li>
+                      {details.howtoReach &&
+                        typeof details.howtoReach === "string" ? details.howtoReach.split("\n").map((tips, index) => (
+                          <li key={index} className="flex items-start">
+                            {tips}
+                          </li>
+                        )) : (
+                        details.howtoReach?.map((tip, index) => (
+                          <li key={index} className="flex items-start">
+                            <span className="text-blue-500 mr-2">•</span>
+                            {tip}
+                          </li>
+                        ))
+                      )}
                     </ul>
                   </div>
                 </div>
@@ -247,25 +239,25 @@ const ViewDetails = () => {
                   </h2>
                 </div>
                 {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-                  <div className="w-full">
-                    <h3 className="font-medium text-gray-800 dark:text-white mb-2">
-                      Regular Hours
-                    </h3>
-                    <p className=" text-gray-600 dark:text-gray-300">
-                      {/* <span className="font-medium">Open:</span>{" "} */}
-                      {details.timing}
-                    </p>
-                    {/* <p className="text-gray-600 dark:text-gray-300">
+                <div className="w-full">
+                  <h3 className="font-medium text-gray-800 dark:text-white mb-2">
+                    Regular Hours
+                  </h3>
+                  <p className=" text-gray-600 dark:text-gray-300">
+                    {/* <span className="font-medium">Open:</span>{" "} */}
+                    {details.timing}
+                  </p>
+                  {/* <p className="text-gray-600 dark:text-gray-300">
                       <span className="font-medium">Close:</span>{" "}
                       {details.closing}
                     </p> */}
-                  </div>
+                </div>
                 {/* </div> */}
               </div>
             </motion.div>
           </div>
         </div>
-        {userType === "guest" ?  <Review /> : "" }
+        {userType === "guest" ? <Review /> : ""}
       </div>
     </motion.div>
   );

@@ -20,6 +20,7 @@ const EditLocations = () => {
     editHoledescription: "",
     editHistory: "",
     editVisitorTips: "",
+    edithowtoReach: "",
     editTiming: "",
     editClosing: "",
   });
@@ -39,6 +40,7 @@ const EditLocations = () => {
             holeDescription,
             history,
             VisitorTips,
+            howtoReach,
             timing,
             closing,
           } = editItem;
@@ -52,6 +54,7 @@ const EditLocations = () => {
             editHoledescription: holeDescription,
             editHistory: history,
             editVisitorTips: VisitorTips,
+            edithowtoReach: howtoReach,
             editTiming: timing,
             editClosing: closing,
           });
@@ -97,6 +100,10 @@ const EditLocations = () => {
         e.target.name === "VisitorTips"
           ? e.target.value
           : editLocations.editVisitorTips,
+      edithowtoReach: 
+        e.target.name === "howtoReach" 
+          ? e.target.value 
+          : editLocations.edithowtoReach,
       editTiming:
         e.target.name === "timing" ? e.target.value : editLocations.editTiming,
       editClosing:
@@ -136,7 +143,7 @@ const EditLocations = () => {
       } catch (error) {
         console.log("Image upload Failed", error);
         return;
-      }finally{
+      } finally {
         setUpdating(false);
       }
     } else {
@@ -153,6 +160,7 @@ const EditLocations = () => {
       holeDescription: editLocations.editHoledescription,
       history: editLocations.editHistory,
       VisitorTips: editLocations.editVisitorTips,
+      howtoReach: editLocations.edithowtoReach,
       timing: editLocations.editTiming,
       closing: editLocations.editClosing,
     });
@@ -167,6 +175,7 @@ const EditLocations = () => {
       holeDescription: updateItem.holeDescription,
       history: updateItem.history,
       VisitorTips: updateItem.VisitorTips,
+      howtoReach: updateItem.howtoReach,
       timing: updateItem.timing,
       closing: updateItem.closing,
     });
@@ -292,6 +301,17 @@ const EditLocations = () => {
               rows="3"
               className="w-full p-2 border rounded"
               value={editLocations.editVisitorTips}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">How To Reach</label>
+            <textarea
+              name="howtoReach"
+              rows="3"
+              className="w-full p-2 border rounded"
+              value={editLocations.edithowtoReach}
               onChange={handleChange}
             ></textarea>
           </div>

@@ -16,6 +16,7 @@ const AddLocation = () => {
     holeDescription: "",
     history: "",
     VisitorTips: "",
+    howtoReach: "",
     timing: "",
     closing: "",
   });
@@ -42,7 +43,7 @@ const AddLocation = () => {
       const formData = new FormData();
       Array.from(newLocationPlace.image).forEach((file) => {
         formData.append("images", file);
-      }); 
+      });
 
       const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/upload`, {
         method: "POST",
@@ -95,7 +96,7 @@ const AddLocation = () => {
                 multiple
                 className="hidden"
                 id="image-upload"
-                onChange={(e) => setNewLocationPlace({...newLocationPlace, image: Array.from(e.target.files)})}
+                onChange={(e) => setNewLocationPlace({ ...newLocationPlace, image: Array.from(e.target.files) })}
               />
               <label htmlFor="image-upload" className="w-full p-8 text-center cursor-pointer">
                 {newLocationPlace.image?.length > 0 ? (
@@ -108,7 +109,7 @@ const AddLocation = () => {
                       className="mx-auto h-12 w-12 text-gray-400"
                       stroke="currentColor"
                       fill="none"
-                      viewBox="0 0 48 48" 
+                      viewBox="0 0 48 48"
                       aria-hidden="true"
                     >
                       <path
@@ -198,7 +199,7 @@ const AddLocation = () => {
               onChange={handleChange}
               required
             ></textarea>
-          </div> 
+          </div>
 
           {/* Full Description */}
           <div className="space-y-2">
@@ -237,19 +238,30 @@ const AddLocation = () => {
             ></textarea>
           </div>
 
+          <div className="space-y-2">
+            <label className="block text-sm font-medium">How To Reach</label>
+            <textarea
+              name="howtoReach"
+              rows="4"
+              placeholder="How To Reach"
+              className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
           {/* Timing */}
           {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> */}
-            <div className="space-y-2">
-              <label className="block text-sm font-medium">Enter Timing Details</label>
-              <textarea
-                type="text"
-                name="timing"
-                rows="4"
-                className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
-                onChange={handleChange}
-                placeholder="Enter Timing Details Of Place"
-              />
-            </div>
+          <div className="space-y-2">
+            <label className="block text-sm font-medium">Enter Timing Details</label>
+            <textarea
+              type="text"
+              name="timing"
+              rows="4"
+              className={`w-full p-3 rounded-lg border ${mode === 'dark' ? 'bg-gray-700 border-gray-600 focus:border-blue-500' : 'bg-white border-gray-300 focus:border-blue-500'} focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800 transition`}
+              onChange={handleChange}
+              placeholder="Enter Timing Details Of Place"
+            />
+          </div>
           {/* </div> */}
 
           {/* Submit Button */}

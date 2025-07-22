@@ -71,7 +71,7 @@ export const ContextProvider = (props) => {
   return (
     <AppContext.Provider
       value={{
-        locationLists,
+        locationLists, 
         setLocationLists,
         statebaseLocation,
         setStatebaseLocation,
