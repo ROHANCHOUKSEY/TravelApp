@@ -17,6 +17,8 @@ export const ContextProvider = (props) => {
   const [mode, setMode] = useState();
   const [stateLocation, setStateLocation] = useState([]);
   const [stateName, setStateName] = useState("");
+  const [showResult, setShowResult] = useState(false);
+  
 
 
   const lightMode = () => {
@@ -92,6 +94,8 @@ export const ContextProvider = (props) => {
         mode,
         lightMode,
         darkMode,
+        showResult,
+        setShowResult,
       }}
     >
       {props.children}

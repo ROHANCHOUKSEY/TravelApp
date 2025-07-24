@@ -1,9 +1,11 @@
 import { Search } from "lucide-react";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const SearchBar = ({ setLocationResult }) => {
 
+  const{showResult, setShowResult} = useContext(AppContext);
   const [searchQuery, setSearchQuery] = useState("");
   const controllRef = useRef(null);
 
@@ -67,6 +69,12 @@ const SearchBar = ({ setLocationResult }) => {
     setSearchQuery(value);
   };
 
+  const handleBlur = () => {
+    setTimeout(() => {
+      setShowResult(false);
+    }, 300)
+  }
+
   return (
     <>
       <div className="relative max-w-lg mx-auto">
@@ -76,6 +84,8 @@ const SearchBar = ({ setLocationResult }) => {
           placeholder="Search your place..."
           value={searchQuery}
           onChange={(e) => handleChange(e.target.value)}
+          onFocus={() => setShowResult(true)}
+          onBlur={handleBlur}
         />
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <Search className="w-5 h-5 text-gray-400" />

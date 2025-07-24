@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import SearchBar from "./SearchBar";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../../CreateContext/AppContext";
 
 const SearchContainer = () => {
+  const{showResult} = useContext(AppContext);
   const [locationResult, setLocationResult] = useState([]);
 
   return (
     <>
       <div className="mb-5 max-w-lg mx-auto">
         <SearchBar setLocationResult={setLocationResult} />
-        {locationResult.length > 0 && (
+        {showResult && locationResult.length > 0 && (
           <div className="mt-2 space-y-2">
             {locationResult.map((loc) => (
               <div
@@ -23,7 +25,7 @@ const SearchContainer = () => {
                   <div className="flex items-center">
                     <svg
                       className={`w-5 h-5 mr-3 ${loc.locationName ? 'text-blue-500' : 'text-purple-500'}`}
-                      fill="none" 
+                      fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
@@ -46,6 +48,7 @@ const SearchContainer = () => {
           </div>
         )}
       </div>
+      
     </>
   );
 };

@@ -54,7 +54,7 @@ const Explore = () => {
 
 
 
-  return (
+  return ( 
     <>
       <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300">
         <div className="mb-8">
@@ -69,6 +69,7 @@ const Explore = () => {
 
         {/* Search Bar */}
         {isLoggined ? <SearchContainer /> : ""}
+        
         {loading ? <h1>Loading...</h1> :
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {locationCards.map((location) => (
