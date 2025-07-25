@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import SearchBar from "./SearchBar/SearchBar";
 import SearchContainer from "./SearchBar/SearchContainer";
 import { AppContext } from "../CreateContext/AppContext";
+import ImageSlider from "./ImagesFeature/ImageSlider";
 
 const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =
@@ -53,15 +54,17 @@ const Explore = () => {
   }, [locationLists]);
 
 
-
-  return ( 
+  return (
     <>
-      <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900 transition-colors duration-300">
-        <div className="mb-8">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4 font-bold text-gray-800 dark:text-gray-100 mb-2">
+      <div className="relative top-[64px] min-h-screen bg-gray-50 p-0 dark:bg-gray-900 transition-colors duration-300">
+        <div className="w-full flex justify-center">
+          <img className="w-full h-120" src="/Images/Explore.jpeg" alt="" />
+        </div>
+        <div className="mb-8 relative bottom-100">
+          <h1 className="text-center font-sans text-3xl underline underline-offset-4 font-bold text-white dark:text-gray-100 mb-2">
             Discover Incredible India
           </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto text-center">
+          <p className="text-lg text-white dark:text-gray-300 max-w-2xl mx-auto text-center">
             Explore breathtaking destinations and hidden gems across our beautiful
             country
           </p>
@@ -69,9 +72,12 @@ const Explore = () => {
 
         {/* Search Bar */}
         {isLoggined ? <SearchContainer /> : ""}
-        
+
+        <ImageSlider />
+
+
         {loading ? <h1>Loading...</h1> :
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="relative bottom-40 grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-6">
             {locationCards.map((location) => (
               <div
                 key={location.id}

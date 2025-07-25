@@ -13,6 +13,7 @@ export const savetodb = async ({
   history,
   timing,
   closing,
+  typeOfPlace,
 }) => {
   try {
     const response = await fetch(
@@ -36,6 +37,7 @@ export const savetodb = async ({
           history,
           timing,
           closing,
+          typeOfPlace,
         }),
       }
     );
@@ -166,6 +168,7 @@ export const postEditFromServer = async (
     howtoReach,
     timing,
     closing,
+    typeOfPlace,
   }
 ) => {
   try {
@@ -190,6 +193,7 @@ export const postEditFromServer = async (
           howtoReach, 
           timing,
           closing,
+          typeOfPlace,
         }),
       }
     );
@@ -464,6 +468,8 @@ const maplocalValueToserviseValue = (serviseItem) => {
     howtoReach: serviseItem.howtoReach,
     timing: serviseItem.timing,
     closing: serviseItem.closing,
+    typeOfPlace: serviseItem.typeOfPlace,
     review: serviseItem.review,
   };
-};
+};  
+  

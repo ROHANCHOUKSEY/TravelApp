@@ -23,6 +23,7 @@ const EditLocations = () => {
     edithowtoReach: "",
     editTiming: "",
     editClosing: "",
+    edittypeOfPlace: "",
   });
 
   useEffect(() => {
@@ -43,6 +44,7 @@ const EditLocations = () => {
             howtoReach,
             timing,
             closing,
+            typeOfPlace,
           } = editItem;
           setEditLocations({
             editimage: image,
@@ -57,6 +59,7 @@ const EditLocations = () => {
             edithowtoReach: howtoReach,
             editTiming: timing,
             editClosing: closing,
+            edittypeOfPlace: typeOfPlace,
           });
         }
       } catch (error) {
@@ -100,9 +103,9 @@ const EditLocations = () => {
         e.target.name === "VisitorTips"
           ? e.target.value
           : editLocations.editVisitorTips,
-      edithowtoReach: 
-        e.target.name === "howtoReach" 
-          ? e.target.value 
+      edithowtoReach:
+        e.target.name === "howtoReach"
+          ? e.target.value
           : editLocations.edithowtoReach,
       editTiming:
         e.target.name === "timing" ? e.target.value : editLocations.editTiming,
@@ -110,6 +113,8 @@ const EditLocations = () => {
         e.target.name === "closing"
           ? e.target.value
           : editLocations.editClosing,
+      edittypeOfPlace:
+        e.target.name === "typeOfPlace" ? e.target.value : editLocations.edittypeOfPlace
     });
   };
 
@@ -163,6 +168,7 @@ const EditLocations = () => {
       howtoReach: editLocations.edithowtoReach,
       timing: editLocations.editTiming,
       closing: editLocations.editClosing,
+      typeOfPlace: editLocations.edittypeOfPlace,
     });
 
     setEditLocations({
@@ -178,6 +184,7 @@ const EditLocations = () => {
       howtoReach: updateItem.howtoReach,
       timing: updateItem.timing,
       closing: updateItem.closing,
+      typeOfPlace: updateItem.typeOfPlace,
     });
     setUpdating(true);
     window.location.href = "/host";
@@ -324,6 +331,18 @@ const EditLocations = () => {
               type="text"
               className="w-full p-2 border rounded"
               value={editLocations.editTiming}
+              onChange={handleChange}
+            ></textarea>
+          </div>
+
+          <div>
+            <label className="block text-sm mb-1">Type Of Turiest Place</label>
+            <textarea
+              name="typeOfPlace"
+              rows="1"
+              type="text"
+              className="w-full p-2 border rounded"
+              value={editLocations.edittypeOfPlace}
               onChange={handleChange}
             ></textarea>
           </div>

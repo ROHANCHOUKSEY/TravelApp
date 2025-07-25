@@ -160,6 +160,7 @@ const ViewDetails = () => {
                 <div className="space-y-4 text-gray-600 dark:text-gray-300">
                   <p className="leading-relaxed">{details.description}</p>
                   <p className="leading-relaxed">{details.holeDescription}</p>
+                  <p className="leading-relaxed">Types of Place: {details.typeOfPlace}</p>
                 </div>
               </div>
 
