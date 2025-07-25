@@ -13,6 +13,7 @@ const LocationSchema = mongoose.Schema({
   howtoReach: { type: String },
   timing: { type: String }, 
   closing: { type: String },
+  typeOfPlace: { type: String },
   review: [
     {
       text: { type: String, required: true },

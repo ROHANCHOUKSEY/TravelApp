@@ -23,6 +23,7 @@ exports.postLocation = async (req, res, next) => {
       howtoReach,
       timing,
       closing,
+      typeOfPlace,
     } = req.body;
     const newLocation = new TravelLocations({
       image,
@@ -37,11 +38,12 @@ exports.postLocation = async (req, res, next) => {
       howtoReach,
       timing,
       closing,
+      typeOfPlace
     });
 
     await newLocation.save();
 
-    console.log("FromLocation", state);
+    console.log("Received typeOfPlace:", typeOfPlace);
 
     const userId = req.session.user._id;
     const User = await user.findById(userId);
@@ -282,6 +284,7 @@ exports.postEditLocation = async (req, res, next) => {
       howtoReach,
       timing,
       closing,
+      typeOfPlace,
     } = req.body;
 
     // Prepare update object
@@ -298,6 +301,7 @@ exports.postEditLocation = async (req, res, next) => {
       howtoReach,
       timing,
       closing,
+      typeOfPlace,
     };
 
     // If new image uploaded via Cloudinary
@@ -392,3 +396,4 @@ exports.deleteLocation = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+ 
