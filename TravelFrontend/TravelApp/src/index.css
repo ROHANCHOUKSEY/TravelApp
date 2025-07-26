@@ -11,9 +11,9 @@
 }
 
 .scroll-animation {
-  animation: scrollLeft 20s linear infinite;
+  animation: scrollLeft 40s linear infinite;
 }
-
+ 
 .scroll-slider {
   width: max-content;
 }

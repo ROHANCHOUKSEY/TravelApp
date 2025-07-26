@@ -72,9 +72,8 @@ const Explore = () => {
 
         {/* Search Bar */}
         {isLoggined ? <SearchContainer /> : ""}
-
-        <ImageSlider />
-
+        {isLoggined ? <ImageSlider /> : ""}
+        
 
         {loading ? <h1>Loading...</h1> :
           <div className="relative bottom-40 grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-6">
