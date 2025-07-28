@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { getStateLocation } from "../../service/locationService";
 import { NavLink, useParams } from "react-router-dom";
 import { AppContext } from "../../CreateContext/AppContext";
+import "../../index.css";
 
 const StateLocations = () => {
   const { statebaseLocation, setStatebaseLocation } = useContext(AppContext);
@@ -17,7 +18,7 @@ const StateLocations = () => {
 
         if (data && data.length > 0) {
           const locationsData = data[0];
-          // console.log("locationsData", locationsData);
+          // console.log("locationsData", locationsData); 
           setStatebaseLocation(locationsData);
 
           // Verify the data structure and set first valid state
@@ -95,20 +96,58 @@ const StateLocations = () => {
           </p>
         </div>
         {/* State Selection Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {statesWithLocations.map((state) => (
-            <button
-              key={state}
-              onClick={() => setActiveState(state)}
-              className={`px-5 py-2 rounded-full font-medium text-sm sm:text-base transition-all duration-300 ease-in-out transform hover:scale-105 ${activeState === state
-                ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30 dark:shadow-blue-700/50"
-                : "bg-white text-gray-700 hover:text-blue-600 shadow-md hover:shadow-lg dark:bg-gray-700 dark:text-gray-200 dark:hover:text-blue-300 border border-gray-200 dark:border-gray-600"
-                }`}
-            >
-              {formatStateName(state)}
-            </button>
-          ))}
+        {/* <div className="w-full overflow-hidden mb-10">
+          <div className="scroll-slider flex gap-2.5 whitespace-nowrap scroll-animation">
+            {[...statesWithLocations, ...statesWithLocations].map((state) => (
+              <button 
+                key={state}
+                onClick={() => setActiveState(state)}
+                className={`px-5 py-2  font-medium text-sm sm:text-base transition-all duration-300 ease-in-out transform hover:scale-105 ${activeState === state
+                  ? "bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/30 dark:shadow-blue-700/50"
+                  : "bg-white text-gray-700 hover:text-blue-600 shadow-md hover:shadow-lg dark:bg-gray-700 dark:text-gray-200 dark:hover:text-blue-300 border border-gray-200 dark:border-gray-600"
+                  }`}
+              >
+                {formatStateName(state)}
+              </button>
+            ))}
+          </div>
+        </div> */}
+        <div className="w-full overflow-hidden">
+          <div className="scroll-slider flex gap-2.5 whitespace-nowrap scroll-animation">
+            {[...statesWithLocations, ...statesWithLocations].map((state, index) => {
+              const stateData = statebaseLocation[state];
+              const previewImage =
+                Array.isArray(stateData) &&
+                  stateData[0]?.image &&
+                  stateData[0].image.length > 0
+                  ? stateData[0].image[4]
+                  : "/placeholder.jpg"; // fallback image
+
+              return (
+                <div
+                  key={index}
+                  onClick={() => setActiveState(state)}
+                  className={`min-w-[20rem] flex-shrink-0 cursor-pointer w-80 h-80 border-1 shadow-md`}
+                >
+                  <img
+                    src={previewImage}
+                    alt={formatStateName(state)}
+                    className="w-100 h-50 object-cover"
+                  />
+                  <div className="p-3 text-center">
+                    <h3 className="text-base sm:text-lg font-semibold dark:text-white">
+                      {formatStateName(state)}
+                    </h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-300">
+                      {stateData.length} locations
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
+
 
         {/* Locations for Selected State */}
         {activeState && currentLocations.length > 0 && (

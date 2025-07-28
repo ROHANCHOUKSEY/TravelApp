@@ -168,7 +168,7 @@ const Navbar = () => {
                       Discover
                     </NavLink>
                     <NavLink to="/stateLocation" className={getNavlinkClass}>
-                      By State
+                     Explore More
                     </NavLink>
                     <NavLink to="/location" className={getNavlinkClass}>
                       Top Picks

@@ -128,7 +128,7 @@ export const getStateLocation = async () => {
     );
     const stateLocationWise = await response.json();
     return stateLocationWise;
-  } catch (error) {
+  } catch (error) { 
     console.log("StateLocation is not fetch", error);
     throw error;
   }
