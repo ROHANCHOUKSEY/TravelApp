@@ -93,13 +93,14 @@ const StateLocations = () => {
             Explore breathtaking destinations across India, organized by state.
             From majestic forts to serene beaches — start your journey with just a
             click.
-          </p>
+          </p> 
         </div>
         {/* State Selection Tabs */}
         {/* <div className="w-full overflow-hidden mb-10">
           <div className="scroll-slider flex gap-2.5 whitespace-nowrap scroll-animation">
             {[...statesWithLocations, ...statesWithLocations].map((state) => (
               <button 
+
                 key={state}
                 onClick={() => setActiveState(state)}
                 className={`px-5 py-2  font-medium text-sm sm:text-base transition-all duration-300 ease-in-out transform hover:scale-105 ${activeState === state
@@ -113,7 +114,7 @@ const StateLocations = () => {
           </div>
         </div> */}
         <div className="w-full overflow-hidden">
-          <div className="scroll-slider flex gap-2.5 whitespace-nowrap scroll-animation">
+          <div className="scroll-slider flex gap-10 whitespace-nowrap scroll-animation mb-20 mt-10">
             {[...statesWithLocations, ...statesWithLocations].map((state, index) => {
               const stateData = statebaseLocation[state];
               const previewImage =
@@ -127,18 +128,18 @@ const StateLocations = () => {
                 <div
                   key={index}
                   onClick={() => setActiveState(state)}
-                  className={`min-w-[20rem] flex-shrink-0 cursor-pointer w-80 h-80 border-1 shadow-md`}
+                  className={`min-w-[20rem] flex-shrink-0 cursor-pointer w-80 h-80 rounded-2xl shadow-xl/20 transition-transform duration-300 ease-in-out transform hover:-translate-y-2 shadow-md hover:shadow-xl  bg-white  ${activeState === state ? "border-2 border-blue-500 " : "border-none"}`}
                 >
                   <img
                     src={previewImage}
                     alt={formatStateName(state)}
-                    className="w-100 h-50 object-cover"
+                    className="w-100 h-50 object-cover rounded-t-2xl shadow-xl"
                   />
                   <div className="p-3 text-center">
                     <h3 className="text-base sm:text-lg font-semibold dark:text-white">
                       {formatStateName(state)}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-300">
+                    <p className="text-sm text-gray-500 dark:text-black">
                       {stateData.length} locations
                     </p>
                   </div>
@@ -152,8 +153,9 @@ const StateLocations = () => {
         {/* Locations for Selected State */}
         {activeState && currentLocations.length > 0 && (
           <div>
-            <h2 className="text-2xl font-semibold mb-6 dark:text-white">
-              {formatStateName(activeState)} ({currentLocations.length} locations)
+            <h2 className="text-[64px] font-extrabold uppercase text-blue-400 tracking-wide text-center mb-10">
+              {formatStateName(activeState)} 
+              {/* ({currentLocations.length} locations) */}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

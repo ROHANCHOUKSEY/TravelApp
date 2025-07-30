@@ -58,25 +58,40 @@ const Explore = () => {
     <>
       <div className="relative top-[64px] min-h-screen bg-gray-50 p-0 dark:bg-gray-900 transition-colors duration-300">
         <div className="w-full flex justify-center">
-          <img className="w-full h-120" src="/Images/Explore.jpeg" alt="" />
+          <img className="w-full h-120" src="/Images/Image.png" alt="" />
         </div>
-        <div className="mb-8 relative bottom-100">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4 font-bold text-white dark:text-gray-100 mb-2">
+        <div className="mb-8 relative bottom-100 text-center">
+          <h1 className="text-[38px] font-extrabold uppercase text-white tracking-wide">
             Discover Incredible India
           </h1>
-          <p className="text-lg text-white dark:text-gray-300 max-w-2xl mx-auto text-center">
+          <p className="text-[30px] font-bold text-white dark:text-gray-300 max-w-2xl mx-auto text-center mb-10">
             Explore breathtaking destinations and hidden gems across our beautiful
             country
           </p>
         </div>
 
-        {/* Search Bar */}
         {isLoggined ? <SearchContainer /> : ""}
-        {isLoggined ? <ImageSlider /> : ""}
-        
+
+        <div className="bg-gray-100 relative bottom-62 h-100 shadow-xl">
+          <div className="w-full text-center">
+            <h1 className="text-[50px] font-extrabold uppercase text-sky-400 tracking-wide">Explore India’s Diverse Beauty
+              <span class="absolute bottom-82 left-45 w-100 h-1 bg-amber-400"></span>
+              <span class="absolute bottom-82 right-45 w-100 h-1 bg-emerald-500"></span>
+            </h1>
+          </div>
+
+          {/* Search Bar */}
+          {isLoggined ? <ImageSlider /> : ""}
+        </div>
+
+        <div className="relative bottom-50 text-center">
+          <h1 className="text-[50px] font-extrabold uppercase text-red-500 tracking-wide underline decoration-solid">Top Destinations to Explore in India</h1>
+          <p className="font-medium uppercase tracking-widest text-black dark:text-white mt-5">Handpicked places worth visiting for history, culture, and natural beauty.</p>
+        </div>
 
         {loading ? <h1>Loading...</h1> :
-          <div className={`relative ${isLoggined ? 'bottom-40' :' bottom-20'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-6`}>
+          <div className={`relative ${isLoggined ? 'bottom-45' : ' bottom-20'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-10`}>
+
             {locationCards.map((location) => (
               <div
                 key={location.id}

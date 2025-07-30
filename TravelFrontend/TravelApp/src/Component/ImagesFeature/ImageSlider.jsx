@@ -47,12 +47,14 @@ const ImageSlider = () => {
 
     return (
         <>
-            <div className='w-full overflow-hidden  relative bottom-39'>
-                <div className='scroll-slider flex gap-2.5 whitespace-nowrap scroll-animation'>
+            <div className='w-full overflow-hidden  relative '>
+                <div className='scroll-slider flex gap-10 whitespace-nowrap scroll-animation mt-5'>
                     {[...images, ...images].map((image, index) => (
-                        <div>
-                            <img key={index} src={image.img} alt={`Slide ${index + 1}`} className="w-72 h-60 mx-2 rounded-lg shadow-lg object-cover cursor-pointer transition delay-250 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110" />
-                            <p>{image.name}</p>
+                        <div className='flex flex-col text-center h-[267px]'>
+                            <img key={index} src={image.img} alt={`Slide ${index + 1}`} className="w-50 h-60 mx-2 rounded-lg shadow-lg object-cover cursor-pointer transition-transform duration-300 ease-in-out transform hover:-translate-y-2 shadow-md hover:shadow-xl  bg-white rounded-lg" />
+                            <div className='relative top-2'>
+                                <p className='font-medium uppercase tracking-widest text-black'>{image.name}</p>
+                            </div>
                         </div>
                     ))}
                 </div>

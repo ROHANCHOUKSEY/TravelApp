@@ -9,7 +9,7 @@ const SearchContainer = () => {
 
   return (
     <>
-      <div className="mb-5 max-w-lg mx-auto relative bottom-98">
+      <div className="mb-5 max-w-lg mx-auto relative bottom-120">
         <SearchBar setLocationResult={setLocationResult} />
         {showResult && locationResult.length > 0 && (
           <div className="mt-2 space-y-2 h-0 relative z-1 ">
