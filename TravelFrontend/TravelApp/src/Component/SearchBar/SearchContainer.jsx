@@ -9,14 +9,14 @@ const SearchContainer = () => {
 
   return (
     <>
-      <div className="mb-5 max-w-lg mx-auto relative bottom-120">
+      <div className="mb-5 max-w-lg mx-auto relative bottom-100">
         <SearchBar setLocationResult={setLocationResult} />
-        {showResult && locationResult.length > 0 && (
+        {locationResult.length > 0 && (
           <div className="mt-2 space-y-2 h-0 relative z-1 ">
-            {locationResult.map((loc) => (
+            {showResult && locationResult.map((loc) => (
               <div
                 key={loc.locationId}
-                className="w-full bg-white rounded-lg border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
+                className="w-60 md:w-full bg-white rounded-lg border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
               >
                 <NavLink
                   to={loc.locationName ? `viewDetails/${loc.locationId}` : `/stateSearch/${loc.state}`}

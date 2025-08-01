@@ -7,6 +7,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import SearchContainer from "./SearchBar/SearchContainer";
 import { AppContext } from "../CreateContext/AppContext";
 import ImageSlider from "./ImagesFeature/ImageSlider";
+import HomePage from "./HomeComponent.jsx/HomePage";
 
 const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =
@@ -57,45 +58,35 @@ const Explore = () => {
   return (
     <>
       <div className="relative top-[64px] min-h-screen bg-gray-50 p-0 dark:bg-gray-900 transition-colors duration-300">
-        <div className="w-full flex justify-center">
-          <img className="w-full h-120" src="/Images/Image.png" alt="" />
-        </div>
-        <div className="mb-8 relative bottom-100 text-center">
-          <h1 className="text-[38px] font-extrabold uppercase text-white tracking-wide">
-            Discover Incredible India
-          </h1>
-          <p className="text-[30px] font-bold text-white dark:text-gray-300 max-w-2xl mx-auto text-center mb-10">
-            Explore breathtaking destinations and hidden gems across our beautiful
-            country
-          </p>
-        </div>
+
+        <HomePage/>
 
         {isLoggined ? <SearchContainer /> : ""}
 
-        <div className="bg-gray-100 relative bottom-62 h-100 shadow-xl">
+       {isLoggined && <div className="bg-gray-100 relative bottom-60 md:bottom-62 h-62 md:h-100 shadow-xl">
           <div className="w-full text-center">
-            <h1 className="text-[50px] font-extrabold uppercase text-sky-400 tracking-wide">Explore India’s Diverse Beauty
-              <span class="absolute bottom-82 left-45 w-100 h-1 bg-amber-400"></span>
-              <span class="absolute bottom-82 right-45 w-100 h-1 bg-emerald-500"></span>
+            <h1 className="text-[15px] md:text-[50px] font-extrabold uppercase text-sky-400 tracking-wide">Explore India’s Diverse Beauty
+              {/* <span class="absolute bottom-82 left-0.5 md:left-45 w-100 h-1 bg-amber-400"></span> */}
+              {/* <span class="absolute bottom-82 right-0.5 md:right-45 w-100 h-1 bg-emerald-500"></span> */}
             </h1>
           </div>
 
           {/* Search Bar */}
-          {isLoggined ? <ImageSlider /> : ""}
-        </div>
+          <ImageSlider />
+        </div>}
 
-        <div className="relative bottom-50 text-center">
-          <h1 className="text-[50px] font-extrabold uppercase text-red-500 tracking-wide underline decoration-solid">Top Destinations to Explore in India</h1>
-          <p className="font-medium uppercase tracking-widest text-black dark:text-white mt-5">Handpicked places worth visiting for history, culture, and natural beauty.</p>
+        <div className="relative bottom-55 md:bottom-50 text-center">
+          <h1 className="text-[16px] md:text-[50px] font-extrabold uppercase text-red-500 tracking-wide underline decoration-solid">Top Destinations to Explore in India</h1>
+          <p className="text-[12px] md:text-xl font-medium uppercase tracking-widest text-gray-500 dark:text-white mt-5">Handpicked places worth visiting for history, culture, and natural beauty.</p>
         </div>
 
         {loading ? <h1>Loading...</h1> :
-          <div className={`relative ${isLoggined ? 'bottom-45' : ' bottom-20'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-10`}>
+          <div className={`relative ${isLoggined ? 'bottom-55 md:bottom-45' : ' bottom-45'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-10`}>
 
             {locationCards.map((location) => (
               <div
                 key={location.id}
-                className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
+                className="transition-transform duration-300 ease-in-out transform hover:-translate-y-2 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg  dark:bg-gray-800 dark:hover:shadow-gray-700/50 "
               >
                 {/* Location Image */}
                 <div className="relative h-48 overflow-hidden">
