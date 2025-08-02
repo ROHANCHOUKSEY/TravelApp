@@ -12,5 +12,7 @@ hostRouter.post("/edit/:id", hostController.postEditLocation);
 hostRouter.delete("/:id", hostController.deleteLocation);
 hostRouter.post("/stateLocation", hostController.postStateLocation);
 hostRouter.get("/stateLocation", hostController.getStateLocation);
+hostRouter.get("/search", hostController.searchLocation);
 
-module.exports = hostRouter;  
+
+module.exports = hostRouter;    

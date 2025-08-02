@@ -38,7 +38,7 @@ exports.postLocation = async (req, res, next) => {
       howtoReach,
       timing,
       closing,
-      typeOfPlace
+      typeOfPlace,
     });
 
     await newLocation.save();
@@ -74,15 +74,15 @@ exports.getHostLocation = async (req, res, next) => {
   try {
     const userId = req.session.user._id;
 
-    const User = await user.findById(userId).populate("hostLocation"); 
+    const User = await user.findById(userId).populate("hostLocation");
 
-    const getLocations = User.hostLocation; 
+    const getLocations = User.hostLocation;
 
     console.log("getLocations: ", getLocations);
 
     res.status(200).json(getLocations);
   } catch (error) {
-    console.log("Host Data is not fetched from database", error); 
+    console.log("Host Data is not fetched from database", error);
     res.status(500).json({ message: "Failed to fetch host locations" });
   }
 };
@@ -348,6 +348,28 @@ exports.postEditLocation = async (req, res, next) => {
   }
 };
 
+exports.searchLocation = async (req, res, next) => {
+  const query = req.query.q;
+
+  if (!query || query.trim() === "") {
+    return res.json([]);
+  }
+
+  try {
+    const result = await TravelLocations.find({
+      $or: [
+        { locationName: { $regex: query, $options: "i" } },
+        { state: { $regex: query, $options: "i" } },
+      ],
+    }).select("locationName, state, _id");
+
+    res.json(result);
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 exports.deleteLocation = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -396,4 +418,3 @@ exports.deleteLocation = async (req, res, next) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
- 

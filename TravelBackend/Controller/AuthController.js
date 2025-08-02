@@ -115,7 +115,7 @@ exports.postLogin = async (req, res, next) => {
     req.session.screenmode = user.screenmode || "light";
 
     await req.session.save();  
-
+  
     res.status(200).json({ message: "Login successful"});
   } catch (error) {
     console.log("user is not login", error);

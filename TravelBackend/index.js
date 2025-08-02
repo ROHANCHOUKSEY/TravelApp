@@ -68,6 +68,7 @@ app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
 
+
 const PORT = process.env.PORT || 3002;
 
 app.post("/api/upload", upload.array("images", 10), (req, res) => {
