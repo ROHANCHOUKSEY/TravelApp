@@ -15,11 +15,11 @@ const SearchContainer = () => {
           <div className="mt-2 space-y-2 h-0 relative z-1 ">
             {showResult && locationResult.map((loc) => (
               <div
-                key={loc.locationId}
+                key={loc._id}
                 className="w-60 md:w-full bg-white rounded-lg border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
               >
                 <NavLink
-                  to={loc.locationName ? `viewDetails/${loc.locationId}` : `/stateSearch/${loc.state}`}
+                  to={loc.locationName ? `viewDetails/${loc._id}` : `/stateSearch/${loc.state}`}
                   className="block p-3 hover:bg-blue-50 transition-colors"
                 >
                   <div className="flex items-center">
