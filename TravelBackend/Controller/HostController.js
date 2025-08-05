@@ -337,7 +337,7 @@ exports.postEditLocation = async (req, res, next) => {
     // Perform the update
     const updatedLocation = await TravelLocations.findByIdAndUpdate(
       id,
-      updatedFields,
+      updatedFields,  
       { new: true }
     );
 
@@ -345,28 +345,6 @@ exports.postEditLocation = async (req, res, next) => {
   } catch (error) {
     console.log("Edit data is not post in database", error);
     res.status(500).json({ message: "Something went wrong" });
-  }
-};
-
-exports.searchLocation = async (req, res, next) => {
-  const query = req.query.q;
-
-  if (!query || query.trim() === "") {
-    return res.json([]);
-  }
-
-  try {
-    const result = await TravelLocations.find({
-      $or: [
-        { locationName: { $regex: query, $options: "i" } },
-        { state: { $regex: query, $options: "i" } },
-      ],
-    }).select("locationName, state, _id");
-
-    res.json(result);
-  } catch (error) {
-    console.error("Search error:", error);
-    res.status(500).json({ error: "Internal server error" });
   }
 };
 
