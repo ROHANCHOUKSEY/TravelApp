@@ -7,21 +7,24 @@ const SearchContainer = () => {
   const{showResult} = useContext(AppContext);
   const [locationResult, setLocationResult] = useState([]);
 
+  console.log("locationResult: ", locationResult);
+
   return (
     <>
       <div className="mb-5 max-w-lg mx-auto relative bottom-100">
         <SearchBar setLocationResult={setLocationResult} />
         {locationResult.length > 0 && (
           <div className="mt-2 space-y-2 h-0 relative z-1 ">
-            {showResult && locationResult.map((loc) => (
+            {showResult && locationResult.map((loc, index) => (
               <div
-                key={loc._id}
+                key={loc._id || `state-${loc.state}-${index}`}
                 className="w-60 md:w-full bg-white rounded-lg border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden"
               >
                 <NavLink
                   to={loc.locationName ? `viewDetails/${loc._id}` : `/stateSearch/${loc.state}`}
                   className="block p-3 hover:bg-blue-50 transition-colors"
                 >
+                  {console.log("loc._id:", loc._id)}
                   <div className="flex items-center">
                     <svg
                       className={`w-5 h-5 mr-3 ${loc.locationName ? 'text-blue-500' : 'text-purple-500'}`}

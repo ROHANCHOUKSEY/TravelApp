@@ -6,17 +6,40 @@ import { AppContext } from "../../CreateContext/AppContext";
 const SearchBar = ({ setLocationResult }) => {
 
   const { showResult, setShowResult } = useContext(AppContext);
-  const [search, setSearch] = useState("")
+  const [searchQuery, setSearchQuery] = useState("");
+  const controllRef = useRef(null);
 
-  const fetchLocationData = async () => {
+  const fetchLocationData = async (searchValue) => {
 
-    if(search === '') return;
+    if (controllRef.current) controllRef.current.abort();
+    controllRef.current = new AbortController();
+    const { signal } = controllRef.current;
 
-    console.log("API CALL", search);
     try {
-      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host/search?q=${encodeURIComponent(search)}`);
+
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/host`, { signal });
       const data = await response.json();
-      setLocationResult(data);
+
+      const uniqueState = new Set(data.map((loc) => loc.state.toLowerCase()));
+
+      if (uniqueState.has(searchValue)) {
+        setLocationResult([{ locationName: "", state: searchValue }]);
+        return;
+      }
+
+      const uniqueLocation = data.map((loc) => ({
+        locationName: loc.locationName,
+        state: loc.state,
+        _id: loc._id,
+      }));
+
+      const filteredLocation = uniqueLocation.filter((loc) => {
+        const searchLocationName = loc.locationName.toLowerCase().includes(searchValue);
+        const searchState = loc.state.toLowerCase().includes(searchValue);
+        return searchLocationName || searchState;
+      });
+
+      setLocationResult(filteredLocation);
     } catch (error) {
       if (error.name !== "AbortError") {
         console.log(error);
@@ -25,12 +48,26 @@ const SearchBar = ({ setLocationResult }) => {
   };
 
   useEffect(() => {
+    const searchValue = searchQuery.toLowerCase().trim();
+
+    if (!searchValue) {
+      if (controllRef.current) controllRef.current.abort();
+      setLocationResult([]);
+      return;
+    }
+
     //debounce
-    const timer = setTimeout(fetchLocationData, 300);
+    const id = setTimeout(() => {
+      fetchLocationData(searchValue)
+    }, 200);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(id);
 
-  }, [search]);
+  }, [searchQuery]);
+
+  const handleChange = (value) => {
+    setSearchQuery(value);
+  };
 
   const handleBlur = () => {
     setTimeout(() => {
@@ -53,16 +90,16 @@ const SearchBar = ({ setLocationResult }) => {
           type="text"
           className=" md:w-full py-4 pl-12 pr-12 rounded-none md:rounded-full border-2 border-amber-300/30 bg-white/90 backdrop-blur-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-lg transition-all duration-200"
           placeholder="Search destinations, states, or experiences..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => handleChange(e.target.value)}
           onFocus={() => setShowResult(true)}
           onBlur={handleBlur}
         />
 
         {/* Clear Button (Right) - Only shows when there's text */}
-        {search && (
+        {searchQuery && (
           <button
-            onClick={() => setSearch('')}
+            onClick={() => handleChange('')}
             className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -72,7 +109,7 @@ const SearchBar = ({ setLocationResult }) => {
         )}
 
         {/* Search Button (Right) - Shows when no text or replaces clear button */}
-        {!search && (
+        {!searchQuery && (
           <button
             onClick={() => {/* Add your search handler here */ }}
             className="absolute right-6 md:right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-500 to-orange-600 text-white p-2 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-110"
