@@ -2,22 +2,57 @@ import React from 'react'
 
 const HomePage = () => {
     return (
-        <>  
-            <div className="w-full flex justify-center ">
-                <img className="w-full h-120 backdrop-blur-sm" src="/Images/homeImage.webp" alt="" />
+        <div className="relative">
+            {/* Hero Image Section */}
+            <div className="relative w-full">
+                <img
+                    className="w-full h-[500px] md:h-[600px] lg:h-[700px] object-cover"
+                    src="/Images/homeImage.webp"
+                    alt="Incredible India"
+                />
+                {/* Gradient Overlay for better text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
             </div>
-            <div className="mb-8 relative bottom-100 text-center">
-                <h1 className="text-2xl md:text-5xl md:text-7xl font-extrabold uppercase text-white tracking-tight mb-6">
-                    <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                        Discover Incredible India
-                    </span>
-                </h1>
-                <p className="text-[15px] md:text-3xl font-semibold text-white/90 mb-10 leading-relaxed">
-                    Explore breathtaking destinations and hidden gems across our beautiful
-                    country
-                </p>
+
+            {/* Content Section */}
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="text-center px-4 max-w-6xl mx-auto relative bottom-20 md:bottom-25">
+                    {/* Animated Badge */}
+                    <div className="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mb-2 md:mb-8 animate-pulse">
+                        <span className="w-2 h-2 bg-green-400 rounded-full mr-3 animate-ping"></span>
+                        <span className="text-white font-medium text-sm md:text-base">Live Adventure</span>
+                    </div>
+
+                    {/* Main Heading */}
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tight mb-6 leading-tight">
+                        <span className="block bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 bg-clip-text text-transparent mb-2">
+                            Discover
+                        </span>
+                        <span className="text-2xl md:text-6xl block text-white drop-shadow-2xl">
+                            Incredible India
+                        </span>
+                    </h1>
+
+                    {/* Subtitle */}
+                    <p className="text-lg md:text-2xl lg:text-3xl font-light text-white/95 mb-12 leading-relaxed max-w-4xl mx-auto drop-shadow-lg relative bottom-[29px] md:bottom-0">
+                        Explore breathtaking destinations and hidden gems across our beautiful country
+                    </p>
+
+                </div>
             </div>
-        </>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center animate-bounce">
+                    <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+            <div className="absolute top-40 right-20 w-32 h-32 bg-amber-400/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-40 left-20 w-16 h-16 bg-orange-500/20 rounded-full blur-xl animate-pulse delay-2000"></div>
+        </div>
     )
 }
 

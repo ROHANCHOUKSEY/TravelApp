@@ -75,13 +75,20 @@ const Explore = () => {
           <ImageSlider />
         </div>}
 
-        <div className="relative bottom-55 md:bottom-50 text-center">
-          <h1 className="text-[16px] md:text-[50px] font-extrabold uppercase text-red-500 tracking-wide underline decoration-solid">Top Destinations to Explore in India</h1>
-          <p className="text-[12px] md:text-xl font-medium uppercase tracking-widest text-gray-500 dark:text-white mt-5">Handpicked places worth visiting for history, culture, and natural beauty.</p>
+        <div className={`relative  ${isLoggined ? 'bottom-55 md:bottom-50' : 'md:bottom-0'} text-center`}>
+          <div className="mb-8">
+            <h1 className="text-[20px] md:text-[60px] font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-4 animate-pulse">
+              Top Destinations to Explore in India
+            </h1>
+            <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-6 rounded-full"></div>
+            <p className="text-[14px] md:text-2xl font-medium text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
+              Handpicked places worth visiting for history, culture, and natural beauty.
+            </p>
+          </div>
         </div>
 
         {loading ? <h1>Loading...</h1> :
-          <div className={`relative ${isLoggined ? 'bottom-55 md:bottom-45' : ' bottom-45'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-10`}>
+          <div className={`relative ${isLoggined ? 'bottom-55 md:bottom-45' : ' bottom-0'} grid grid-cols-1 md:grid-cols-2 p-6 lg:grid-cols-3 gap-10`}>
 
             {locationCards.map((location) => (
               <div
@@ -134,16 +141,16 @@ const Explore = () => {
 
                   <div className="flex justify-between items-center">
                     {isLoggined ? (
-                      <NavLink
+                      <NavLink 
                         to={`viewDetails/${location.id}`}
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition-all duration-300"
+                        className="text-white bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition-all duration-300"
                       >
                         View Details
                       </NavLink>
                     ) : (
                       <NavLink
                         to="login"
-                        className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg  dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition-all duration-300"
+                        className="text-white bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg  dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition-all duration-300"
                       >
                         View Details
                       </NavLink>

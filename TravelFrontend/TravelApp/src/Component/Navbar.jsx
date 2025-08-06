@@ -31,14 +31,14 @@ const Navbar = () => {
 
   const getNavlinkClass = ({ isActive }) => {
     return isActive
-      ? "text-white bg-indigo-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer"
-      : "text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300 cursor-pointer";
+      ? "text-white bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:scale-105"
+      : "text-white hover:bg-white/10 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer backdrop-blur-sm hover:shadow-lg transform hover:scale-105";
   };
 
   const getMobileNavlinkClass = ({ isActive }) => {
     return isActive
-      ? "block text-white bg-indigo-700 px-3 py-2 rounded-md text-base font-medium"
-      : "block text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-base font-medium";
+      ? "block text-white bg-gradient-to-r from-amber-500 to-orange-500 px-4 py-3 rounded-lg text-base font-semibold shadow-lg"
+      : "block text-white hover:bg-white/10 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300";
   };
 
   const handleLogout = async () => {
@@ -125,26 +125,29 @@ const Navbar = () => {
   }, [mode]);
  
   return (
-    <nav className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg fixed z-10 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="w-full bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 shadow-2xl fixed z-10 backdrop-blur-md border-b border-white/20 dark:border-none dark:shadow-xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 dark:bg-gray-900 ">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
-          <div className="flex-shrink-0 flex items-center">
-            <div className="flex items-center">
-              <svg
-                className="h-8 w-8 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              <span className="ml-2 text-white text-xl font-bold">
+          <div className="flex-shrink-0 flex items-center group">
+            <div className="flex items-center cursor-pointer transform hover:scale-105 transition-all duration-300">
+              <div className="relative">
+                <svg
+                  className="h-8 w-8 text-white drop-shadow-lg group-hover:animate-pulse"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M13 10V3L4 14h7v7l9-11h-7z"
+                  />
+                </svg>
+                <div className="absolute inset-0 bg-white/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
+              </div>
+              <span className="ml-3 text-white text-xl font-bold tracking-wide drop-shadow-lg group-hover:text-amber-100 transition-colors duration-300">
                 Bharat Explorer
               </span>
             </div>
@@ -154,11 +157,11 @@ const Navbar = () => {
           <div className="hidden md:flex items-center space-x-2">
             {loading ? (<>
               <div className="flex space-x-4">
-                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
-                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
-                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
-                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
-                <div className="h-8 w-20 bg-indigo-600 rounded-md animate-pulse"></div>
+                <div className="h-8 w-20 bg-white/20 rounded-lg animate-pulse"></div>
+                <div className="h-8 w-20 bg-white/20 rounded-lg animate-pulse"></div>
+                <div className="h-8 w-20 bg-white/20 rounded-lg animate-pulse"></div>
+                <div className="h-8 w-20 bg-white/20 rounded-lg animate-pulse"></div>
+                <div className="h-8 w-20 bg-white/20 rounded-lg animate-pulse"></div>
               </div>
             </>) :
               isLoggined ? (
@@ -177,40 +180,43 @@ const Navbar = () => {
                       Favourites
                     </NavLink>
 
-                    <div className="relative ml-2 " ref={dropdownRef}>
+                    <div className="relative ml-2" ref={dropdownRef}>
                       <button
                         onClick={toggleDropdown}
-                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300 cursor-pointer"
+                        className="flex items-center text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 cursor-pointer backdrop-blur-sm hover:shadow-lg transform hover:scale-105"
                       >
-                        <CircleUserRound className="h-5 w-5 mr-1" />
-                        <span className="text-sm font-medium">
+                        <div className="relative">
+                          <CircleUserRound className="h-5 w-5 mr-2 drop-shadow-lg" />
+                          <div className="absolute inset-0 bg-white/20 rounded-full blur-sm"></div>
+                        </div>
+                        <span className="text-sm font-medium drop-shadow-lg">
                           {userName} {userlastName}
                         </span>
                         <ChevronDown
-                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${dropDown ? "transform rotate-180" : ""
+                          className={`h-4 w-4 ml-2 transition-transform duration-300 drop-shadow-lg ${dropDown ? "transform rotate-180" : ""
                             }`}
                         />
                       </button>
 
                       {dropDown && (
-                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                          <div className="py-1">
-                            <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                              <p className="font-medium">Welcome back!</p>
-                              <p className="truncate">
+                        <div className="absolute right-0 mt-3 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden z-20 border border-white/20 animate-fade-in">
+                          <div className="py-2">
+                            <div className="px-4 py-3 text-sm text-gray-700 border-b border-gray-100 bg-gradient-to-r from-amber-50 to-orange-50">
+                              <p className="font-bold text-amber-600">Welcome back!</p>
+                              <p className="truncate text-gray-600">
                                 {userName} {userlastName}
                               </p>
                             </div>
 
                             {/* Dark/Light Mode Toggle */}
-                            <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
+                            <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-amber-50 transition-all duration-200">
                               <div className="flex items-center">
                                 {mode === "dark" ? (
-                                  <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                                  <Moon className="h-4 w-4 mr-3 text-amber-600" />
                                 ) : (
-                                  <Sun className="h-4 w-4 mr-2 text-indigo-600" />
+                                  <Sun className="h-4 w-4 mr-3 text-amber-600" />
                                 )}
-                                <span>
+                                <span className="font-medium">
                                   {mode === "dark" ? "Dark" : "Light"} Mode
                                 </span>
                               </div>
@@ -221,16 +227,16 @@ const Navbar = () => {
                                   checked={mode === "dark"}
                                   onChange={handleToogle}
                                 />
-                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
                               </label>
                             </div>
 
                             <button
                               onClick={handleLogout}
-                              className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
+                              className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
                             >
-                              <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                              Sign out
+                              <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
+                              <span className="font-medium group-hover:text-red-600">Sign out</span>
                             </button>
                           </div>
                         </div>
@@ -252,36 +258,39 @@ const Navbar = () => {
                     <div className="relative ml-2" ref={dropdownRef}>
                       <button
                         onClick={toggleDropdown}
-                        className="flex items-center text-white hover:bg-indigo-700 px-3 py-2 rounded-md transition duration-300"
+                        className="flex items-center text-white hover:bg-white/10 px-4 py-2 rounded-lg transition-all duration-300 backdrop-blur-sm hover:shadow-lg transform hover:scale-105"
                       >
-                        <CircleUserRound className="h-5 w-5 mr-1" />
-                        <span className="text-sm font-medium">
+                        <div className="relative">
+                          <CircleUserRound className="h-5 w-5 mr-2 drop-shadow-lg" />
+                          <div className="absolute inset-0 bg-white/20 rounded-full blur-sm"></div>
+                        </div>
+                        <span className="text-sm font-medium drop-shadow-lg">
                           {userName} {userlastName}
                         </span>
                         <ChevronDown
-                          className={`h-4 w-4 ml-1 transition-transform duration-200 ${dropDown ? "transform rotate-180" : ""
+                          className={`h-4 w-4 ml-2 transition-transform duration-300 drop-shadow-lg ${dropDown ? "transform rotate-180" : ""
                             }`}
                         />
                       </button>
 
                       {dropDown && (
-                        <div className="absolute right-0 mt-2 w-56 bg-white rounded-md shadow-lg overflow-hidden z-20 border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                          <div className="py-1">
-                            <div className="px-4 py-2 text-sm text-gray-700 border-b border-gray-100 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-gray-200">
-                              <p className="font-medium">Host Dashboard</p>
-                              <p className="truncate">
+                        <div className="absolute right-0 mt-3 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden z-20 border border-white/20 animate-fade-in">
+                          <div className="py-2">
+                            <div className="px-4 py-3 text-sm text-gray-700 border-b border-gray-100 bg-gradient-to-r from-amber-50 to-orange-50">
+                              <p className="font-bold text-amber-600">Host Dashboard</p>
+                              <p className="truncate text-gray-600">
                                 {userName} {userlastName}
                               </p>
                             </div>
                             {/* Dark/Light Mode Toggle */}
-                            <div className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200">
+                            <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-amber-50 transition-all duration-200">
                               <div className="flex items-center">
                                 {mode === "dark" ? (
-                                  <Moon className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
+                                  <Moon className="h-4 w-4 mr-3 text-amber-600" />
                                 ) : (
-                                  <Sun className="h-4 w-4 mr-2 text-indigo-600" />
+                                  <Sun className="h-4 w-4 mr-3 text-amber-600" />
                                 )}
-                                <span>
+                                <span className="font-medium">
                                   {mode === "dark" ? "Dark" : "Light"} Mode
                                 </span>
                               </div>
@@ -292,15 +301,15 @@ const Navbar = () => {
                                   checked={mode === "dark"}
                                   onChange={handleToogle}
                                 />
-                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-600 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-500 peer-checked:bg-indigo-600"></div>
+                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
                               </label>
                             </div>
                             <button
                               onClick={handleLogout}
-                              className="flex w-full items-center px-4 py-2 text-sm cursor-pointer text-gray-700 hover:bg-indigo-50 transition-colors duration-200 dark:hover:bg-gray-700 dark:text-gray-200"
+                              className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
                             >
-                              <LogOut className="h-4 w-4 mr-2 text-indigo-600 dark:text-indigo-400" />
-                              Sign out
+                              <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
+                              <span className="font-medium group-hover:text-red-600">Sign out</span>
                             </button>
                           </div>
                         </div>
@@ -317,7 +326,7 @@ const Navbar = () => {
                     <NavLink to="/login" className={getNavlinkClass}>
                       Login
                     </NavLink>
-                    <NavLink to="/signUp" className={getNavlinkClass}>
+                    <NavLink to="/signUp" className="bg-gradient-to-r from-white to-gray-100 text-amber-600 hover:from-gray-100 hover:to-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl transform hover:scale-105">
                       Sign Up
                     </NavLink>
                   </div>
@@ -329,12 +338,12 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white hover:text-gray-200 focus:outline-none"
+              className="text-white hover:text-amber-100 focus:outline-none p-2 rounded-lg hover:bg-white/10 transition-all duration-300"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
                 <svg
-                  className="h-6 w-6"
+                  className="h-6 w-6 transform rotate-180 transition-transform duration-300"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -348,7 +357,7 @@ const Navbar = () => {
                 </svg>
               ) : (
                 <svg
-                  className="h-6 w-6"
+                  className="h-6 w-6 transition-transform duration-300"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -368,8 +377,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-indigo-700">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="md:hidden bg-gradient-to-b from-amber-600/95 to-orange-600/95 backdrop-blur-md border-t border-white/20 animate-slide-down">
+          <div className="px-4 pt-4 pb-6 space-y-2">
             {isLoggined ? (
               userType === "guest" ? (
                 <>
@@ -403,11 +412,11 @@ const Navbar = () => {
                   </NavLink>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-base font-medium"
+                    className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
                   >
                     Sign out
                   </button>
-                  <div className="pt-2 border-t border-indigo-800"></div>
+                  <div className="pt-2 border-t border-white/20"></div>
                 </>
               ) : (
                 <>
@@ -434,7 +443,7 @@ const Navbar = () => {
                   </NavLink>
                   <button
                     onClick={handleLogout}
-                    className="block w-full text-left text-white hover:bg-indigo-600 px-3 py-2 rounded-md text-base font-medium"
+                    className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
                   >
                     Sign out
                   </button>

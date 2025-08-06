@@ -88,7 +88,7 @@ const SearchBar = ({ setLocationResult }) => {
         {/* Input Field */}
         <input
           type="text"
-          className=" md:w-full py-4 pl-12 pr-12 rounded-none md:rounded-full border-2 border-amber-300/30 bg-white/90 backdrop-blur-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-amber-400 shadow-lg transition-all duration-200"
+          className=" md:w-full py-4 pl-12 pr-12  rounded-full border-2 border-amber-300/30 bg-white/90 backdrop-blur-sm text-gray-800 focus:outline-none focus:ring-2  shadow-lg transition-all duration-200 h-[44px] md:rounded-full md:h-15"
           placeholder="Search destinations, states, or experiences..."
           value={searchQuery}
           onChange={(e) => handleChange(e.target.value)}

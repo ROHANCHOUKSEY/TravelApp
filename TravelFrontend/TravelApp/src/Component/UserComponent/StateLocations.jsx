@@ -114,7 +114,7 @@ const StateLocations = () => {
           </div>
         </div> */}
         <div className="w-full overflow-hidden">
-          <div className="scroll-slider flex gap-10 whitespace-nowrap scroll-animation mb-20 mt-10">
+          <div className="scroll-slider flex gap-8 whitespace-nowrap scroll-animation mb-20 mt-10">
             {[...statesWithLocations, ...statesWithLocations].map((state, index) => {
               const stateData = statebaseLocation[state];
               const previewImage =
@@ -128,20 +128,47 @@ const StateLocations = () => {
                 <div
                   key={index}
                   onClick={() => setActiveState(state)}
-                  className={`min-w-[20rem] flex-shrink-0 cursor-pointer w-80 h-80 rounded-2xl shadow-xl/20 transition-transform duration-300 ease-in-out transform hover:-translate-y-2 shadow-md hover:shadow-xl  bg-white  ${activeState === state ? "border-2 border-blue-500 " : "border-none"}`}
+                  className={`group relative min-w-[320px] flex-shrink-0 cursor-pointer w-80 h-96 rounded-3xl transition-all duration-500 ease-in-out transform hover:-translate-y-4 hover:scale-105 ${
+                    activeState === state 
+                      ? "ring-4 ring-blue-500 ring-opacity-50 shadow-2xl" 
+                      : "shadow-xl hover:shadow-2xl"
+                  } bg-white dark:bg-gray-800 overflow-hidden border border-gray-100 dark:border-gray-700`}
                 >
-                  <img
-                    src={previewImage}
-                    alt={formatStateName(state)}
-                    className="w-100 h-50 object-cover rounded-t-2xl shadow-xl"
-                  />
-                  <div className="p-3 text-center">
-                    <h3 className="text-base sm:text-lg font-semibold dark:text-white">
+                  {/* Image Container */}
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={previewImage}
+                      alt={formatStateName(state)}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                    
+                    {/* Active State Badge */}
+                    {activeState === state && (
+                      <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
+                        ✨ Active
+                      </div>
+                    )}
+                    
+                    {/* Location Count Badge */}
+                    <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
+                      🏛️ {stateData.length} locations
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-6 relative">
+                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-blue-600 transition-colors duration-300">
                       {formatStateName(state)}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-black">
-                      {stateData.length} locations
-                    </p>
+                    
+                    {/* Explore Button */}
+                    <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                      <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        🚀 Explore Now
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -207,7 +234,7 @@ const StateLocations = () => {
                       <div className="flex justify-between">
                         <NavLink
                           to={`/viewDetails/${location._id}`}
-                          className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
+                          className="text-white bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
                         >
                           View Details
                         </NavLink>
