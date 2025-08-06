@@ -35,10 +35,13 @@ const Favourites = () => {
   return (
     <>
       <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
-        <div className="mb-8">
-          <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 mb-2 dark:text-white">
-            Your Favourite Destinations
-          </h1>
+        <div className="mb-12 text-center">
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-6 animate-pulse">
+              Your Favourite Destinations
+            </h1>
+          </div>
+          <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

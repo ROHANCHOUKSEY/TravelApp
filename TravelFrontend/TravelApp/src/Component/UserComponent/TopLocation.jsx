@@ -37,16 +37,20 @@ const TopLocation = () => {
       navigate("/favourites");
     }
   };
-
   return (
     <div className="relative top-[64px] min-h-screen bg-gray-50 p-6 dark:bg-gray-900">
-      <div className="mb-8">
-        <h1 className="text-center font-sans text-3xl underline underline-offset-4  font-bold text-gray-800 dark:text-white mb-2">
-          Must-Visit Destinations
-        </h1>
-        <p className="text-lg text-center text-gray-600 dark:text-white max-w-2xl mx-auto">
-          Explore the most loved and highly rated locations in India.
-        </p>
+      <div className="mb-12 text-center">
+        <div className="mb-8">
+          <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-6 animate-pulse">
+            Must-Visit Destinations
+          </h1>
+          <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full">
+          </div>
+
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Explore the most loved and highly rated locations in India.
+            </p>
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {locationLists.map((location) => (

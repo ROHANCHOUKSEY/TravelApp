@@ -18,10 +18,8 @@ const StateLocations = () => {
 
         if (data && data.length > 0) {
           const locationsData = data[0];
-          // console.log("locationsData", locationsData); 
           setStatebaseLocation(locationsData);
 
-          // Verify the data structure and set first valid state
           const validStates = Object.entries(locationsData).filter(
             ([state, locations]) =>
               Array.isArray(locations) && locations.length > 0
@@ -65,7 +63,6 @@ const StateLocations = () => {
     return <div className="text-center py-8">No locations data available</div>;
   }
 
-  // Get states that have valid arrays with locations
   const statesWithLocations = Object.entries(statebaseLocation)
     .filter(
       ([state, locations]) => Array.isArray(locations) && locations.length > 0
@@ -76,7 +73,6 @@ const StateLocations = () => {
     return <div className="text-center py-8">Loading...</div>;
   }
 
-  // Safely get current locations
   const currentLocations =
     activeState && Array.isArray(statebaseLocation[activeState])
       ? statebaseLocation[activeState]
@@ -85,15 +81,18 @@ const StateLocations = () => {
   return (
     <>
       <div className="relative top-[64px] container  mx-auto px-4 py-8 dark:bg-gray-900">
-        <div className="mb-8">
-          <h1 className="text-center font-sans text-3xl dark:text-white underline underline-offset-4  font-bold text-gray-800 mb-2">
-            Discover India, One State at a Time
-          </h1>
-          <p className="text-lg text-center dark:text-white text-gray-600 max-w-2xl mx-auto">
-            Explore breathtaking destinations across India, organized by state.
-            From majestic forts to serene beaches — start your journey with just a
-            click.
-          </p> 
+        <div className="mb-12 text-center">
+          <div className="mb-8">
+            <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-6 animate-pulse">
+              Discover India, One State at a Time
+            </h1>
+            <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Explore breathtaking destinations across India, organized by state.
+              From majestic forts to serene beaches — start your journey with just a
+              click.
+            </p>
+          </div>
         </div>
         {/* State Selection Tabs */}
         {/* <div className="w-full overflow-hidden mb-10">
@@ -117,53 +116,61 @@ const StateLocations = () => {
           <div className="scroll-slider flex gap-8 whitespace-nowrap scroll-animation mb-20 mt-10">
             {[...statesWithLocations, ...statesWithLocations].map((state, index) => {
               const stateData = statebaseLocation[state];
-              const previewImage =
+
+              let previewImage = "/placeholder.jpg";
+
+              if (
                 Array.isArray(stateData) &&
-                  stateData[0]?.image &&
-                  stateData[0].image.length > 0
-                  ? stateData[0].image[4]
-                  : "/placeholder.jpg"; // fallback image
+                stateData[0]?.image &&
+                stateData[0].image.length > 0
+              ) {
+                const currentState = stateData[0].state;
+
+                if (currentState === "Maharashtra") {
+                  previewImage = stateData[0].image[2] || "/placeholder.jpg";
+                } else if (currentState === "Madhya Pradesh") {
+                  previewImage = stateData[0].image[4] || "/placeholder.jpg";
+                }else if(currentState === "Goa"){
+                  previewImage = stateData[0].image[4] || "/placeholder.jpg";
+                } 
+                else {
+                  previewImage = stateData[0].image[2] || "/placeholder.jpg";
+                }
+              }
 
               return (
                 <div
                   key={index}
                   onClick={() => setActiveState(state)}
-                  className={`group relative min-w-[320px] flex-shrink-0 cursor-pointer w-80 h-96 rounded-3xl transition-all duration-500 ease-in-out transform hover:-translate-y-4 hover:scale-105 ${
-                    activeState === state 
-                      ? "ring-4 ring-blue-500 ring-opacity-50 shadow-2xl" 
-                      : "shadow-xl hover:shadow-2xl"
-                  } bg-white dark:bg-gray-800 overflow-hidden border border-gray-100 dark:border-gray-700`}
+                  className={`group relative min-w-[320px] flex-shrink-0 cursor-pointer w-80 h-96 rounded-3xl transition-all duration-500 ease-in-out transform hover:-translate-y-4 hover:scale-105 ${activeState === state
+                    ? "ring-4 ring-blue-500 ring-opacity-50 shadow-2xl"
+                    : "shadow-xl hover:shadow-2xl"
+                    } bg-white dark:bg-gray-800 overflow-hidden border border-gray-100 dark:border-gray-700`}
                 >
-                  {/* Image Container */}
                   <div className="relative h-64 overflow-hidden">
                     <img
                       src={previewImage}
                       alt={formatStateName(state)}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
-                    {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                    
-                    {/* Active State Badge */}
+
                     {activeState === state && (
                       <div className="absolute top-4 right-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg animate-pulse">
                         ✨ Active
                       </div>
                     )}
-                    
-                    {/* Location Count Badge */}
+
                     <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-gray-800/90 text-gray-800 dark:text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
                       🏛️ {stateData.length} locations
                     </div>
                   </div>
 
-                  {/* Content Section */}
                   <div className="p-6 relative">
-                    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                    <h3 className="text-xl font-bold text-center text-gray-800 dark:text-white mb-3 group-hover:text-blue-600 transition-colors duration-300">
                       {formatStateName(state)}
                     </h3>
-                    
-                    {/* Explore Button */}
+
                     <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                       <button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                         🚀 Explore Now
@@ -181,13 +188,12 @@ const StateLocations = () => {
         {activeState && currentLocations.length > 0 && (
           <div>
             <h2 className="text-[64px] font-extrabold uppercase text-blue-400 tracking-wide text-center mb-10">
-              {formatStateName(activeState)} 
+              {formatStateName(activeState)}
               {/* ({currentLocations.length} locations) */}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {currentLocations.map((location, index) => {
-                // Ensure location is an object
                 if (typeof location !== "object" || location === null) {
                   return null; // Skip invalid entries
                 }
@@ -197,7 +203,6 @@ const StateLocations = () => {
                     key={index}
                     className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 dark:bg-gray-800 dark:hover:shadow-gray-700/50"
                   >
-                    {/* Render location details */}
                     {location.image &&
                       Array.isArray(location.image) &&
                       location.image[0] && (
