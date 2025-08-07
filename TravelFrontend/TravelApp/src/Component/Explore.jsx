@@ -16,7 +16,7 @@ const Explore = () => {
   const [loading, setLoading] = useState(true);
 
 
-  useEffect(() => {
+  useEffect(() => { 
     async function fetchLocation() {
       try {
         setLoading(true);

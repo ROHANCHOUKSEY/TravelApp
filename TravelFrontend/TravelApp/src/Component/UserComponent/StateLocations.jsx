@@ -9,6 +9,7 @@ const StateLocations = () => {
   const [activeState, setActiveState] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
     async function fetchStateLocation() {
@@ -113,7 +114,11 @@ const StateLocations = () => {
           </div>
         </div> */}
         <div className="w-full overflow-hidden">
-          <div className="scroll-slider flex gap-8 whitespace-nowrap scroll-animation mb-20 mt-10">
+          <div 
+            className={`scroll-slider flex gap-8 whitespace-nowrap mb-20 mt-10 scroll-animation ${isHovering ? 'animation-paused' : ''}`}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+          >
             {[...statesWithLocations, ...statesWithLocations].map((state, index) => {
               const stateData = statebaseLocation[state];
 
