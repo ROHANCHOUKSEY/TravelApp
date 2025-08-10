@@ -19,6 +19,7 @@ import {
 import { motion } from "framer-motion";
 import Review from "../Review/Review";
 import { AppContext } from "../../CreateContext/AppContext";
+import UseKeyPress from "./UseKeyPress";
 
 const ViewDetails = () => {
 
@@ -30,6 +31,10 @@ const ViewDetails = () => {
   const [details, setDetails] = useState(null);
 
   const { id } = useParams();
+
+  UseKeyPress("Escape", () => {
+    if (imgOpen) setImgOpen(false);
+  });
 
   useEffect(() => {
     async function fetchDetails() {
@@ -68,7 +73,6 @@ const ViewDetails = () => {
       ));
   };
 
-
   const handleImageOpen = (pic) => {
     setTakeImg(pic)
     console.log("TakeImg: ", takeImg);
@@ -86,7 +90,7 @@ const ViewDetails = () => {
       <div className="max-w-6xl mx-auto">
         {/* Image Gallery (unchanged) */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden mb-8">
-          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white px-6 pt-6">
+          <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white px-6 pt-6 text-center uppercase">
             Photo Gallery
           </h2>
 
@@ -99,7 +103,6 @@ const ViewDetails = () => {
                   : ""
                   }`}
               >
-                {/* {imgOpen ? <h1>X</h1> : ""} */}
                 {<img
                   src={img}
                   alt={`${details.locationName} ${index + 1}`}
@@ -121,23 +124,23 @@ const ViewDetails = () => {
 
         {/* Seprate Image Open */}
         {imgOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
-          <button
-            className="absolute top-2 right-6 text-white text-3xl font-bold hover:text-gray-300 cursor-pointer"
-            onClick={() => setImgOpen(false)}
-          >
-            &times;
-          </button>          
-          <motion.img
-            src={takeImg}
-            alt="Selected"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="shadow-lg w-full object-contain max-h-[80vh]"
-          />
-        </div>
-      )}
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <button
+              className="absolute top-2 right-6 text-white text-3xl font-bold hover:text-gray-300 cursor-pointer"
+              onClick={() => setImgOpen(false)}
+            >
+              &times;
+            </button>
+            <motion.img
+              src={takeImg}
+              alt="Selected"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+              className="shadow-lg w-full object-contain max-h-[80vh]"
+            />
+          </div>
+        )}
 
 
         {/* Enhanced Details Section */}

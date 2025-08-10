@@ -123,7 +123,7 @@ const Navbar = () => {
       lightMode();
     }
   }, [mode]);
- 
+
   return (
     <nav className="w-full bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 shadow-2xl fixed z-10 backdrop-blur-md border-b border-white/20 dark:border-none dark:shadow-xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 dark:bg-gray-900 ">
@@ -147,9 +147,11 @@ const Navbar = () => {
                 </svg>
                 <div className="absolute inset-0 bg-white/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
               </div>
-              <span className="ml-3 text-white text-xl font-bold tracking-wide drop-shadow-lg group-hover:text-amber-100 transition-colors duration-300">
-                Bharat Explorer
-              </span>
+              <NavLink to="/">
+                <span className="ml-3 text-white text-xl font-bold tracking-wide drop-shadow-lg group-hover:text-amber-100 transition-colors duration-300">
+                  Bharat Explorer
+                </span>
+              </NavLink>
             </div>
           </div>
 
@@ -171,7 +173,7 @@ const Navbar = () => {
                       Discover
                     </NavLink>
                     <NavLink to="/stateLocation" className={getNavlinkClass}>
-                     Explore More
+                      Explore More
                     </NavLink>
                     <NavLink to="/location" className={getNavlinkClass}>
                       Top Picks
