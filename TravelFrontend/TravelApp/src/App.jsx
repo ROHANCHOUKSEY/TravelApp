@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <ScrollToTopOnRouteChange /> 
+      <ScrollToTopOnRouteChange />
       <Navbar />
       <Outlet />
       <Footer />

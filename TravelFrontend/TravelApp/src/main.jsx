@@ -19,7 +19,7 @@ import Login from "./Component/LoginSignUpComponent/Login.jsx";
 import SignUp from "./Component/LoginSignUpComponent/SignUp.jsx";
 import PageNotFound from "./Component/PageNotFound.jsx";
 import ProtectedRoute from "./Component/ProtectedRoute.jsx";
-import ViewDetails from "./Component/ViewDetails.jsx";
+import ViewDetails from "./Component/ViewDetailsCom/ViewDetails.jsx";
 import StateLocations from "./Component/UserComponent/StateLocations.jsx";
 import SearchStateLocations from "./Component/UserComponent/SearchStateLocations.jsx";
 
