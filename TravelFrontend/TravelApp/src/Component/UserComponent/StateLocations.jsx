@@ -84,11 +84,11 @@ const StateLocations = () => {
       <div className="relative top-[64px] container  mx-auto px-4 py-8 dark:bg-gray-900">
         <div className="mb-12 text-center">
           <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-6 animate-pulse">
+            <h1 className="text-2xl md:text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent tracking-wide mb-6 animate-pulse">
               Discover India, One State at a Time
             </h1>
             <div className="w-32 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto mb-8 rounded-full"></div>
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base text-center md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Explore breathtaking destinations across India, organized by state.
               From majestic forts to serene beaches — start your journey with just a
               click.
@@ -192,7 +192,7 @@ const StateLocations = () => {
         {/* Locations for Selected State */}
         {activeState && currentLocations.length > 0 && (
           <div>
-            <h2 className="text-[64px] font-extrabold uppercase text-blue-400 tracking-wide text-center mb-10">
+            <h2 className="text-2xl md:text-[64px] font-extrabold uppercase text-blue-400 tracking-wide text-center mb-10">
               {formatStateName(activeState)}
               {/* ({currentLocations.length} locations) */}
             </h2>

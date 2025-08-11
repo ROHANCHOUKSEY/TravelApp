@@ -63,7 +63,7 @@ const Explore = () => {
 
         {isLoggined ? <SearchContainer /> : ""}
 
-       {isLoggined && <div className="bg-gray-100 relative bottom-60 md:bottom-62 h-62 md:h-100 shadow-xl">
+       {isLoggined && <div className="bg-gray-100 dark:bg-gray-900 relative bottom-60 md:bottom-62 h-62 md:h-100 shadow-xl">
           <div className="w-full text-center">
             <h1 className="text-[15px] md:text-[50px] font-extrabold uppercase text-sky-400 tracking-wide">Explore India’s Diverse Beauty
               {/* <span class="absolute bottom-82 left-0.5 md:left-45 w-100 h-1 bg-amber-400"></span> */}

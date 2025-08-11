@@ -355,8 +355,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-gradient-to-b from-amber-600/95 to-orange-600/95 backdrop-blur-md border-t border-white/20 animate-slide-down">
-          <div className="px-4 pt-4 pb-6 space-y-2">
+        <div className="md:hidden bg-gradient-to-b from-amber-600/95 to-orange-600/95 backdrop-blur-md border-t border-white/20 animate-slide-down z-50">
+          <div className="px-4 pt-4 pb-6 space-y-2 dark:bg-gray-900">
             {isLoggined ? (
               userType === "guest" ? (
                 <>
@@ -388,6 +388,28 @@ const Navbar = () => {
                   >
                     Favourites
                   </NavLink>
+                  <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-amber-50 transition-all duration-200 bg-white rounded-full
+                  ">
+                    <div className="flex items-center">
+                      {mode === "dark" ? (
+                        <Moon className="h-4 w-4 mr-3 text-amber-600" />
+                      ) : (
+                        <Sun className="h-4 w-4 mr-3 text-amber-600" />
+                      )}
+                      <span className="font-medium">
+                        {mode === "dark" ? "Dark" : "Light"} Mode
+                      </span>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="sr-only peer"
+                        checked={mode === "dark"}
+                        onChange={handleToogle}
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
+                    </label>
+                  </div>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
@@ -419,6 +441,28 @@ const Navbar = () => {
                   >
                     Add Location
                   </NavLink>
+                  <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-700 hover:bg-amber-50 transition-all duration-200 bg-white rounded-full
+                  ">
+                    <div className="flex items-center">
+                      {mode === "dark" ? (
+                        <Moon className="h-4 w-4 mr-3 text-amber-600" />
+                      ) : (
+                        <Sun className="h-4 w-4 mr-3 text-amber-600" />
+                      )}
+                      <span className="font-medium">
+                        {mode === "dark" ? "Dark" : "Light"} Mode
+                      </span>
+                    </div>
+                    <label className="relative inline-flex items-center cursor-pointer">
+                      <input
+                        type="checkbox"
+                        className="sr-only peer"
+                        checked={mode === "dark"}
+                        onChange={handleToogle}
+                      />
+                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
+                    </label>
+                  </div>
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
