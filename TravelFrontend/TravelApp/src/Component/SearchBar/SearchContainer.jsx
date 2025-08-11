@@ -1,11 +1,11 @@
 import React, { useContext, useState } from "react";
 import SearchBar from "./SearchBar";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"; 
 import "../../index.css"
 import { AppContext } from "../../CreateContext/AppContext";
 
 const SearchContainer = () => {
-  const{showResult} = useContext(AppContext);
+  const [showResult, setShowResult] = useState(false);
   const [locationResult, setLocationResult] = useState([]);
 
   console.log("locationResult: ", locationResult);
@@ -13,7 +13,7 @@ const SearchContainer = () => {
   return (
     <>
       <div className="mb-5 max-w-lg mx-auto relative bottom-63">
-        <SearchBar setLocationResult={setLocationResult} />
+        <SearchBar setLocationResult={setLocationResult} setShowResult={setShowResult}/>
         { showResult && locationResult.length > 0 && (
           <div className="mt-2 space-y-2 h-0 relative z-1">
             {/* Search Results Container with Light Gray Background */}

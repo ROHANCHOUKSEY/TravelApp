@@ -91,30 +91,6 @@ const Navbar = () => {
     }
   };
 
-  // useEffect(() => {
-  //   async function getScreenMode() {
-  //     try {
-  //       const res = await getsessionmode();
-  //       // const data = await res.json();
-  //       console.log("getsessionmode", res);
-
-  //       if (res.mode === "dark") {
-  //         darkMode();
-  //       } else {
-  //         lightMode();
-  //       }
-  //     } catch (err) {
-  //       console.error("Failed to get screen mode", err);
-  //     }
-  //   }
-
-  //   getScreenMode();
-  // }, []);
-
-  // if (loading) {
-  //   return null;
-  // }
-
   useEffect(() => {
     // Only change mode if already set in context
     if (mode === "dark") {

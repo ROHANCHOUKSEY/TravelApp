@@ -3,9 +3,8 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AppContext } from "../../CreateContext/AppContext";
 
-const SearchBar = ({ setLocationResult }) => {
+const SearchBar = ({ setLocationResult, setShowResult }) => {
 
-  const { showResult, setShowResult } = useContext(AppContext);
   const [searchQuery, setSearchQuery] = useState("");
   const controllRef = useRef(null);
 
@@ -51,7 +50,7 @@ const SearchBar = ({ setLocationResult }) => {
     const searchValue = searchQuery.toLowerCase().trim();
 
     if (!searchValue) {
-      if (controllRef.current) controllRef.current.abort();
+      if (controllRef.current) controllRef.current.abort(); 
       setLocationResult([]);
       return;
     }
