@@ -1,4 +1,5 @@
 import React from 'react'
+// import Filteraction from '../LocationFilteration/Filteraction'
 
 const HomePage = () => {
     return (
@@ -37,21 +38,8 @@ const HomePage = () => {
                     <p className="text-lg md:text-2xl lg:text-3xl font-light text-white/95 mb-12 leading-relaxed max-w-4xl mx-auto drop-shadow-lg relative bottom-[29px] md:bottom-0">
                         Explore breathtaking destinations and hidden gems across our beautiful country
                     </p>
-
                 </div>
             </div>
-
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center animate-bounce">
-                    <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-            </div>
-
-            {/* Decorative Elements */}
-            <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-            <div className="absolute top-40 right-20 w-32 h-32 bg-amber-400/20 rounded-full blur-xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-40 left-20 w-16 h-16 bg-orange-500/20 rounded-full blur-xl animate-pulse delay-2000"></div>
         </div>
     )
 }

@@ -14,9 +14,34 @@ const Explore = () => {
     useContext(AppContext);
 
   const [loading, setLoading] = useState(true);
+  // Add filtration state
+  const [selectLocation, setSelectLocation] = useState("");
+  const [filteredLocations, setFilteredLocations] = useState([]);
+  const [locationCards, setLocationCards] = useState([]);
 
+  // Location types for filtering
+  const Locations = ["Temple", "Hill Station", "Beach", "Zoo", "Fort"];
 
-  useEffect(() => { 
+  // Handle location selection
+  const handleSelectLocation = (e) => {
+    setSelectLocation(e.target.value);
+  };
+
+  // Filter locations based on selected type
+  const filterLocations = () => {
+    if (selectLocation) {
+      const filtered = locationLists.filter(
+        (loc) => loc.typeOfPlace.toLowerCase() === selectLocation.toLowerCase()
+      );
+      setFilteredLocations(filtered);
+      return filtered;
+    } else {
+      setFilteredLocations(locationLists);
+      return locationLists;
+    }
+  };
+
+  useEffect(() => {
     async function fetchLocation() {
       try {
         setLoading(true);
@@ -30,6 +55,7 @@ const Explore = () => {
     setLoading(false);
   }, []);
 
+
   const suffleCard = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -39,31 +65,30 @@ const Explore = () => {
     return shuffled;
   }
 
-  const [locationCards, setLocationCards] = useState([]);
-
+  // Update location cards when locationLists or filter changes
   useEffect(() => {
     const isPageReload = window.performance.getEntriesByType("navigation")[0]?.type === "reload";
-    if (isPageReload && locationLists && locationLists.length) {
-      const shuffledCards = suffleCard(locationLists);
+    const locationsToDisplay = filterLocations();
+    if (isPageReload && locationsToDisplay && locationsToDisplay.length) {
+      const shuffledCards = suffleCard(locationsToDisplay);
       setLocationCards(shuffledCards);
-      // console.log("Shuffled because page was reloaded manually");
     } else {
-      setLocationCards(locationLists);
-      // console.log("Used original order because it was not a page reload");
+      setLocationCards(locationsToDisplay);
     }
-
-  }, [locationLists]);
+  }, [locationLists, selectLocation]);
 
 
   return (
     <>
       <div className="relative top-[64px] min-h-screen bg-gray-50 p-0 dark:bg-gray-900 transition-colors duration-300">
 
-        <HomePage/>
+        {/* Home PageConainter */}
+        <HomePage />
 
+        {/* //Filteration Container */}
         {isLoggined ? <SearchContainer /> : ""}
 
-       {isLoggined && <div className="bg-gray-100 dark:bg-gray-900 relative bottom-60 md:bottom-62 h-62 md:h-100 shadow-xl">
+        {isLoggined && <div className="bg-gray-100 dark:bg-gray-900 relative bottom-60 md:bottom-62 h-62 md:h-100 shadow-xl">
           <div className="w-full text-center">
             <h1 className="text-[15px] md:text-[50px] font-extrabold uppercase text-sky-400 tracking-wide">Explore India’s Diverse Beauty
               {/* <span class="absolute bottom-82 left-0.5 md:left-45 w-100 h-1 bg-amber-400"></span> */}
@@ -84,6 +109,22 @@ const Explore = () => {
             <p className="text-[14px] md:text-2xl font-medium text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Handpicked places worth visiting for history, culture, and natural beauty.
             </p>
+            
+            {/* Add Filter Dropdown */}
+            <div className="mt-6 mb-4">
+              <select 
+                value={selectLocation} 
+                onChange={handleSelectLocation} 
+                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+              >
+                <option value="" className="text-black dark:text-white">All Locations</option>
+                {Locations.map((location, index) => (
+                  <option key={index} value={location} className="text-black dark:text-white">
+                    {location}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
@@ -141,7 +182,7 @@ const Explore = () => {
 
                   <div className="flex justify-between items-center">
                     {isLoggined ? (
-                      <NavLink 
+                      <NavLink
                         to={`viewDetails/${location.id}`}
                         className="text-white bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg dark:shadow-lg  font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 transition-all duration-300"
                       >
@@ -159,6 +200,7 @@ const Explore = () => {
                 </div>
               </div>
             ))}
+
           </div>
         }
       </div>

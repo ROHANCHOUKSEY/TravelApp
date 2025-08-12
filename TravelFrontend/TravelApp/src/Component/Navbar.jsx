@@ -102,7 +102,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 shadow-2xl fixed z-10 backdrop-blur-md border-b border-white/20 dark:border-none dark:shadow-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 dark:bg-gray-900 ">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 dark:bg-gray-900 max-w-[100%]">
         <div className="flex items-center justify-between h-16">
           {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center group">
@@ -183,7 +183,7 @@ const Navbar = () => {
                               <p className="font-bold text-amber-600">Welcome back!</p>
                               <p className="truncate text-gray-600">
                                 {userName} {userlastName}
-                              </p>
+                              </p> 
                             </div>
 
                             {/* Dark/Light Mode Toggle */}

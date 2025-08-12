@@ -81,7 +81,7 @@ export const locationFromServer = async () => {
           "Content-Type": "application/json",
         },
       }
-    );
+    ); 
     const allLocation = await response.json();
     return allLocation.map(maplocalValueToserviseValue);
   } catch (error) {

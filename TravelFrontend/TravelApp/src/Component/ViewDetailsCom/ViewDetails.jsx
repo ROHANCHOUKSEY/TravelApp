@@ -40,7 +40,6 @@ const ViewDetails = () => {
     async function fetchDetails() {
       try {
         const data = await locationDetails(id);
-        console.log("fetchDetailsData", data);
         setDetails(data);
       } catch (error) {
         console.error("Error fetching details:", error);
@@ -75,7 +74,6 @@ const ViewDetails = () => {
 
   const handleImageOpen = (pic) => {
     setTakeImg(pic)
-    console.log("TakeImg: ", takeImg);
     setImgOpen(true);
   }
 

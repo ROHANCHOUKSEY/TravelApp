@@ -34,8 +34,6 @@ export const ContextProvider = (props) => {
         const res = await fetch(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/auth/session`, {
           credentials: "include", // send cookies for session
         });
-        console.log("Response:", res);
-
         if (!res.ok) throw new Error("Session check failed"); 
  
         const data = await res.json();
@@ -64,8 +62,6 @@ export const ContextProvider = (props) => {
         setLoading(false);
       }
     };
-    console.log("isLoggined: ", isLoggined);
-    console.log("userType: ", userType);
     checkLoginStatus();
   }, [isLoggined, mode]);
 

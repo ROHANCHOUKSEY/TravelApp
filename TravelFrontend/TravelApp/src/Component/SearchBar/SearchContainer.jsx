@@ -1,24 +1,21 @@
 import React, { useContext, useState } from "react";
 import SearchBar from "./SearchBar";
-import { NavLink } from "react-router-dom"; 
+import { NavLink } from "react-router-dom";
 import "../../index.css"
 import { AppContext } from "../../CreateContext/AppContext";
 
 const SearchContainer = () => {
   const [showResult, setShowResult] = useState(false);
-  const [locationResult, setLocationResult] = useState([]);
-
-  console.log("locationResult: ", locationResult);
-
+  const [locationResult, setLocationResult] = useState([]); 
   return (
     <>
-      <div className="mb-5 max-w-lg mx-auto relative bottom-63">
-        <SearchBar setLocationResult={setLocationResult} setShowResult={setShowResult}/>
-        { showResult && locationResult.length > 0 && (
+      <div className="mb-5 max-w-full w-150 mx-auto relative bottom-63">
+        <SearchBar setLocationResult={setLocationResult} setShowResult={setShowResult} />
+        {showResult && locationResult.length > 0 && (
           <div className="mt-2 space-y-2 h-0 relative z-1">
             {/* Search Results Container with Light Gray Background */}
             <div className={showResult && `bg-gray-100 rounded-lg p-3 shadow-lg border border-gray-200 max-h-80 overflow-y-scroll`}>
-              { locationResult.map((loc, index) => (
+              {locationResult.map((loc, index) => (
                 <div
                   key={loc._id || `state-${loc.state}-${index}`}
                   className="w-60 md:w-full bg-white rounded-lg border border-gray-200 hover:border-blue-300 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden mb-2 last:mb-0"
@@ -27,7 +24,6 @@ const SearchContainer = () => {
                     to={loc.locationName ? `viewDetails/${loc._id}` : `/stateSearch/${loc.state}`}
                     className="block p-3 hover:bg-blue-50 transition-colors"
                   >
-                    {console.log("loc._id:", loc._id)}
                     <div className="flex items-center">
                       <svg
                         className={`w-5 h-5 mr-3 ${loc.locationName ? 'text-blue-500' : 'text-purple-500'}`}
@@ -55,7 +51,6 @@ const SearchContainer = () => {
           </div>
         )}
       </div>
-      
     </>
   );
 };

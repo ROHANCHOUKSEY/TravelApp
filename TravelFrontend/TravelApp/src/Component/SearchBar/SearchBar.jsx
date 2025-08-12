@@ -50,7 +50,7 @@ const SearchBar = ({ setLocationResult, setShowResult }) => {
     const searchValue = searchQuery.toLowerCase().trim();
 
     if (!searchValue) {
-      if (controllRef.current) controllRef.current.abort(); 
+      if (controllRef.current) controllRef.current.abort();
       setLocationResult([]);
       return;
     }
@@ -76,7 +76,7 @@ const SearchBar = ({ setLocationResult, setShowResult }) => {
 
   return (
     <>
-      <div className="relative text-center max-w-2xl w-full mx-auto">
+      <div className="p-5 md:p-0 relative text-center max-w-2xl w-full mx-auto">
         {/* Search Icon (Left) */}
         <div className="absolute left-6 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400 z-10">
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -87,7 +87,7 @@ const SearchBar = ({ setLocationResult, setShowResult }) => {
         {/* Input Field */}
         <input
           type="text"
-          className=" md:w-full py-4 pl-12 pr-12  rounded-full border-2 border-amber-300/30 bg-white/90 backdrop-blur-sm text-gray-800 focus:outline-none focus:ring-2  shadow-lg transition-all duration-200 h-[44px] md:rounded-full md:h-15"
+          className="w-[100%] md:w-full py-4 pl-12 pr-12  rounded-full border-2 border-amber-300/30 bg-white/90 backdrop-blur-sm text-gray-800 focus:outline-none focus:ring-2  shadow-lg transition-all duration-200 h-[44px] md:rounded-full md:h-15"
           placeholder="Search destinations, states, or experiences..."
           value={searchQuery}
           onChange={(e) => handleChange(e.target.value)}
@@ -119,7 +119,7 @@ const SearchBar = ({ setLocationResult, setShowResult }) => {
           </button>
         )}
       </div>
-    </>
+    </> 
   );
 };
 
