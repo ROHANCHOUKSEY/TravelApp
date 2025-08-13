@@ -113,7 +113,7 @@ const Explore = () => {
 
             {/* Add Filter Dropdown */}
             {isLoggined && (
-              <div className="mt-6 mb-4 relative md:right-[40%]">
+              <div className="mt-6 mb-4">
                 <select
                   value={selectLocation}
                   onChange={handleSelectLocation}
@@ -126,7 +126,7 @@ const Explore = () => {
                 >
                   <option
                     value=""
-                    className="border-b border-gray-300"
+                    className="border-b border-gray-300 dark:text-black"
                   >
                     All Locations
                   </option>
@@ -134,7 +134,7 @@ const Explore = () => {
                     <option
                       key={index}
                       value={location}
-                      className="border-b border-gray-300"
+                      className="border-b border-gray-300 dark:text-black"
                     >
                       {location}
                     </option>
