@@ -86,6 +86,7 @@ export const ContextProvider = (props) => {
         setStateLocation,
         stateName,
         setStateName,
+        setMode,
         mode,
         lightMode,
         darkMode,

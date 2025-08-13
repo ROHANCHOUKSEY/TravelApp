@@ -14,6 +14,7 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [dropDown, setDropdown] = useState(false);
   const dropdownRef = useRef();
+  const{setMode} = useContext(AppContext);
 
   const {
     isLoggined,
@@ -57,6 +58,7 @@ const Navbar = () => {
       navigate("/login");
       setIsMobileMenuOpen(false); 
       setDropdown(false);
+      setMode("light")
     } catch (error) {
       console.error("Logout failed:", error);
     }
