@@ -365,7 +365,7 @@ const Navbar = () => {
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Explore
+                    Discover
                   </NavLink>
                   <NavLink
                     to="/location"
@@ -379,7 +379,7 @@ const Navbar = () => {
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    StateLocation
+                    Explore More
                   </NavLink>
                   <NavLink
                     to="/favourites"
@@ -425,14 +425,14 @@ const Navbar = () => {
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Explore
+                    Discover
                   </NavLink>
                   <NavLink
                     to="/host"
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Host
+                    Host 
                   </NavLink>
                   <NavLink
                     to="/addLocation"
