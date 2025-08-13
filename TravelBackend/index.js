@@ -28,7 +28,7 @@ const storage = new CloudinaryStorage({
     allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
 });
-
+ 
 const upload = multer({ storage });
 
 // const DB_PATH = process.env.MONGO_URI;
@@ -57,9 +57,9 @@ app.use(
     saveUninitialized: false,
     store: store,
     cookie: {
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "none",
     },
   })
 );
@@ -92,7 +92,7 @@ app.get("/", (req, res) => {
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    app.listen(process.env.PORT || 3002, () => {
+    app.listen(process.env.PORT, () => {
       console.log("Server Start At Port:", process.env.PORT || 3002);
     });
   })
