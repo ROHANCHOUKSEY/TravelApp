@@ -50,9 +50,12 @@ app.use(
 
 app.use("/uploads", express.static("uploads"));
 
+app.set("trust proxy", 1);
+
+
 app.use(
   session({
-    secret: "rohanchouksey",
+    secret: process.env.SESSION_SECRET || "rohanchouksey",
     resave: false,
     saveUninitialized: false,
     store: store,
