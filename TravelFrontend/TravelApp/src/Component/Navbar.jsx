@@ -54,7 +54,7 @@ const Navbar = () => {
 
       setIsLoggined(false);
       setUser(null);
-      navigate("/login");
+      navigate("/");
       setIsMobileMenuOpen(false);
       setDropdown(false);
     } catch (error) {
