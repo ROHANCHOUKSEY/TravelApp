@@ -8,6 +8,7 @@ import SearchContainer from "./SearchBar/SearchContainer";
 import { AppContext } from "../CreateContext/AppContext";
 import ImageSlider from "./ImagesFeature/ImageSlider";
 import HomePage from "./HomeComponent.jsx/HomePage";
+import "../index.css"
 
 const Explore = () => {
   const { locationLists, setLocationLists, isLoggined } =
@@ -109,22 +110,39 @@ const Explore = () => {
             <p className="text-[14px] md:text-2xl font-medium text-gray-600 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed">
               Handpicked places worth visiting for history, culture, and natural beauty.
             </p>
-            
+
             {/* Add Filter Dropdown */}
-            <div className="mt-6 mb-4">
-              <select 
-                value={selectLocation} 
-                onChange={handleSelectLocation} 
-                className="px-4 py-2 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-              >
-                <option value="" className="text-black dark:text-white">All Locations</option>
-                {Locations.map((location, index) => (
-                  <option key={index} value={location} className="text-black dark:text-white">
-                    {location}
+            {isLoggined && (
+              <div className="mt-6 mb-4 relative md:right-[40%]">
+                <select
+                  value={selectLocation}
+                  onChange={handleSelectLocation}
+                  className="w-[220px] px-4 py-2 border-2 border-gray-300 rounded-lg 
+                 focus:outline-none focus:border-blue-500 
+                 shadow-md hover:shadow-lg transition-all duration-200 ease-in-out
+                 bg-gradient-to-r from-blue-50 via-white to-blue-100 
+                 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800
+                 text-gray-800 dark:text-gray-200 font-medium "
+                >
+                  <option
+                    value=""
+                    className="border-b border-gray-300"
+                  >
+                    All Locations
                   </option>
-                ))}
-              </select>
-            </div>
+                  {Locations.map((location, index) => (
+                    <option
+                      key={index}
+                      value={location}
+                      className="border-b border-gray-300"
+                    >
+                      {location}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
           </div>
         </div>
 
