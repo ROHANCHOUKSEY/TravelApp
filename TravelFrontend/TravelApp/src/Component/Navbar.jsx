@@ -54,8 +54,8 @@ const Navbar = () => {
 
       setIsLoggined(false);
       setUser(null);
-      navigate("/");
-      setIsMobileMenuOpen(false);
+      navigate("/login");
+      setIsMobileMenuOpen(false); 
       setDropdown(false);
     } catch (error) {
       console.error("Logout failed:", error);
@@ -183,7 +183,7 @@ const Navbar = () => {
                               <p className="font-bold text-amber-600">Welcome back!</p>
                               <p className="truncate text-gray-600">
                                 {userName} {userlastName}
-                              </p>
+                              </p> 
                             </div>
 
                             {/* Dark/Light Mode Toggle */}
@@ -209,16 +209,13 @@ const Navbar = () => {
                               </label>
                             </div>
 
-                            <NavLink to="/">
-                              <button
-                                onClick={handleLogout}
-                                className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
-                              >
-                                <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
-                                <span className="font-medium group-hover:text-red-600">Sign out</span>
-                              </button>
-                            </NavLink>
-
+                            <button
+                              onClick={handleLogout}
+                              className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
+                            >
+                              <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
+                              <span className="font-medium group-hover:text-red-600">Sign out</span>
+                            </button>
                           </div>
                         </div>
                       )}
@@ -285,16 +282,13 @@ const Navbar = () => {
                                 <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
                               </label>
                             </div>
-                            <NavLink to="/">
-                              <button
-                                onClick={handleLogout}
-                                className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
-                              >
-                                <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
-                                <span className="font-medium group-hover:text-red-600">Sign out</span>
-                              </button>
-                            </NavLink>
-
+                            <button
+                              onClick={handleLogout}
+                              className="flex w-full items-center px-4 py-3 text-sm cursor-pointer text-gray-700 hover:bg-red-50 transition-all duration-200 group"
+                            >
+                              <LogOut className="h-4 w-4 mr-3 text-red-500 group-hover:animate-pulse" />
+                              <span className="font-medium group-hover:text-red-600">Sign out</span>
+                            </button>
                           </div>
                         </div>
                       )}
@@ -416,14 +410,12 @@ const Navbar = () => {
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
                     </label>
                   </div>
-                  <NavLink to="/">
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
-                    >
-                      Sign out
-                    </button>
-                  </NavLink>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
+                  >
+                    Sign out
+                  </button>
                   <div className="pt-2 border-t border-white/20"></div>
                 </>
               ) : (
@@ -432,7 +424,7 @@ const Navbar = () => {
                     to="/"
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
-                  >
+                  > 
                     Discover
                   </NavLink>
                   <NavLink
@@ -440,7 +432,7 @@ const Navbar = () => {
                     className={getMobileNavlinkClass}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Host
+                    Host 
                   </NavLink>
                   <NavLink
                     to="/addLocation"
@@ -471,17 +463,15 @@ const Navbar = () => {
                       <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-amber-500 peer-checked:to-orange-500"></div>
                     </label>
                   </div>
-                  <NavLink to="/">
-                    <button
-                      onClick={handleLogout}
-                      className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
-                    >
-                      Sign out
-                    </button>
-                  </NavLink>
+                  <button
+                    onClick={handleLogout}
+                    className="block w-full text-left text-white hover:bg-red-500/20 px-4 py-3 rounded-lg text-base font-medium transition-all duration-300"
+                  >
+                    Sign out
+                  </button>
                 </>
               )
-            ) : ( 
+            ) : (
               <>
                 <NavLink
                   to="/"
