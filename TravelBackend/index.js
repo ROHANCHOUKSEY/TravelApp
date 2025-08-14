@@ -89,7 +89,7 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
   res.status(200).json({ imageUrls: fileUrls });
 });
 
-
+ 
 const PORT = process.env.PORT || 3002;
 
 app.post("/api/upload", upload.array("images", 10), (req, res) => {
