@@ -71,6 +71,24 @@ app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
 
+// Serve frontend build files
+app.use(express.static(path.join(__dirname, "frontend", "dist"))); 
+// ^ Adjust "frontend/dist" to the actual location of your React build folder
+
+// Fallback to index.html for React Router
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
+
+// Upload route
+app.post("/api/upload", upload.array("images", 10), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ error: "No files uploaded" });
+  }
+  const fileUrls = req.files.map((file) => file.path);
+  res.status(200).json({ imageUrls: fileUrls });
+});
+
 
 const PORT = process.env.PORT || 3002;
 
