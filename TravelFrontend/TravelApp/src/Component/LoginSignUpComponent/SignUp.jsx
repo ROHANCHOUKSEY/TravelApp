@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { signUp } from "../../service/locationService";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaCheck } from "react-icons/fa";
 import { Eye, EyeOff } from "lucide-react";
 
@@ -235,16 +235,16 @@ const SignUp = () => {
               </>
             )}
           </button>
-
+ 
           {/* Login Link */}
           <div className="text-center text-sm text-gray-600">
             Already have an account?{" "}
-            <a
-              href="/login"
+            <NavLink
+              to="/login"
               className="font-medium text-blue-600 hover:text-blue-500"
             >
               Log in
-            </a>
+            </NavLink>
           </div>
         </form>
       </div>
