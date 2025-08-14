@@ -71,12 +71,11 @@ app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
 
-// Serve frontend build files
-app.use(express.static(path.join(__dirname, "frontend", "dist"))); 
-// ^ Adjust "frontend/dist" to the actual location of your React build folder
+// Serve static frontend
+app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
-// Fallback to index.html for React Router
-app.get("*", (req, res) => {
+// React Router fallback for any other request
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
 });
 
@@ -89,7 +88,7 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
   res.status(200).json({ imageUrls: fileUrls });
 });
 
- 
+
 const PORT = process.env.PORT || 3002;
 
 app.post("/api/upload", upload.array("images", 10), (req, res) => {
