@@ -28,7 +28,7 @@ const storage = new CloudinaryStorage({
     allowed_formats: ["jpg", "jpeg", "png", "webp"],
   },
 });
- 
+
 const upload = multer({ storage });
 
 // const DB_PATH = process.env.MONGO_URI;
@@ -52,7 +52,6 @@ app.use("/uploads", express.static("uploads"));
 
 app.set("trust proxy", 1);
 
-
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "rohanchouksey",
@@ -75,19 +74,9 @@ app.use("/api/user", userRouter);
 app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
 // React Router fallback for any other request
-app.use((req, res) => {
+app.use((req, res) => { 
   res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
-});
-
-// Upload route
-app.post("/api/upload", upload.array("images", 10), (req, res) => {
-  if (!req.files || req.files.length === 0) {
-    return res.status(400).json({ error: "No files uploaded" });
-  }
-  const fileUrls = req.files.map((file) => file.path);
-  res.status(200).json({ imageUrls: fileUrls });
-});
-
+}); 
 
 const PORT = process.env.PORT || 3002;
 
@@ -95,7 +84,7 @@ app.post("/api/upload", upload.array("images", 10), (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ error: "No files uploaded" });
   }
-
+ 
   const fileUrls = req.files.map((file) => file.path); // file.path is Cloudinary URL
 
   res.status(200).json({ imageUrls: fileUrls });
