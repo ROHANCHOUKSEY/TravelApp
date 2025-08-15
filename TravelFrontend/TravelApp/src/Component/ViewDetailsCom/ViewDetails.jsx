@@ -172,7 +172,7 @@ const ViewDetails = () => {
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <FaLandmark className="text-blue-500 mr-3 text-xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                  <h2 className="text-[19px] md:text-2xl font-semibold text-gray-800 dark:text-white">
                     Overview
                   </h2>
                 </div>
@@ -188,7 +188,7 @@ const ViewDetails = () => {
                 <div className="mb-8">
                   <div className="flex items-center mb-4">
                     <FaHistory className="text-blue-500 mr-3 text-xl" />
-                    <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                    <h2 className="text-[19px] text-2xl font-semibold text-gray-800 dark:text-white">
                       Historical Significance
                     </h2>
                   </div>
@@ -202,7 +202,7 @@ const ViewDetails = () => {
               <div className="mb-8">
                 <div className="flex items-center mb-4">
                   <FaExclamationCircle className="text-blue-500 mr-3 text-xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                  <h2 className="text-[19px] text-2xl font-semibold text-gray-800 dark:text-white">
                     Visitor Information
                   </h2>
                 </div>
@@ -254,7 +254,7 @@ const ViewDetails = () => {
               <div className="bg-blue-100 dark:bg-blue-900/30 p-6 rounded-lg">
                 <div className="flex items-center mb-4">
                   <FaClock className="text-blue-600 dark:text-blue-300 mr-3 text-2xl" />
-                  <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
+                  <h2 className="text-[19px] text-2xl font-semibold text-gray-800 dark:text-white">
                     Visiting Hours
                   </h2>
                 </div>
