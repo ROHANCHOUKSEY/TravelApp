@@ -44,6 +44,7 @@ const Login = () => {
       if (error.message) {
         setLoginError(error.message);
       }
+      setLoading(false)
     }
   };
   

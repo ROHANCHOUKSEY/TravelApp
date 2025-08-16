@@ -52,6 +52,7 @@ const SignUp = () => {
       } else {
         setValidationerror([{ msg: error.message || "Signup failed" }]);
       }
+      setLoading(false);
     } finally {
       setIsSubmitting(false);
     }
