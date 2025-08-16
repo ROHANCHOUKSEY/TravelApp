@@ -60,8 +60,10 @@ app.use(
     store: store,
     cookie: {
       secure: process.env.NODE_ENV === "production",
+      // secure: false,
       httpOnly: true,
       sameSite: "none",
+      // sameSite: "lax",
     },
   })
 );
