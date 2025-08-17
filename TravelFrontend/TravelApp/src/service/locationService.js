@@ -12,7 +12,7 @@ export const savetodb = async ({
   howtoReach,
   history,
   timing,
-  closing,
+  closing, 
   typeOfPlace,
 }) => {
   try {

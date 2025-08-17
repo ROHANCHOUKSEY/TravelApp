@@ -243,8 +243,8 @@ const SignUp = () => {
               </>
             )}
           </button>
-
-          {/* Login Link */}
+  
+          {/* Login Link */} 
           <div className="text-center text-sm text-gray-600">
             Already have an account?{" "}
             <NavLink
