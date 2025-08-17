@@ -72,6 +72,16 @@ app.use("/auth", authRouter);
 app.use("/api/host", hostRouter);
 app.use("/api/user", userRouter);
 
+app.post("/api/upload", upload.array("images", 10), (req, res) => {
+  if (!req.files || req.files.length === 0) {
+    return res.status(400).json({ error: "No files uploaded" });
+  }
+ 
+  const fileUrls = req.files.map((file) => file.path); // file.path is Cloudinary URL
+
+  res.status(200).json({ imageUrls: fileUrls });
+});
+
 // Serve static frontend
 app.use(express.static(path.join(__dirname, "frontend", "dist")));
 
@@ -82,15 +92,6 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 3002;
 
-app.post("/api/upload", upload.array("images", 10), (req, res) => {
-  if (!req.files || req.files.length === 0) {
-    return res.status(400).json({ error: "No files uploaded" });
-  }
- 
-  const fileUrls = req.files.map((file) => file.path); // file.path is Cloudinary URL
-
-  res.status(200).json({ imageUrls: fileUrls });
-});
 
 // app.listen(process.env.PORT, () => {
 //   console.log("Server Start At Port:", process.env.PORT);
