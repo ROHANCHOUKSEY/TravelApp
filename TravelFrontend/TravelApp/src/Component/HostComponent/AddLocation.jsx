@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { savetodb, stateLocation } from "../../service/locationService";
 import { AppContext } from "../../CreateContext/AppContext";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const AddLocation = () => {
   const { setLocationLists, setStatebaseLocation, mode } = useContext(AppContext);

@@ -18,8 +18,6 @@ export const ContextProvider = (props) => {
   const [stateLocation, setStateLocation] = useState([]);
   const [stateName, setStateName] = useState("");
   
-
-
   const lightMode = () => {
     setMode("light");
   };
