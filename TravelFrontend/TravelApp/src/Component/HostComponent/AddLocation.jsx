@@ -1,10 +1,12 @@
 import { useContext, useState } from "react";
 import { savetodb, stateLocation } from "../../service/locationService";
 import { AppContext } from "../../CreateContext/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const AddLocation = () => {
   const { setLocationLists, setStatebaseLocation, mode } = useContext(AppContext);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const [newLocationPlace, setNewLocationPlace] = useState({
     image: "",
@@ -66,7 +68,7 @@ const AddLocation = () => {
       setStatebaseLocation(prev => [...prev, savedStateLocation]);
       setLocationLists(prev => [...prev, newLocation]);
 
-      window.location.href = "/host";
+      navigate("/host");
     } catch (error) {
       console.error("Error:", error);
       alert(`Failed to save location: ${error.message}`);
