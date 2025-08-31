@@ -38,7 +38,7 @@ const Login = () => {
       setIsLoggined(true);
       setUser(userLogin);
       navigation("/");
-      setLoading(false);
+      setLoading(false); 
     } catch (error) {
       console.log(error);
       if (error.message) {

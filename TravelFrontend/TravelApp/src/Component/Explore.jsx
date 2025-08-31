@@ -20,7 +20,7 @@ const Explore = () => {
   const [filteredLocations, setFilteredLocations] = useState([]);
   const [locationCards, setLocationCards] = useState([]);
 
-  // Location types for filtering
+  // Location types for filtering 
   const Locations = ["Temple", "Hill Station", "Beach", "Zoo", "Fort"];
 
   // Handle location selection
@@ -54,8 +54,8 @@ const Explore = () => {
     }
     fetchLocation();
     setLoading(false);
-  }, []);
-
+  }, []); 
+ 
 
   const suffleCard = (array) => {
     const shuffled = [...array];
@@ -63,7 +63,7 @@ const Explore = () => {
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
-    return shuffled;
+    return shuffled; 
   }
 
   // Update location cards when locationLists or filter changes

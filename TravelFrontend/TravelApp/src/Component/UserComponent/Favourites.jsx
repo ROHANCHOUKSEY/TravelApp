@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 const Favourites = () => {
   const [locationLists, setLocationLists] = useState([]);
-
+  
   useEffect(() => {
     const fetchfavourites = async () => {
       try {
@@ -22,13 +22,14 @@ const Favourites = () => {
   }, []);
 
   const handleDelete = async (id) => {
-    console.log("ID", id);
     try {
       const deletedId = await deleteFromFavourite(id);
+      console.log("deletedId: ", deletedId);
       const updatedList = locationLists.filter((fav) => fav.id !== deletedId);
       setLocationLists(updatedList);
+      console.log("card delete");
     } catch (error) {
-      console.error("Delete failed:", error);
+      console.error("Delete failed:", error); 
     }
   };
 
@@ -136,7 +137,7 @@ const Favourites = () => {
                     </NavLink>
                     <button
                       onClick={() => handleDelete(location.id)}
-                      className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110"
+                      className="inline-flex items-center px-4 py-2 bg-red-600 transition ease-in-out delay-75 hover:bg-red-700 text-white text-sm font-medium rounded-md hover:-translate-y-1 hover:scale-110 cursor-pointer"
                     >
                       <svg
                         stroke="currentColor"

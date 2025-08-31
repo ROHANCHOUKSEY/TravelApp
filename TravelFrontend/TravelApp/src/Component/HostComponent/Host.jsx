@@ -24,7 +24,7 @@ const Host = () => {
       (item) => item.id !== deleteLocation
     );
     setLocationLists(UpdateList);
-  };
+  }; 
 
   console.log("locationLists: ", locationLists);
 

@@ -12,7 +12,7 @@ export const savetodb = async ({
   howtoReach,
   history,
   timing,
-  closing, 
+  closing,
   typeOfPlace,
 }) => {
   try {
@@ -62,8 +62,8 @@ export const hostlocation = async () => {
     );
     console.log("hostlocationResponse: ", response);
     const data = await response.json();
-    console.log("hostLocationData2: ",data);
-    
+    console.log("hostLocationData2: ", data);
+
     return data.map(maplocalValueToserviseValue);
   } catch (error) {
     console.log("host location is not fetch: ", error);
@@ -81,7 +81,7 @@ export const locationFromServer = async () => {
           "Content-Type": "application/json",
         },
       }
-    ); 
+    );
     const allLocation = await response.json();
     return allLocation.map(maplocalValueToserviseValue);
   } catch (error) {
@@ -128,7 +128,7 @@ export const getStateLocation = async () => {
     );
     const stateLocationWise = await response.json();
     return stateLocationWise;
-  } catch (error) { 
+  } catch (error) {
     console.log("StateLocation is not fetch", error);
     throw error;
   }
@@ -190,7 +190,7 @@ export const postEditFromServer = async (
           holeDescription,
           history,
           VisitorTips,
-          howtoReach, 
+          howtoReach,
           timing,
           closing,
           typeOfPlace,
@@ -210,7 +210,7 @@ export const deleteFromServer = async (id) => {
     {
       method: "DELETE",
       credentials: "include",
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
       },
     }
@@ -231,7 +231,7 @@ export const locationDetails = async (id) => {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
-        }, 
+        },
       }
     );
     const data = await response.json();
@@ -281,26 +281,27 @@ export const favouriteFromServer = async () => {
   }
 };
 
-export const deleteFromFavourite = async (id) => {
-  try {
-    const response = await fetch(
-      `${
-        import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
-      }/api/user/favourites/${id}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    return id;
-  } catch (error) {
-    console.log("favourite is not delete from server", error);
-  }
-};
+  export const deleteFromFavourite = async (id) => {
+    try {
+      const response = await fetch(
+        `${
+          import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+        }/api/user/favourites/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        } 
+      );
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.message || "Delete failed");
+      return id;
+    } catch (error) {
+      console.log("favourite is not delete from server", error);
+    }
+  };
 
 export const postReview = async (id, text, postuserName, createdAt) => {
   const response = await fetch(
@@ -471,5 +472,4 @@ const maplocalValueToserviseValue = (serviseItem) => {
     typeOfPlace: serviseItem.typeOfPlace,
     review: serviseItem.review,
   };
-};  
-  
+};

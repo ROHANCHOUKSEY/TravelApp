@@ -14,7 +14,7 @@
   animation: scrollLeft 40s linear infinite;
 }
 
-/* Pause animation when hovering */
+/* Pause animation when hovering */ 
 .animation-paused {
   animation-play-state: paused !important;
 }

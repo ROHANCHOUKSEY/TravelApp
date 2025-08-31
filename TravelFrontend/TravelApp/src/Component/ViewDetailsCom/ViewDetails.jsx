@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import {
   getReview,
   locationDetails,
   postReview,
+  userFavourite,
 } from "../../service/locationService";
+import { FaHeart } from "react-icons/fa";
 import {
   FaMapMarkerAlt,
   FaStar,
@@ -30,7 +32,10 @@ const ViewDetails = () => {
 
   const [details, setDetails] = useState(null);
 
+  console.log("details.id: ", details);
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
   UseKeyPress("Escape", () => {
     if (imgOpen) setImgOpen(false);
@@ -48,6 +53,12 @@ const ViewDetails = () => {
 
     fetchDetails();
   }, []);
+
+  const favouriteHandle = async(id) => {
+    console.log("favourite click");
+    await userFavourite(id);
+    navigate("/favourites");
+  }
 
   if (!details) {
     return (
@@ -160,11 +171,16 @@ const ViewDetails = () => {
                     <span>{details.country}</span>
                   </div>
                 </div>
-                <div className="flex items-center mt-4 md:mt-0">
-                  <div className="flex mr-4">{renderStars()}</div>
-                  <span className="text-gray-600 dark:text-gray-300">
-                    {details.rating}/5.0
-                  </span>
+                <div className="flex gap-4 items-center mt-4 md:mt-0">
+                  <div className="flex items-center">
+                    <div className="flex mr-1">{renderStars()}</div>
+                    <span className="text-gray-600 dark:text-gray-300">
+                      {details.rating}/5.0
+                    </span>
+                  </div>
+                  <div onClick={() => favouriteHandle(details.id)} className="flex items-center justify-center w-8 h-8 dark:bg-white rounded-full hover:-translate-y-2 delay-200 duration-200 cursor-pointer">
+                    <FaHeart className="text-red-500" />
+                  </div>
                 </div>
               </div>
 
