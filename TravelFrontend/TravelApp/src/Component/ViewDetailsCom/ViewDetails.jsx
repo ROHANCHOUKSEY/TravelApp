@@ -32,8 +32,6 @@ const ViewDetails = () => {
 
   const [details, setDetails] = useState(null);
 
-  console.log("details.id: ", details);
-
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -54,10 +52,14 @@ const ViewDetails = () => {
     fetchDetails();
   }, []);
 
-  const favouriteHandle = async(id) => {
-    console.log("favourite click");
-    await userFavourite(id);
-    navigate("/favourites");
+  const favouriteHandle = async (id) => {
+    try {
+      await userFavourite(id);
+      navigate("/favourites");
+    }catch(error){
+      console.log("favourite is not add in list", error);
+    }
+
   }
 
   if (!details) {
@@ -178,7 +180,7 @@ const ViewDetails = () => {
                       {details.rating}/5.0
                     </span>
                   </div>
-                  <div onClick={() => favouriteHandle(details.id)} className="flex items-center justify-center w-8 h-8 dark:bg-white rounded-full hover:-translate-y-2 delay-200 duration-200 cursor-pointer">
+                  <div onClick={() => favouriteHandle(details._id)} className="flex items-center justify-center w-8 h-8 dark:bg-white rounded-full hover:-translate-y-2 delay-200 duration-200 cursor-pointer">
                     <FaHeart className="text-red-500" />
                   </div>
                 </div>
