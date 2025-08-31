@@ -364,7 +364,7 @@ exports.deleteLocation = async (req, res, next) => {
 
     if (User.hostLocation.includes(id)) {
       User.hostLocation = User.hostLocation.filter(
-        (locationId) => locationId.toString() !== id
+        (locationId) => locationId.toString() !== id 
       );
       await User.save();
     }

@@ -136,7 +136,7 @@ exports.postScreenmode = async (req, res, next) => {
     res.status(500).json({ message: "Failed to save screen mode" });
   }
 };
-
+ 
 exports.getScreenmode = async (req, res, next) => {
   try {
     if (!req.session.user || !req.session.user._id) {
@@ -144,7 +144,7 @@ exports.getScreenmode = async (req, res, next) => {
     }
     const userId = req.session.user._id;
     // console.log("userId", userId)
-    const user = await User.findById(userId);
+    const user = await User.findById(userId); 
     const screenmode = user.screenmode || "light";
     res.status(200).json(screenmode);
   } catch (error) {

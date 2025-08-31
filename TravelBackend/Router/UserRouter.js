@@ -11,4 +11,4 @@ userRouter.get("/details/:id", userController.getDetails);
 userRouter.post("/reviewpost/:id", userController.reviewPost);
 userRouter.get("/reviewpost/:id", userController.reviewGet);
 
-module.exports = userRouter;
+module.exports = userRouter;  

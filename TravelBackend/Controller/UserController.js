@@ -37,10 +37,11 @@ exports.getFavourites = async (req, res, next) => {
     console.log("Favourite is not get from server");
   }
 };
-
+ 
 exports.deleteFavourites = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const userId = req.session.user._id;
     const User = await user.findById(userId);
     if (User.favourites.includes(id)) {
@@ -48,6 +49,7 @@ exports.deleteFavourites = async (req, res, next) => {
       await User.save();
       res.status(200).json({ message: "favourite delete" });
     }
+    
   } catch (error) {
     console.log("Favourite is not delete");
   }
@@ -61,12 +63,10 @@ exports.reviewPost = async (req, res, next) => {
     const newReview = { text, postuserName, createdAt };
     travellocation.review.push(newReview);
     await travellocation.save();
-    res
-      .status(200)
-      .json({
-        message: "Review posted successfully",
-        updatelocation: travellocation,
-      });
+    res.status(200).json({
+      message: "Review posted successfully",
+      updatelocation: travellocation,
+    });
   } catch (error) {
     console.log("Error during post review", error);
     res.status(400).json({ message: "Error to post review" });
