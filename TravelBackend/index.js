@@ -59,13 +59,13 @@ app.use(
     saveUninitialized: false,
     store: store,
     cookie: {
-      // secure: process.env.NODE_ENV === "production",
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
+      // secure: false,
       httpOnly: true,
-      // sameSite: "none",
-      sameSite: "lax",
+      sameSite: "none",
+      // sameSite: "lax",
     }, 
-  })
+  })  
 );
 
 app.use("/auth", authRouter);

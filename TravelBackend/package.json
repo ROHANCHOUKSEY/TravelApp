@@ -4,20 +4,20 @@
   "description": "Travel App",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "echo 'No build step for backend'"
   },
   "author": "Rohan Chouksey",
   "license": "ISC",
   "engines": {
-    "node": "20.x" 
+    "node": "20.x"
   },
-  "dependencies": {  
+  "dependencies": {
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "cloudinary": "^1.41.3",
-    "connect-mongodb-session": "^5.0.0", 
+    "connect-mongodb-session": "^5.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
