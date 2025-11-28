@@ -39,7 +39,7 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login/>} />
       <Route path="signUp" element={<SignUp/>} />
       <Route path="*" element={<PageNotFound/>} />
-    </Route>
+    </Route> 
   )
 ); 
 

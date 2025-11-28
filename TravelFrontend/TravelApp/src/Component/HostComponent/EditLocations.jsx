@@ -31,7 +31,7 @@ const EditLocations = () => {
       try {
         if (id) {
           const editItem = await editFromServer(id);
-          const {
+          const { 
             image,
             locationName,
             country,

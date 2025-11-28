@@ -127,7 +127,7 @@ const Favourites = () => {
                   <p className="text-gray-600 dark:text-white text-sm mb-4 line-clamp-2">
                     {location.description}
                   </p>
-
+ 
                   <div className="flex justify-between items-center">
                     <NavLink
                       to={`/viewDetails/${location.id}`}
