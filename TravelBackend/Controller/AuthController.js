@@ -20,7 +20,7 @@ exports.postSignUp = [
   check("email")
     .isEmail()
     .withMessage("Please enter a valid email")
-    .normalizeEmail(),
+    .normalizeEmail({gmail_remove_dots:false, gmail_remove_subaddress:false}),
 
   check("password")
     .trim()
@@ -63,7 +63,7 @@ exports.postSignUp = [
     if (!errors.isEmpty()) {
       // console.log("Validation errors: ", errors.array());
       return res.status(400).json({ errors: errors.array() });
-    }
+    } 
     try {
       const { firstname, lastname, email, password, usertype } = req.body;
 
