@@ -22,7 +22,7 @@ exports.postSignUp = [
     .withMessage("Please enter a valid email")
     .normalizeEmail({gmail_remove_dots:false, gmail_remove_subaddress:false}),
 
-  check("password")
+  check("password") 
     .trim()
     .isLength({ min: 8 })
     .withMessage("Password must be at least 8 character long")
